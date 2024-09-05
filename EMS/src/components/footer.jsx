@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="f-container w-32">
-          <h2 className="text-2xl text-white mb-4">Our Headoffices</h2>
+          <h2 className="text-2xl text-white mb-4">Our HeadOffices</h2>
           <a href="#" className="block text-gray-400 mb-2"><i className="fas fa-angle-right mr-2"></i>Islamabad</a>
           <a href="#" className="block text-gray-400 mb-2"><i className="fas fa-angle-right mr-2"></i>Lahore</a>
           <a href="#" className="block text-gray-400 mb-2"><i className="fas fa-angle-right mr-2"></i>Faislabad</a>
