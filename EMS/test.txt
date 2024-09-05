@@ -1,0 +1,21 @@
+<div className="flex flex-wrap gap-y-14 justify-around lg:hidden">
+  {images.map((image, index) => (
+    <div
+      key={index}
+      className="relative w-[80vw] md:w-[40vw] h-[400px] bg-cover bg-center rounded-3xl"
+      style={{ backgroundImage: `url(${image})` }}
+    >
+      <div className="absolute inset-0 bg-transparent hover:bg-gray-800 hover:bg-opacity-75 rounded-3xl transition-opacity duration-300 flex flex-col justify-end items-center p-4">
+        <div className="opacity-0 hover:opacity-100 transition-opacity duration-300 w-full p-4 bg-gray-800 bg-opacity-75 rounded-b-3xl">
+          <h2 className="text-lg font-semibold text-white text-center">
+            {title} {index + 1}
+          </h2>
+          <div className="mt-2 flex items-center justify-center">
+            <span className="text-yellow-400">★★★★☆</span> {/* Replace with actual rating */}
+          </div>
+          <button className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-md">Book Now</button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

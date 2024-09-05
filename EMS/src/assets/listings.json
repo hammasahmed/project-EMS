@@ -1,0 +1,16 @@
+[
+    {
+        "_id": "1",
+        "title": "Beautiful Apartment",
+        "description": "A spacious apartment in the city center.",
+        "price": 1200,
+        "imageUrl": "https://picsum.photos/500"
+    },
+    {
+        "_id": "2",
+        "title": "Cozy Cottage",
+        "description": "A charming cottage in the countryside.",
+        "price": 800,
+        "imageUrl": "https://picsum.photos/150"
+    }
+]
