@@ -30,8 +30,8 @@ const Details = () => {
     return <div className='text-4xl text-green-500 text-center align-center'>Loading...</div>;
   }
 
-  return (<div className='bg-slate-400 flex flex-row'>
-    <div className='mt-[2%] w-[60%] bg-green-400'>
+  return (<div className='bg-purple-100 flex flex-row'>
+    <div className='mt-[2%] w-[60%]'>
       <h1 className='text-4xl mx-[4%]'>{listing.title}</h1>
       <img src={listing.imageUrl} alt={listing.title} className='m-[4%]' />
       <h2 className='text-2xl m-[4%]'>About {listing.serviceType}</h2>
@@ -39,9 +39,11 @@ const Details = () => {
       
     </div>
 
-    <div className='w-[40%] bg-yellow-400'>
-    <p className='text-2xl'>Price: ${listing.price}</p>
-    
+    <div className='w-[40%] p-[4%]'>
+    <p className='text-2xl p-[1%]'>Price: Starting From ${listing.price}</p>
+    <p className='text-2xl p-[1%]'>Capacity: 250 Admi</p>
+    <p className='text-2xl p-[1%]'>Location: Shumali Koria</p>
+
         
     </div>
     </div>
