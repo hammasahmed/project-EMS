@@ -8,7 +8,8 @@ const Details = () => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const response = await fetch('http://localhost:3000/listings/${id}');
+        
+        const response = await fetch('http://localhost:3000/listings');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -26,15 +27,23 @@ const Details = () => {
   }, [id]);
 
   if (!listing) {
-    return <div>Loading...</div>;
+    return <div className='text-4xl text-green-500 text-center align-center'>Loading...</div>;
   }
 
-  return (
-    <div>
-      <h1 className='text-4xl'>{listing.title}</h1>
-      <img src={listing.imageUrl} alt={listing.title} />
-      <p>{listing.description}</p>
-      <p>Price: ${listing.price}</p>
+  return (<div className='bg-slate-400 flex flex-row'>
+    <div className='mt-[2%] w-[60%] bg-green-400'>
+      <h1 className='text-4xl mx-[4%]'>{listing.title}</h1>
+      <img src={listing.imageUrl} alt={listing.title} className='m-[4%]' />
+      <h2 className='text-2xl m-[4%]'>About {listing.serviceType}</h2>
+      <p className='mx-[4%]'>{listing.description}</p>
+      
+    </div>
+
+    <div className='w-[40%] bg-yellow-400'>
+    <p className='text-2xl'>Price: ${listing.price}</p>
+    
+        
+    </div>
     </div>
   );
 };

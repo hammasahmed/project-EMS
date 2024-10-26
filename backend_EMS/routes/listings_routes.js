@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import listing from '../models/listing_model.js';
+
 const router = Router();
 
 // ROUTE FOR GETTING ALL listings
@@ -11,11 +12,21 @@ router.get('/listings', async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-// // ROUTE FOR GETTING A SPECIFIC listing BY ID
-// router.get('/listing/:id', (req, res) => {
-//   const listingId = req.params.id;
-//   res.send(`Details of listing ID: ${listingId}`);
-// });
+// ROUTE FOR GETTING A SPECIFIC listing BY ID
+router.get('/listings/:id', async (req, res) => { // change `:_id` to `:id`
+  try {
+    const listingId = req.params.id;
+    const listing = await listing.findById(listingId);
+    
+    if (!listing) {
+      return res.status(404).send('Listing not found');
+    }
+    
+    res.json(listing);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 
 // Route for creating a new listing
 router.post('/listings', async (req, res) => {

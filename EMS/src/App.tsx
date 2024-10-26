@@ -6,7 +6,7 @@ import Featured_services from './components/featured_services';
 import Testimonial from './components/testimonial';
 import Footer from './components/footer';
 import SignUpForm from './components/login';
-import VenueDetail from './components/VenueDetail'
+import VenueDetail from './components/DetailPage'
 import ListingsPage from './components/listingpage'
 import Login from './pages/login';
 import Home from './pages/home'
