@@ -6,10 +6,10 @@ import slide3 from '../assets/slide3.jpg';
 const slides = [
   { image: slide1, text: "WELCOME TO SITE" },
   { image: slide2, text: "We Make Your Events Special" },
-  { image: slide3, text: "Chal ab chuti kr  " }
+  { image: slide3, text: "We Make Your Events Memorable" }
 ];
 
-const Slider = () => {
+const Slider = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
