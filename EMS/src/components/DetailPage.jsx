@@ -10,7 +10,12 @@ const Details = () => {
     const fetchListing = async () => {
       // http://localhost:3000/listings/${id}
       try {
+<<<<<<< HEAD:EMS/src/components/VenueDetail.jsx
         const response = await fetch('/listings.json');
+=======
+        
+        const response = await fetch('http://localhost:3000/listings');
+>>>>>>> 6fbb954c4f176b7b9c3dafcffd8f3f0e1b2d4a39:EMS/src/components/DetailPage.jsx
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -28,9 +33,10 @@ const Details = () => {
   }, [id]);
 
   if (!listing) {
-    return <div>Loading...</div>;
+    return <div className='text-4xl text-green-500 text-center align-center'>Loading...</div>;
   }
 
+<<<<<<< HEAD:EMS/src/components/VenueDetail.jsx
   return (
     <div className='flex p-3 border-black border-2'>
       <div className='border-red border-2 w-[40%]'>
@@ -43,6 +49,24 @@ const Details = () => {
       <p>Price: ${listing.price}</p>
       </div>
 
+=======
+  return (<div className='bg-purple-100 flex flex-row'>
+    <div className='mt-[2%] w-[60%]'>
+      <h1 className='text-4xl mx-[4%]'>{listing.title}</h1>
+      <img src={listing.imageUrl} alt={listing.title} className='m-[4%]' />
+      <h2 className='text-2xl m-[4%]'>About {listing.serviceType}</h2>
+      <p className='mx-[4%]'>{listing.description}</p>
+      
+    </div>
+
+    <div className='w-[40%] p-[4%]'>
+    <p className='text-2xl p-[1%]'>Price: Starting From ${listing.price}</p>
+    <p className='text-2xl p-[1%]'>Capacity: 250 Admi</p>
+    <p className='text-2xl p-[1%]'>Location: Shumali Koria</p>
+
+        
+    </div>
+>>>>>>> 6fbb954c4f176b7b9c3dafcffd8f3f0e1b2d4a39:EMS/src/components/DetailPage.jsx
     </div>
   );
 };
