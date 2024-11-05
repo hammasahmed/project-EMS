@@ -280,7 +280,7 @@ const Details = () => {
           <b>Address:</b> St# 01, Road# 01, Shumali Korea
         </div>
         <div className="text-center mt-4">
-          <button className="rounded-3xl  text-lg py-2 px-4 bg-[#06c911]">
+          <button className="rounded-3xl  text-lg py-2 px-4 bg-[#06c911] hover:bg-[#9c198b] hover:text-white">
             <b>Check for Availability</b>
           </button>
         </div>

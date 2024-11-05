@@ -4,12 +4,12 @@
         "title": "Beautiful Apartment",
         "description": "A spacious apartment in the city center.",
         "price": 1200,
-        "imageUrl": "https://picsum.photos/500",
-        "picture1": "https://picsum.photos/150",
-        "picture3": "https://picsum.photos/150",
-        "picture4": "https://picsum.photos/150",
-        "picture5": "https://picsum.photos/150",
-        "picture6": "https://picsum.photos/150",
+        "imageUrl": "https://picsum.photos/seed/1/768/432",
+        "picture1": "https://picsum.photos/seed/2/768/432",
+        "picture3": "https://picsum.photos/seed/3/768/432",
+        "picture4": "https://picsum.photos/seed/4/768/432",
+        "picture5": "https://picsum.photos/seed/5/768/432",
+        "picture6": "https://picsum.photos/seed/6/768/432",
     },
     {
         "_id": "2",
@@ -18,9 +18,9 @@
         "price": 800,
         "imageUrl": "https://picsum.photos/150",
         "pictures":{
-        "picture1": "https://picsum.photos/50",
-        "picture3": "https://picsum.photos/100",
-        "picture4": "https://picsum.photos/150",
-        "picture5": "https://picsum.photos/200",}
+        "picture1": "https://picsum.photos/seed/1/768/432",
+        "picture3": "https://picsum.photos/seed/2/768/432",
+        "picture4": "https://picsum.photos/seed/3/768/432",
+        "picture5": "https://picsum.photos/seed/4/768/432",}
     }
 ]
