@@ -34,10 +34,12 @@ const Search = () => {
       {selectedService === "catering" && (
         <select className="bg-white p-2 rounded w-[70vw] sm:w-[15vw]">
           <option value="plated">Any</option>
-          <option value="buffet">Buffet</option>
-          <option value="plated">Plated</option>
-          <option value="familyStyle">Family Style</option>
-          <option value="plated">Packed</option>
+          <option value="buffet">Starters</option>
+          <option value="plated">Main Courses</option>
+          <option value="familyStyle">Grilled Items</option>
+          <option value="plated">Breads</option>
+          <option value="">Desserts</option>
+          <option value="">Beverages</option>
           
         </select>
       )}
@@ -390,3 +392,4 @@ export default Search;
 // };
 
 // export default HomePage;
+
