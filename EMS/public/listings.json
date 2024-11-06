@@ -8,11 +8,20 @@
     "imageUrl": "https://picsum.photos/seed/1/640/360",
     "serviceType": "venue",
     "venueType": "Sports Arena",
+<<<<<<< HEAD
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
       "picture4": "https://picsum.photos/seed/picsum/200/300",
       "picture5": "https://picsum.photos/seed/picsum/200/300"
+=======
+    "capacity" : 250,
+    "pictures": {
+      "picture1": "https://picsum.photos/seed/1/300/200",
+      "picture2": "https://picsum.photos/seed/2/300/200",
+      "picture3": "https://picsum.photos/seed/3/300/200",
+      "picture4": "https://picsum.photos/seed/4/300/200"
+>>>>>>> development
     }
   },
   {
@@ -23,11 +32,21 @@
     "city": "Lahore",
     "imageUrl": "https://picsum.photos/seed/2/300/200",
     "serviceType": "venue",
+<<<<<<< HEAD
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
       "picture4": "https://picsum.photos/seed/picsum/200/300",
       "picture5": "https://picsum.photos/seed/picsum/200/300"
+=======
+    "venueType": "Banquet Hall",
+    "capacity" : 250,
+    "pictures": {
+      "picture5": "https://picsum.photos/seed/25/300/200",
+      "picture6": "https://picsum.photos/seed/picsum/200/300",
+      "picture7": "https://picsum.photos/seed/picsum/200/300",
+      "picture8": "https://picsum.photos/seed/picsum/200/300"
+>>>>>>> development
     }
   },
   {
@@ -301,11 +320,21 @@
     "city": "Islamabad",
     "imageUrl": "https://picsum.photos/seed/3/300/200",
     "serviceType": "venue",
+<<<<<<< HEAD
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
       "picture4": "https://picsum.photos/seed/picsum/200/300",
       "picture5": "https://picsum.photos/seed/picsum/200/300"
+=======
+    "venueType": "Marquee",
+    "capacity" : 250,
+    "pictures": {
+      "picture9": "https://picsum.photos/seed/25/300/200",
+      "picture10": "https://picsum.photos/seed/picsum/200/300",
+      "picture11": "https://picsum.photos/seed/picsum/200/300",
+      "picture12": "https://picsum.photos/seed/picsum/200/300"
+>>>>>>> development
     }
   },
   {
@@ -316,11 +345,21 @@
     "city": "Peshawar",
     "imageUrl": "https://picsum.photos/seed/4/300/200",
     "serviceType": "venue",
+<<<<<<< HEAD
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
       "picture4": "https://picsum.photos/seed/picsum/200/300",
       "picture5": "https://picsum.photos/seed/picsum/200/300"
+=======
+    "venueType": "Conference Hall",
+    "capacity" : 250,
+    "pictures": {
+      "picture13": "https://picsum.photos/seed/25/300/200",
+      "picture14": "https://picsum.photos/seed/picsum/200/300",
+      "picture15": "https://picsum.photos/seed/picsum/200/300",
+      "picture16": "https://picsum.photos/seed/picsum/200/300"
+>>>>>>> development
     }
   },
   {
@@ -331,11 +370,20 @@
     "city": "Faisalabad",
     "imageUrl": "https://picsum.photos/seed/5/300/200",
     "serviceType": "venue",
+<<<<<<< HEAD
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
       "picture4": "https://picsum.photos/seed/picsum/200/300",
       "picture5": "https://picsum.photos/seed/picsum/200/300"
+=======
+    "capacity" : 250,
+    "pictures": {
+      "picture17": "https://picsum.photos/seed/25/300/200",
+      "picture18": "https://picsum.photos/seed/picsum/200/300",
+      "picture19": "https://picsum.photos/seed/picsum/200/300",
+      "picture20": "https://picsum.photos/seed/picsum/200/300"
+>>>>>>> development
     }
   },
   {
@@ -346,6 +394,10 @@
     "city": "Multan",
     "imageUrl": "https://picsum.photos/seed/6/300/200",
     "serviceType": "venue",
+<<<<<<< HEAD
+=======
+    "capacity" : 250,
+>>>>>>> development
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
@@ -361,6 +413,10 @@
     "city": "Quetta",
     "imageUrl": "https://picsum.photos/seed/7/300/200",
     "serviceType": "venue",
+<<<<<<< HEAD
+=======
+    "capacity" : 250,
+>>>>>>> development
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",

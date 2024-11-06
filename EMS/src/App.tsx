@@ -13,6 +13,7 @@ import Home from './pages/home'
 import Signup from './pages/signup'
 import Listings from './pages/listings'
 import VendorDB from './pages/vendorDB'
+import BookingForm from './components/BookingForm'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
                     
                     <Route path="/details/:id" element={<VenueDetail />} />
                     <Route path="/vendordb" element={<VendorDB />} />
+                    <Route path="/BookingForm" element={<BookingForm />} />
 
                 </Routes>
 
