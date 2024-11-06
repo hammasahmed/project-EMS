@@ -95,6 +95,7 @@ function VDB_addlistings(prop) {
     parking: "",
     ground_type: "",
     sitting_arrangement: "",
+    serving_capacity:"",
     lighting_type: "",
     VIP_seats: "",
     projector: "",
@@ -106,8 +107,27 @@ function VDB_addlistings(prop) {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
+  const [menuItems, setMenuItems] = useState([
+    { name: '', starters: '', mainCourses: '', grilledItems: '', breads: '', desserts: '', beverages: '', price: '' }
+  ]);
 
 
+
+
+  const handleMenu = (index, event) => {
+    const { name, value } = event.target;
+    const newMenuItems = [...menuItems];
+    newMenuItems[index][name] = value;
+    setMenuItems(newMenuItems);
+  };
+
+  const addMenuItem = () => {
+    setMenuItems([...menuItems, { name: '', starters: '', mainCourses: '', grilledItems: '', breads: '', desserts: '', beverages: '', price: '' }]);
+  };
+
+  const removeMenuItem = (index) => {
+    setMenuItems(menuItems.filter((_, i) => i !== index));
+  };
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -161,6 +181,7 @@ function VDB_addlistings(prop) {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     console.log(FormData)
   }
 
@@ -175,7 +196,7 @@ function VDB_addlistings(prop) {
 
       <div className="w-[90%] sm:w-[60%] md:w-[60%] rounded-xl mt-10 border-[1px] shadow-lg m-auto">
         <div className="w-full mx-auto bg-white p-8 shadow-lg rounded-xl">
-          <h2 className="text-xl font-semibold mb-4">Booking Form</h2>
+          <h2 className="text-xl font-semibold mb-4">Add Listing</h2>
           {/* <p className="text-gray-500 mb-6">The information can be edited</p> */}
           <form>
             <div className="  gap-4 mb-4 ">
@@ -223,7 +244,7 @@ function VDB_addlistings(prop) {
                   </option>
                 ))}
               </select>
-             
+
               <select
                 className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
                 onChange={handleChange}
@@ -235,16 +256,7 @@ function VDB_addlistings(prop) {
                 ))}
               </select>
 
-              <select
-                className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
-                onChange={handleChange}
-              >
-                {cateringOptions.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+             
 
               <select className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]">
                 {ServingType.map((type, index) => (
@@ -265,7 +277,7 @@ function VDB_addlistings(prop) {
                 ))}
               </select>
               <label className="block text-sm font-medium text-gray-700">
-                Price Per Person
+                Price Per Person(Starting From)
               </label>
               <input
                 id=""
@@ -279,8 +291,8 @@ function VDB_addlistings(prop) {
                 Serving Capacity
               </label>
               <input
-                id="Parking"
-                name={formData.parking}
+                id=""
+                name=""
                 // value={formData.parking}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 onChange={handleChange}
@@ -337,6 +349,44 @@ function VDB_addlistings(prop) {
                     type="number"
                   ></input>
                 </div>
+
+                <label className="block text-sm font-medium text-gray-700">
+                  Crockry
+                </label>
+                <select
+                  id="Crockry"
+                  name="Crockry"
+                  // value={formData.projector}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                  onChange={handleChange}
+                >
+                  {booleanOptions.map((e, index) => {
+                    return (
+                      <option key={index} value={e}>
+                        {e}
+                      </option>
+                    );
+                  })}
+                </select>
+
+                <label className="block text-sm font-medium text-gray-700">
+                  Serving Staff Availibility
+                </label>
+                <select
+                  id="Serving Staff"
+                  name="Serving Staff"
+                  // value={formData.projector}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                  onChange={handleChange}
+                >
+                  {booleanOptions.map((e, index) => {
+                    return (
+                      <option key={index} value={e}>
+                        {e}
+                      </option>
+                    );
+                  })}
+                </select>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Projector
@@ -403,11 +453,31 @@ function VDB_addlistings(prop) {
                 </div>
 
               </div>
-
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Outdoor Catering Allowed
+                </label>
+                <select
+                  id="catering"
+                  name="catering"
+                  // value={formData.catering}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                  required
+                  onChange={handleChange}
+                >
+                  {booleanOptions.map((e, index) => {
+                    return (
+                      <option key={index} value={e}>
+                        {e}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
               <div className=" gap-4 mb-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Catering Service
+                    Inbound Catering Service
                   </label>
                   <select
                     id="catering"
@@ -439,6 +509,73 @@ function VDB_addlistings(prop) {
                     placeholder="No. of persons"
                     required
                   />
+                </div>
+              </div>
+              <div className="">
+                <h2>Create Your Menu</h2>
+                {menuItems.map((item, index) => (
+                  <div key={index} className="menu-item flex flex-wrap" >
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Item Name"
+                      // value={item.name}
+       className="h-10 w-[25%]"               onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="starters"
+                      placeholder="Starters"
+                      // value={item.starters}
+   className="h-10 w-[25%]"                   onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="mainCourses"
+                      placeholder="Main Courses"
+                      // value={item.mainCourses}
+className="h-10 w-[25%]"                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="grilledItems"
+                      placeholder="Grilled Items"
+                      // value={item.grilledItems}className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="breads"
+                      placeholder="Breads"
+                      // value={item.breads}
+     className="h-10 w-[25%]"                 onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="desserts"
+                      placeholder="Desserts"
+                      // value={item.desserts}
+   className="h-10 w-[25%]"                   onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="beverages"
+                      placeholder="Beverages"
+                      // value={item.beverages}
+  className="h-10 w-[25%]"                    onChange={(e) => handleChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="price"
+                      placeholder="Price"
+                      // value={item.price}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <button type="button" onClick={() => removeMenuItem(index)} className="border-2 border-red-400 p-1 rounded-full">Remove</button>
+                  </div>
+                ))}
+                <div className="flex justify-end">
+                <button type="button" onClick={addMenuItem} className="border-2 border-green-400 rounded-full p-2 mr-[10%] ">Add Menu</button>
                 </div>
               </div>
             </div>
