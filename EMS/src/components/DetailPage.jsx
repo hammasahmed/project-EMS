@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Slider_for_Detail from "./Slider_for_Detail";
+import BookingForm from "./BookingForm";
 
 const Details = () => {
   const { id } = useParams(); // Get the ID from the URL
   const [listing, setListing] = useState(null);
-  const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const navigate =  useNavigate()
   useEffect(() => {
     const fetchListing = async () => {
-      // http://localhost:3000/listings/${id}
+      // 
       try {
         const response = await fetch("/listings.json");
 
@@ -36,18 +37,11 @@ const Details = () => {
       </div>
     );
   }
-
-  // return (
-  //   // <div className='flex p-3 border-black border-2'>
-  //   //   <div className='border-red border-2 w-[40%]'>
-  //   //   <h1 className='text-4xl mt-3'>{listing.title}</h1>
-  //   //   {/* <img src={listing.imageUrl} alt={listing.title} /> */}
-  //   //   <Slider_for_Detail />
-  //   //   </div>
-  //   //   <div className='border-blue border-2 '>
-  //   //   <p>{listing.description}</p>
-  //   //   <p>Price: ${listing.price}</p>
-  //   //   </div>
+  const submitHandler = (e) => {
+    e.preventDefault();
+    navigate('/BookingForm',{state:listing})
+    
+  };
 
   return (
       // < >
@@ -265,7 +259,7 @@ const Details = () => {
       </div>
     </div>
     
-    <div className="w-full md:w-[35%] p-[4%] mt-5">
+    <div className="w-full md:w-[40%] p-[4%] mt-5">
       <div className="flex flex-col justify-around p-5 mt-10 shadow-xl h-auto md:h-[300px] md:mt-5">
         <div className="text-xl sm:text-2xl font-bold">
           Price: Starting From ${listing.price}
@@ -280,7 +274,7 @@ const Details = () => {
           <b>Address:</b> St# 01, Road# 01, Shumali Korea
         </div>
         <div className="text-center mt-4">
-          <button className="rounded-3xl  text-lg py-2 px-4 bg-[#06c911]">
+          <button className="rounded-3xl  text-lg py-2 px-4 bg-[#06c911]" type="submit" onClick={submitHandler}>
             <b>Check for Availability</b>
           </button>
         </div>
