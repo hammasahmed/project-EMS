@@ -9,10 +9,10 @@
     "serviceType": "venue",
     "venueType": "Sports Arena",
     "pictures": {
-      "picture1": "https://picsum.photos/seed/25/300/200",
-      "picture2": "https://picsum.photos/seed/25/300/200",
-      "picture3": "https://picsum.photos/seed/25/300/200",
-      "picture4": "https://picsum.photos/seed/25/300/200"
+      "picture1": "https://picsum.photos/seed/1/300/200",
+      "picture2": "https://picsum.photos/seed/2/300/200",
+      "picture3": "https://picsum.photos/seed/3/300/200",
+      "picture4": "https://picsum.photos/seed/4/300/200"
     }
   },
   {
