@@ -5,10 +5,11 @@ import { useState } from "react";
 
 
 function VDB_addlistings(prop) {
-  const booleanOptions = ["Yes", "No"];
+  const booleanOptions = ["Select Option","Yes", "No"];
 
-  const lighting = ["High", "Medium", "Low"];
+  const lighting = ["Select Option","High", "Medium", "Low"];
   const events = [
+    "Select Option",
     "Wedding",
     "Birthday",
     "Anniversary",
@@ -19,6 +20,7 @@ function VDB_addlistings(prop) {
     "Seminar",
   ];
   const grounds = [
+    "Select Option",
     "Football",
     "Badminton",
     "Tennis",
@@ -27,6 +29,7 @@ function VDB_addlistings(prop) {
     "Basketball",
   ];
   const sitting_types = [
+    "Select Option",
     "Chevron",
     "Auditorium",
     "Banquet",
@@ -38,7 +41,8 @@ function VDB_addlistings(prop) {
   ]
 
   const venueOptions = [
-    "",
+    "Select Option",
+    "Venue Type",
     "sports_arena",
     "banquet_hall",
     "marquee",
@@ -46,9 +50,9 @@ function VDB_addlistings(prop) {
     "hotel"
   ];
 
-  const ServingType = ['', 'Self-Serving', 'Full-Serving'];
+  const ServingType = ["Select Option",'', 'Self-Serving', 'Full-Serving'];
 
-  const City = ["City", "Islamabad", "Ahmed Nager", "Ahmadpur East", "Ali Khan", "Alipur", "Arifwala", "Attock", "Bhera", "Bhalwal",
+  const City = ["Select Option", "Islamabad", "Ahmed Nager", "Ahmadpur East", "Ali Khan", "Alipur", "Arifwala", "Attock", "Bhera", "Bhalwal",
     "Bahawalnagar", "Bahawalpur", "Bhakkar", "Burewala", "Chillianwala", "Chakwal", "Chichawatni", "Chiniot", "Chishtian", "Daska",
     "Darya Khan", "Dera Ghazi", "Dhaular", "Dina", "Dinga", "Dipalpur", "Faisalabad", "Fateh Jhang", "Ghakhar Mandi", "Gojra", "Gujranwala",
     "Gujrat", "Gujar Khan", "Hafizabad", "Haroonabad", "Hasilpur", "Haveli", "Lakha", "Jalalpur", "Jattan", "Jampur", "Jaranwala", "Jhang", "Jhelum",
@@ -71,37 +75,39 @@ function VDB_addlistings(prop) {
     "Killa Abdullah", "Killa Saifullah", "Kohlu", "Lasbela", "Lehri", "Loralai", "Mastung", "Musakhel", "Nasirabad", "Nushki", "Panjgur",
     "Pishin valley", "Quetta", "Sherani", "Sibi", "Sohbatpur", "Washuk", "Zhob", "Ziarat"]
   const cateringOptions = [
-    { value: "", label: "Catering Type" },
-    { value: "buffet", label: "Starters" },
-    { value: "plated", label: "Main Courses" },
-    { value: "familyStyle", label: "Grilled Items" },
-    { value: "plated", label: "Breads" },
-    { value: "", label: "Desserts" },
-    { value: "", label: "Beverages" }
+    "Select Option","Catering Type", "Starters" ,"Main Courses" ,"Grilled Items" ,"Breads" , "Desserts" , "Beverages" 
   ];
 
 
-  const serviceOptions = [
-    { value: "", label: "Select Service" },
-    { value: "venue", label: "Venue" },
-    { value: "catering", label: "Catering" }
+  const serviceOptions = ["Select Service" ,"Venue","Catering"
   ];
 
   const [formData, setFormData] = useState({
-    name: "",
+    title: "",
     selectedoption: "",
+    venue_type:"",
     event_type: "",
     date: "",
     parking: "",
     ground_type: "",
     sitting_arrangement: "",
     serving_capacity:"",
+    ServingType:"",
     lighting_type: "",
     VIP_seats: "",
     projector: "",
     wifi: "",
     ac_heating: "",
     catering: "",
+    address:"",
+    Price_Per_Person:"",
+    outdoor_catering:"",
+    Crockry:"",
+    serving_staff:"",
+    service_type:"",
+    Inbond_catering:"",
+    seating_capacity:"",
+    description:""
   });
   const [timeSlots, setTimeSlots] = useState([]);
   const [startTime, setStartTime] = useState('');
@@ -182,7 +188,7 @@ function VDB_addlistings(prop) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(FormData)
+    console.log(formData)
   }
 
 
@@ -207,12 +213,12 @@ function VDB_addlistings(prop) {
                 <input
                   type="text"
                   id="first-name"
-                  // value={formData.name}
-                  name={formData.name}
+                  value={formData.title}
+                  name="title"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   placeholder="Beautiful Marquee at my home"
                   onChange={handleChange}
-                  required
+                  
                 />
               </div>
 
@@ -221,13 +227,13 @@ function VDB_addlistings(prop) {
               </label>
               <input
                 type="text"
-                id="first-name"
-                // value={formData.name}
-                name={formData.name}
+                id="address"
+                value={formData.address}
+                 name="address"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Dhoke Khaby, Chungi No. 2"
                 onChange={handleChange}
-                required
+                
               />
 
             </div>
@@ -235,30 +241,39 @@ function VDB_addlistings(prop) {
 
 
               <select
+                name="service_type"
+                value={formData.service_type}
                 className="border-2 h-10 rounded-xl pl-4 w-[100%]"
                 onChange={handleChange}
               >
                 {serviceOptions.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
+                  <option key={index}>
+                    {option}
                   </option>
                 ))}
               </select>
 
               <select
+              name="venue_type"
+              value={formData.venue_type}
                 className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
                 onChange={handleChange}
               >
                 {venueOptions.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option ? option.replace("_", " ").replace(/(?:^|\s)\S/g, a => a.toUpperCase()) : "Venue Type"}
+                  <option key={index}   >
+                    
+                  {option}
                   </option>
                 ))}
               </select>
 
              
 
-              <select className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]">
+              <select className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
+              name="ServingType"
+              value={formData.ServingType}
+              >
+                
                 {ServingType.map((type, index) => (
                   <option key={index} value={type}>
                     {type || 'Select Serving Type'}
@@ -267,11 +282,13 @@ function VDB_addlistings(prop) {
               </select>
 
               <select
+              name="venue_type"
+              value={formData.venue_type}
                 className="border-2 h-10 rounded-xl pl-4 w-[100%]"
                 onChange={handleChange}
               >
                 {City.map((option, index) => (
-                  <option key={index} value={option}>
+                  <option key={index} >
                     {option}
                   </option>
                 ))}
@@ -281,7 +298,8 @@ function VDB_addlistings(prop) {
               </label>
               <input
                 id=""
-                name={formData.parking}
+                name="Price_Per_Person"
+                value={formData.Price_Per_Person}
                 // value={formData.parking}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 onChange={handleChange}
@@ -292,8 +310,8 @@ function VDB_addlistings(prop) {
               </label>
               <input
                 id=""
-                name=""
-                // value={formData.parking}
+                value={formData.serving_capacity}
+                name="serving_capacity"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 onChange={handleChange}
                 type="number"
@@ -305,7 +323,8 @@ function VDB_addlistings(prop) {
                   </label>
                   <input
                     id="Parking"
-                    name={formData.parking}
+                    name="parking"
+                    value={formData.parking}
                     // value={formData.parking}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
@@ -318,8 +337,8 @@ function VDB_addlistings(prop) {
                   </label>
                   <select
                     id="ground"
+                    value={formData.ground_type}
                     name="ground_type"
-                    // value={formData.ground_type}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
                   >
@@ -343,6 +362,7 @@ function VDB_addlistings(prop) {
                   <input
                     id="VIPS"
                     name="VIP_seats"
+                    value={formData.VIP_seats}
                     // value={formData.VIP_seats}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
@@ -354,15 +374,15 @@ function VDB_addlistings(prop) {
                   Crockry
                 </label>
                 <select
-                  id="Crockry"
                   name="Crockry"
+                  value={formData.Crockry}
                   // value={formData.projector}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   onChange={handleChange}
                 >
                   {booleanOptions.map((e, index) => {
                     return (
-                      <option key={index} value={e}>
+                      <option key={index}>
                         {e}
                       </option>
                     );
@@ -373,8 +393,8 @@ function VDB_addlistings(prop) {
                   Serving Staff Availibility
                 </label>
                 <select
-                  id="Serving Staff"
-                  name="Serving Staff"
+                  name="serving_staff"
+                  value={formData.serving_staff}
                   // value={formData.projector}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   onChange={handleChange}
@@ -392,8 +412,8 @@ function VDB_addlistings(prop) {
                     Projector
                   </label>
                   <select
-                    id="projector"
                     name="projector"
+                    value={formData.projector}
                     // value={formData.projector}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
@@ -416,8 +436,8 @@ function VDB_addlistings(prop) {
                     AC / Heating
                   </label>
                   <select
-                    id="ac_heating"
                     name="ac_heating"
+                    value={formData.ac_heating}
                     // value={formData.ac_heating}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
@@ -436,8 +456,8 @@ function VDB_addlistings(prop) {
                     Wifi
                   </label>
                   <select
-                    id="Wifi"
-                    name="Wifi"
+                    name="wifi"
+                    value={formData.wifi}
                     // value={formData.wifi}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
@@ -458,8 +478,8 @@ function VDB_addlistings(prop) {
                   Outdoor Catering Allowed
                 </label>
                 <select
-                  id="catering"
-                  name="catering"
+                  name="outdoor_catering"
+                  value={formData.outdoor_catering}
                   // value={formData.catering}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   required
@@ -480,8 +500,8 @@ function VDB_addlistings(prop) {
                     Inbound Catering Service
                   </label>
                   <select
-                    id="catering"
-                    name="catering"
+                    name="Inbond_catering"
+                    value={formData.Inbond_catering}
                     // value={formData.catering}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     required
@@ -502,12 +522,12 @@ function VDB_addlistings(prop) {
                   </label>
                   <input
                     type="text"
-                    id="Persons"
-                    name="guest"
+                    name="seating_capacity"
+                    value={formData.seating_capacity}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
                     placeholder="No. of persons"
-                    required
+                    
                   />
                 </div>
               </div>
@@ -569,7 +589,7 @@ className="h-10 w-[25%]"                      onChange={(e) => handleChange(inde
                       name="price"
                       placeholder="Price"
                       // value={item.price}
-                      onChange={(e) => handleChange(index, e)}
+                      onChange={(e) => handleChange()}
                     />
                     <button type="button" onClick={() => removeMenuItem(index)} className="border-2 border-red-400 p-1 rounded-full">Remove</button>
                   </div>
@@ -592,7 +612,8 @@ className="h-10 w-[25%]"                      onChange={(e) => handleChange(inde
                         type="checkbox"
                         id={`event_type_${index}`}
                         name="event_type"
-                        value={e}
+                        value={formData.event_type+=formData.event_type}
+                        
                         className="mr-2"
                         onChange={handleChange}
                       />
