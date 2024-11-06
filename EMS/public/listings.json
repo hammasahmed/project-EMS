@@ -8,6 +8,7 @@
     "imageUrl": "https://picsum.photos/seed/1/640/360",
     "serviceType": "venue",
     "venueType": "Sports Arena",
+    "capacity" : 250,
     "pictures": {
       "picture1": "https://picsum.photos/seed/1/300/200",
       "picture2": "https://picsum.photos/seed/2/300/200",
@@ -24,6 +25,7 @@
     "imageUrl": "https://picsum.photos/seed/2/300/200",
     "serviceType": "venue",
     "venueType": "Banquet Hall",
+    "capacity" : 250,
     "pictures": {
       "picture5": "https://picsum.photos/seed/25/300/200",
       "picture6": "https://picsum.photos/seed/picsum/200/300",
@@ -40,6 +42,7 @@
     "imageUrl": "https://picsum.photos/seed/3/300/200",
     "serviceType": "venue",
     "venueType": "Marquee",
+    "capacity" : 250,
     "pictures": {
       "picture9": "https://picsum.photos/seed/25/300/200",
       "picture10": "https://picsum.photos/seed/picsum/200/300",
@@ -56,6 +59,7 @@
     "imageUrl": "https://picsum.photos/seed/4/300/200",
     "serviceType": "venue",
     "venueType": "Conference Hall",
+    "capacity" : 250,
     "pictures": {
       "picture13": "https://picsum.photos/seed/25/300/200",
       "picture14": "https://picsum.photos/seed/picsum/200/300",
@@ -71,6 +75,7 @@
     "city": "Faisalabad",
     "imageUrl": "https://picsum.photos/seed/5/300/200",
     "serviceType": "venue",
+    "capacity" : 250,
     "pictures": {
       "picture17": "https://picsum.photos/seed/25/300/200",
       "picture18": "https://picsum.photos/seed/picsum/200/300",
@@ -86,6 +91,7 @@
     "city": "Multan",
     "imageUrl": "https://picsum.photos/seed/6/300/200",
     "serviceType": "venue",
+    "capacity" : 250,
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
@@ -101,6 +107,7 @@
     "city": "Quetta",
     "imageUrl": "https://picsum.photos/seed/7/300/200",
     "serviceType": "venue",
+    "capacity" : 250,
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",

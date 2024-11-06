@@ -264,7 +264,7 @@ const Details = () => {
               Price: Starting From ${listing.price}
             </div>
             <div className="text-lg">
-              <b>Capacity:</b> 250 Admi
+              <b>Capacity:</b> {listing.capacity} Admi
             </div>
             <div className="text-lg">
               <b>Location:</b> Shumali Koria
