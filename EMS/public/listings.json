@@ -8,20 +8,12 @@
     "imageUrl": "https://picsum.photos/seed/1/640/360",
     "serviceType": "venue",
     "venueType": "Sports Arena",
-<<<<<<< HEAD
-    "pictures": {
-      "picture1": "https://picsum.photos/seed/25/300/200",
-      "picture3": "https://picsum.photos/seed/picsum/200/300",
-      "picture4": "https://picsum.photos/seed/picsum/200/300",
-      "picture5": "https://picsum.photos/seed/picsum/200/300"
-=======
     "capacity" : 250,
     "pictures": {
       "picture1": "https://picsum.photos/seed/1/300/200",
       "picture2": "https://picsum.photos/seed/2/300/200",
       "picture3": "https://picsum.photos/seed/3/300/200",
       "picture4": "https://picsum.photos/seed/4/300/200"
->>>>>>> development
     }
   },
   {
@@ -32,13 +24,6 @@
     "city": "Lahore",
     "imageUrl": "https://picsum.photos/seed/2/300/200",
     "serviceType": "venue",
-<<<<<<< HEAD
-    "pictures": {
-      "picture1": "https://picsum.photos/seed/25/300/200",
-      "picture3": "https://picsum.photos/seed/picsum/200/300",
-      "picture4": "https://picsum.photos/seed/picsum/200/300",
-      "picture5": "https://picsum.photos/seed/picsum/200/300"
-=======
     "venueType": "Banquet Hall",
     "capacity" : 250,
     "pictures": {
@@ -46,272 +31,8 @@
       "picture6": "https://picsum.photos/seed/picsum/200/300",
       "picture7": "https://picsum.photos/seed/picsum/200/300",
       "picture8": "https://picsum.photos/seed/picsum/200/300"
->>>>>>> development
     }
   },
-  {
-    "_id": "2",
-    "title": "Modern House in Lahore",
-    "description": "A modern 4-bedroom house with a garden.",
-    "price": 200,
-    "city": "Lahore",
-    "imageUrl": "https://drive.google.com/file/d/1jIhrZ9CYGg1qOIJU7mvpHv8D3h2JZ3So/view?usp=sharing",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "3",
-    "title": "Luxury Condo in Islamabad",
-    "description": "A luxury condo in the heart of the capital city.",
-    "price": 250,
-    "city": "Islamabad",
-    "imageUrl": "https://picsum.photos/seed/3/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "4",
-    "title": "Cozy Cottage in Peshawar",
-    "description": "A charming cottage with a rustic feel.",
-    "price": 100,
-    "city": "Peshawar",
-    "imageUrl": "https://picsum.photos/seed/4/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "5",
-    "title": "Elegant Villa in Faisalabad",
-    "description": "An elegant villa with modern amenities.",
-    "price": 180,
-    "city": "Faisalabad",
-    "imageUrl": "https://picsum.photos/seed/5/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "6",
-    "title": "Affordable Studio in Multan",
-    "description": "A small but affordable studio apartment.",
-    "price": 75,
-    "city": "Multan",
-    "imageUrl": "https://picsum.photos/seed/6/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "7",
-    "title": "Charming Flat in Quetta",
-    "description": "A charming flat with a view of the mountains.",
-    "price": 90,
-    "city": "Quetta",
-    "imageUrl": "https://picsum.photos/seed/7/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "8",
-    "title": "Stylish Loft in Rawalpindi",
-    "description": "A stylish loft in a vibrant neighborhood.",
-    "price": 130,
-    "city": "Rawalpindi",
-    "imageUrl": "https://picsum.photos/seed/8/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "9",
-    "title": "Beautiful Home in Sialkot",
-    "description": "A beautiful home with a spacious yard.",
-    "price": 160,
-    "city": "Sialkot",
-    "imageUrl": "https://picsum.photos/seed/9/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "10",
-    "title": "Luxury Residence in Gujranwala",
-    "description": "A luxury residence with high-end finishes.",
-    "price": 220,
-    "city": "Gujranwala",
-    "imageUrl": "https://picsum.photos/seed/10/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "11",
-    "title": "Lovely House in Badin",
-    "description": "A lovely house with a great location.",
-    "price": 130,
-    "city": "Badin",
-    "imageUrl": "https://picsum.photos/seed/11/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "12",
-    "title": "Charming Apartment in Faisalabad",
-    "description": "A charming apartment in the heart of Faisalabad.",
-    "price": 120,
-    "city": "Faisalabad",
-    "imageUrl": "https://picsum.photos/seed/12/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "13",
-    "title": "Comfortable Flat in Jamshoro",
-    "description": "A comfortable flat with modern amenities.",
-    "price": 110,
-    "city": "Jamshoro",
-    "imageUrl": "https://picsum.photos/seed/13/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "14",
-    "title": "Elegant Villa in Lahore",
-    "description": "An elegant villa with a private pool.",
-    "price": 300,
-    "city": "Lahore",
-    "imageUrl": "https://picsum.photos/seed/14/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "15",
-    "title": "Modern Condo in Peshawar",
-    "description": "A modern condo with city views.",
-    "price": 140,
-    "city": "Peshawar",
-    "imageUrl": "https://picsum.photos/seed/15/300/200",
-    "serviceType": "venue"
-  },
-  {
-    "_id": "16",
-    "title": "Gourmet Catering for Weddings",
-    "description": "High-end gourmet catering service specializing in weddings.",
-    "price": 500,
-    "city": "Karachi",
-    "imageUrl": "https://picsum.photos/seed/16/300/200",
-    "serviceType": "catering",
-    "cateringType": "Family Style"
-  },
-  {
-    "_id": "17",
-    "title": "Budget Catering for Small Events",
-    "description": "Affordable catering service for small events.",
-    "price": 100,
-    "city": "Lahore",
-    "imageUrl": "https://picsum.photos/seed/17/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "18",
-    "title": "Luxury Catering in Islamabad",
-    "description": "Luxury catering service for high-end events.",
-    "price": 800,
-    "city": "Islamabad",
-    "imageUrl": "https://picsum.photos/seed/18/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "19",
-    "title": "Rustic Catering for Outdoor Events",
-    "description": "Catering service specializing in rustic outdoor events.",
-    "price": 300,
-    "city": "Peshawar",
-    "imageUrl": "https://picsum.photos/seed/19/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "20",
-    "title": "Catering for Corporate Events",
-    "description": "Professional catering for corporate events and meetings.",
-    "price": 400,
-    "city": "Faisalabad",
-    "imageUrl": "https://picsum.photos/seed/20/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "21",
-    "title": "Home-Style Catering in Multan",
-    "description": "Home-style catering with traditional flavors.",
-    "price": 150,
-    "city": "Multan",
-    "imageUrl": "https://picsum.photos/seed/21/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "22",
-    "title": "Mountain View Catering in Quetta",
-    "description": "Catering service with a focus on local ingredients.",
-    "price": 200,
-    "city": "Quetta",
-    "imageUrl": "https://picsum.photos/seed/22/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "23",
-    "title": "Vibrant Catering in Rawalpindi",
-    "description": "Vibrant and colorful catering service for lively events.",
-    "price": 250,
-    "city": "Rawalpindi",
-    "imageUrl": "https://picsum.photos/seed/23/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "24",
-    "title": "Elegant Catering in Sialkot",
-    "description": "Elegant catering service for formal events.",
-    "price": 350,
-    "city": "Sialkot",
-    "imageUrl": "https://picsum.photos/seed/24/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "25",
-    "title": "High-End Catering in Gujranwala",
-    "description": "High-end catering service for exclusive events.",
-    "price": 600,
-    "city": "Gujranwala",
-    "imageUrl": "https://picsum.photos/seed/25/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "26",
-    "title": "Private Chef in Badin",
-    "description": "Hire a private chef for your next event.",
-    "price": 400,
-    "city": "Badin",
-    "imageUrl": "https://picsum.photos/seed/26/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "27",
-    "title": "Outdoor BBQ Catering in Faisalabad",
-    "description": "Specialized BBQ catering service for outdoor events.",
-    "price": 250,
-    "city": "Faisalabad",
-    "imageUrl": "https://picsum.photos/seed/27/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "28",
-    "title": "Custom Cake Design in Jamshoro",
-    "description": "Custom cake design and catering for special occasions.",
-    "price": 200,
-    "city": "Jamshoro",
-    "imageUrl": "https://picsum.photos/seed/28/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "29",
-    "title": "Dessert Catering in Lahore",
-    "description": "Dessert-only catering service for sweet lovers.",
-    "price": 150,
-    "city": "Lahore",
-    "imageUrl": "https://picsum.photos/seed/29/300/200",
-    "serviceType": "catering"
-  },
-  {
-    "_id": "30",
-    "title": "Event Catering in Peshawar",
-    "description": "Full-service catering for events of all sizes.",
-    "price": 450,
-    "city": "Peshawar",
-    "imageUrl": "https://picsum.photos/seed/30/300/200",
-    "serviceType": "catering"
-  },
-
   {
     "_id": "3",
     "title": "Luxury Condo in Islamabad",
@@ -320,13 +41,6 @@
     "city": "Islamabad",
     "imageUrl": "https://picsum.photos/seed/3/300/200",
     "serviceType": "venue",
-<<<<<<< HEAD
-    "pictures": {
-      "picture1": "https://picsum.photos/seed/25/300/200",
-      "picture3": "https://picsum.photos/seed/picsum/200/300",
-      "picture4": "https://picsum.photos/seed/picsum/200/300",
-      "picture5": "https://picsum.photos/seed/picsum/200/300"
-=======
     "venueType": "Marquee",
     "capacity" : 250,
     "pictures": {
@@ -334,7 +48,6 @@
       "picture10": "https://picsum.photos/seed/picsum/200/300",
       "picture11": "https://picsum.photos/seed/picsum/200/300",
       "picture12": "https://picsum.photos/seed/picsum/200/300"
->>>>>>> development
     }
   },
   {
@@ -345,13 +58,6 @@
     "city": "Peshawar",
     "imageUrl": "https://picsum.photos/seed/4/300/200",
     "serviceType": "venue",
-<<<<<<< HEAD
-    "pictures": {
-      "picture1": "https://picsum.photos/seed/25/300/200",
-      "picture3": "https://picsum.photos/seed/picsum/200/300",
-      "picture4": "https://picsum.photos/seed/picsum/200/300",
-      "picture5": "https://picsum.photos/seed/picsum/200/300"
-=======
     "venueType": "Conference Hall",
     "capacity" : 250,
     "pictures": {
@@ -359,7 +65,6 @@
       "picture14": "https://picsum.photos/seed/picsum/200/300",
       "picture15": "https://picsum.photos/seed/picsum/200/300",
       "picture16": "https://picsum.photos/seed/picsum/200/300"
->>>>>>> development
     }
   },
   {
@@ -370,20 +75,12 @@
     "city": "Faisalabad",
     "imageUrl": "https://picsum.photos/seed/5/300/200",
     "serviceType": "venue",
-<<<<<<< HEAD
-    "pictures": {
-      "picture1": "https://picsum.photos/seed/25/300/200",
-      "picture3": "https://picsum.photos/seed/picsum/200/300",
-      "picture4": "https://picsum.photos/seed/picsum/200/300",
-      "picture5": "https://picsum.photos/seed/picsum/200/300"
-=======
     "capacity" : 250,
     "pictures": {
       "picture17": "https://picsum.photos/seed/25/300/200",
       "picture18": "https://picsum.photos/seed/picsum/200/300",
       "picture19": "https://picsum.photos/seed/picsum/200/300",
       "picture20": "https://picsum.photos/seed/picsum/200/300"
->>>>>>> development
     }
   },
   {
@@ -394,10 +91,7 @@
     "city": "Multan",
     "imageUrl": "https://picsum.photos/seed/6/300/200",
     "serviceType": "venue",
-<<<<<<< HEAD
-=======
     "capacity" : 250,
->>>>>>> development
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
@@ -413,10 +107,7 @@
     "city": "Quetta",
     "imageUrl": "https://picsum.photos/seed/7/300/200",
     "serviceType": "venue",
-<<<<<<< HEAD
-=======
     "capacity" : 250,
->>>>>>> development
     "pictures": {
       "picture1": "https://picsum.photos/seed/25/300/200",
       "picture3": "https://picsum.photos/seed/picsum/200/300",
