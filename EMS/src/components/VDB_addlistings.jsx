@@ -595,7 +595,7 @@ function VDB_addlistings(prop) {
               )}
               <div className="">
                 <h2>Create Your Menu</h2>
-                {menuItems.map((e, index) => (
+                {menuItems.map((item, index) => (
                   <div key={index} className="menu-item flex flex-wrap" >
                     <input
                       type="text"
