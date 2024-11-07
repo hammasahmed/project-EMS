@@ -1,24 +1,25 @@
 
+
 import React from "react";
 import { useState } from "react";
-
+import axios from 'axios';
 
 
 function VDB_addlistings(prop) {
-  const booleanOptions = ["Select Option","Yes", "No"];
+  const booleanOptions = ["Select Option", "Yes", "No"];
 
-  const lighting = ["Select Option","High", "Medium", "Low"];
-  const events = [
-    "Select Option",
-    "Wedding",
-    "Birthday",
-    "Anniversary",
-    "Mehandi",
-    "Barat",
-    "Walima",
-    "Conference",
-    "Seminar",
-  ];
+  const lighting = ["Select Option", "High", "Medium"];
+  // const events = [
+  //   "Select Option",
+  //   "Wedding",
+  //   "Birthday",
+  //   "Anniversary",
+  //   "Mehandi",
+  //   "Barat",
+  //   "Walima",
+  //   "Conference",
+  //   "Seminar",
+  // ];
   const grounds = [
     "Select Option",
     "Football",
@@ -28,20 +29,19 @@ function VDB_addlistings(prop) {
     "Volleyball",
     "Basketball",
   ];
-  const sitting_types = [
-    "Select Option",
-    "Chevron",
-    "Auditorium",
-    "Banquet",
-    "Boardroom",
-    "Cabaret",
-    "Classroom",
-    "Hollow square",
-    "U-shaped"
-  ]
+  // const sitting_types = [
+  //   "Select Option",
+  //   "Chevron",
+  //   "Auditorium",
+  //   "Banquet",
+  //   "Boardroom",
+  //   "Cabaret",
+  //   "Classroom",
+  //   "Hollow square",
+  //   "U-shaped"
+  // ]
 
   const venueOptions = [
-    "Select Option",
     "Venue Type",
     "sports_arena",
     "banquet_hall",
@@ -50,7 +50,7 @@ function VDB_addlistings(prop) {
     "hotel"
   ];
 
-  const ServingType = ["Select Option",'', 'Self-Serving', 'Full-Serving'];
+  const ServingType = ["Select Option", '', 'Self-Serving', 'Full-Serving'];
 
   const City = ["Select Option", "Islamabad", "Ahmed Nager", "Ahmadpur East", "Ali Khan", "Alipur", "Arifwala", "Attock", "Bhera", "Bhalwal",
     "Bahawalnagar", "Bahawalpur", "Bhakkar", "Burewala", "Chillianwala", "Chakwal", "Chichawatni", "Chiniot", "Chishtian", "Daska",
@@ -75,39 +75,63 @@ function VDB_addlistings(prop) {
     "Killa Abdullah", "Killa Saifullah", "Kohlu", "Lasbela", "Lehri", "Loralai", "Mastung", "Musakhel", "Nasirabad", "Nushki", "Panjgur",
     "Pishin valley", "Quetta", "Sherani", "Sibi", "Sohbatpur", "Washuk", "Zhob", "Ziarat"]
   const cateringOptions = [
-    "Select Option","Catering Type", "Starters" ,"Main Courses" ,"Grilled Items" ,"Breads" , "Desserts" , "Beverages" 
+    "Select Option", "Catering Type", "Starters", "Main Courses", "Grilled Items", "Breads", "Desserts", "Beverages"
   ];
 
 
-  const serviceOptions = ["Select Service" ,"Venue","Catering"
+  const serviceOptions = ["Select Service", "Venue", "Catering"
   ];
 
   const [formData, setFormData] = useState({
     title: "",
-    selectedoption: "",
-    venue_type:"",
+    description: "",
+    address: "",
+    City: "",
+    service_type: "",
+    venue_type: "",
     event_type: "",
-    date: "",
-    parking: "",
-    ground_type: "",
+    seating_capacity: "",
     sitting_arrangement: "",
-    serving_capacity:"",
-    ServingType:"",
     lighting_type: "",
+    ServingType: "",
     VIP_seats: "",
+    Inbond_catering: "",
+    outdoor_catering: "",
     projector: "",
     wifi: "",
     ac_heating: "",
-    catering: "",
-    address:"",
-    Price_Per_Person:"",
-    outdoor_catering:"",
-    Crockry:"",
-    serving_staff:"",
-    service_type:"",
-    Inbond_catering:"",
-    seating_capacity:"",
-    description:""
+    parking: "",
+    serving_capacity: "",
+    Crockry: "",
+    serving_staff: "",
+    ground_type: "",
+    Price_Per_Person: "",
+    imageUrl: "",
+    menu_name: "",
+    starters: "",
+    mainCourses: "",
+    grilledItems: "",
+    breads: "",
+    desserts: "",
+    beverages: "",
+    menu_price: "",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   });
   const [timeSlots, setTimeSlots] = useState([]);
   const [startTime, setStartTime] = useState('');
@@ -134,6 +158,11 @@ function VDB_addlistings(prop) {
   const removeMenuItem = (index) => {
     setMenuItems(menuItems.filter((_, i) => i !== index));
   };
+
+
+
+
+
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -186,9 +215,15 @@ function VDB_addlistings(prop) {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formData)
+    try {
+      await axios.post("http://localhost:3000/listings", formData);
+      alert("Data submitted successfully!");
+  } catch (error) {
+      alert("Error submitting data");
+  }
   }
 
 
@@ -218,7 +253,7 @@ function VDB_addlistings(prop) {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   placeholder="Beautiful Marquee at my home"
                   onChange={handleChange}
-                  
+
                 />
               </div>
 
@@ -229,11 +264,11 @@ function VDB_addlistings(prop) {
                 type="text"
                 id="address"
                 value={formData.address}
-                 name="address"
+                name="address"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Dhoke Khaby, Chungi No. 2"
                 onChange={handleChange}
-                
+
               />
 
             </div>
@@ -253,37 +288,40 @@ function VDB_addlistings(prop) {
                 ))}
               </select>
 
+              {formData.service_type === "Venue" && (
+                <select
+                  name="venue_type"
+                  value={formData.venue_type}
+                  className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
+                  onChange={handleChange}
+                >
+                  {venueOptions.map((option, index) => (
+                    <option key={index}   >
+
+                      {option}
+                    </option>
+                  ))}
+                </select>)}
+
+
+              {formData.service_type === "Venue" && (
+
+                <select className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
+                  name="ServingType"
+                  value={formData.ServingType}
+                >
+
+                  {ServingType.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type || 'Select Serving Type'}
+                    </option>
+                  ))}
+                </select>)}
+
               <select
-              name="venue_type"
-              value={formData.venue_type}
-                className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
-                onChange={handleChange}
-              >
-                {venueOptions.map((option, index) => (
-                  <option key={index}   >
-                    
-                  {option}
-                  </option>
-                ))}
-              </select>
+                name="City"
+                value={formData.City}
 
-             
-
-              <select className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
-              name="ServingType"
-              value={formData.ServingType}
-              >
-                
-                {ServingType.map((type, index) => (
-                  <option key={index} value={type}>
-                    {type || 'Select Serving Type'}
-                  </option>
-                ))}
-              </select>
-
-              <select
-              name="venue_type"
-              value={formData.venue_type}
                 className="border-2 h-10 rounded-xl pl-4 w-[100%]"
                 onChange={handleChange}
               >
@@ -305,32 +343,39 @@ function VDB_addlistings(prop) {
                 onChange={handleChange}
                 type="number"
               ></input>
-              <label className="block text-sm font-medium text-gray-700">
-                Serving Capacity
-              </label>
-              <input
-                id=""
-                value={formData.serving_capacity}
-                name="serving_capacity"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                onChange={handleChange}
-                type="number"
-              ></input>
-              <div className=" gap-4 mb-4">
+              {formData.service_type === "Catering" && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Parking Capacity
+                    Serving Capacity
                   </label>
                   <input
-                    id="Parking"
-                    name="parking"
-                    value={formData.parking}
-                    // value={formData.parking}
+                    id=""
+                    value={formData.serving_capacity}
+                    name="serving_capacity"
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
                     type="number"
                   ></input>
                 </div>
+              )}
+              <div className=" gap-4 mb-4">
+                {formData.service_type === "Venue" && (
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Parking Capacity
+                    </label>
+                    <input
+                      id="Parking"
+                      name="parking"
+                      value={formData.parking}
+                      // value={formData.parking}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                      type="number"
+                    ></input>
+                  </div>)}
+                  {formData.venue_type === "sports_arena" && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Ground Type
@@ -350,63 +395,68 @@ function VDB_addlistings(prop) {
                       );
                     })}
                   </select>
-                </div>
+                </div>)}
 
               </div>
               <div className=" gap-4 mb-4">
+                {formData.service_type === "Venue" && (
 
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      No.of VIP Persons
+                    </label>
+                    <input
+                      id="VIPS"
+                      name="VIP_seats"
+                      value={formData.VIP_seats}
+                      // value={formData.VIP_seats}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                      type="number"
+                    ></input>
+                  </div>)}
+                  {formData.service_type === "Catering" && (
                 <div>
+                
                   <label className="block text-sm font-medium text-gray-700">
-                    No.of VIP Persons
+                    Crockry
                   </label>
-                  <input
-                    id="VIPS"
-                    name="VIP_seats"
-                    value={formData.VIP_seats}
-                    // value={formData.VIP_seats}
+                  <select
+                    name="Crockry"
+                    value={formData.Crockry}
+                    // value={formData.projector}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                     onChange={handleChange}
-                    type="number"
-                  ></input>
-                </div>
+                  >
+                    {booleanOptions.map((e, index) => {
+                      return (
+                        <option key={index}>
+                          {e}
+                        </option>
+                      );
+                    })}
+                  </select>
 
-                <label className="block text-sm font-medium text-gray-700">
-                  Crockry
-                </label>
-                <select
-                  name="Crockry"
-                  value={formData.Crockry}
-                  // value={formData.projector}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  onChange={handleChange}
-                >
-                  {booleanOptions.map((e, index) => {
-                    return (
-                      <option key={index}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </select>
-
-                <label className="block text-sm font-medium text-gray-700">
-                  Serving Staff Availibility
-                </label>
-                <select
-                  name="serving_staff"
-                  value={formData.serving_staff}
-                  // value={formData.projector}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  onChange={handleChange}
-                >
-                  {booleanOptions.map((e, index) => {
-                    return (
-                      <option key={index} value={e}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </select>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Serving Staff Availibility
+                  </label>
+                  <select
+                    name="serving_staff"
+                    value={formData.serving_staff}
+                    // value={formData.projector}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                    onChange={handleChange}
+                  >
+                    {booleanOptions.map((e, index) => {
+                      return (
+                        <option key={index} value={e}>
+                          {e}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>)}
+                {formData.venue_type === "conference_hall" && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Projector
@@ -426,31 +476,36 @@ function VDB_addlistings(prop) {
                       );
                     })}
                   </select>
-                </div>
+                </div>)}
 
               </div>
 
               <div className=" gap-4 mb-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    AC / Heating
-                  </label>
-                  <select
-                    name="ac_heating"
-                    value={formData.ac_heating}
-                    // value={formData.ac_heating}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {booleanOptions.map((e, index) => {
-                      return (
-                        <option key={index} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
+                {formData.service_type === "Venue" && (
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      AC / Heating
+                    </label>
+                    <select
+                      name="ac_heating"
+                      value={formData.ac_heating}
+                      // value={formData.ac_heating}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                )}
+                                {formData.venue_type === "conference_hall" && (
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Wifi
@@ -470,41 +525,22 @@ function VDB_addlistings(prop) {
                       );
                     })}
                   </select>
-                </div>
+                </div>)}
 
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Outdoor Catering Allowed
-                </label>
-                <select
-                  name="outdoor_catering"
-                  value={formData.outdoor_catering}
-                  // value={formData.catering}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  required
-                  onChange={handleChange}
-                >
-                  {booleanOptions.map((e, index) => {
-                    return (
-                      <option key={index} value={e}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              <div className=" gap-4 mb-4">
+
+              {formData.service_type === "Venue" && (
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Inbound Catering Service
+                    Outdoor Catering Allowed
                   </label>
                   <select
-                    name="Inbond_catering"
-                    value={formData.Inbond_catering}
+                    name="outdoor_catering"
+                    value={formData.outdoor_catering}
                     // value={formData.catering}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    required
+
                     onChange={handleChange}
                   >
                     {booleanOptions.map((e, index) => {
@@ -515,170 +551,173 @@ function VDB_addlistings(prop) {
                       );
                     })}
                   </select>
+                </div>)}
+              {formData.service_type === "Venue" && (
+                <div className=" gap-4 mb-4">
+
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Inbound Catering Service
+                    </label>
+                    <select
+                      name="Inbond_catering"
+                      value={formData.Inbond_catering}
+                      // value={formData.catering}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      required
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Seating Capacity
+                    </label>
+                    <input
+                      type="text"
+                      name="seating_capacity"
+                      value={formData.seating_capacity}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                      placeholder="No. of persons"
+
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Seating Capacity
-                  </label>
-                  <input
-                    type="text"
-                    name="seating_capacity"
-                    value={formData.seating_capacity}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                    placeholder="No. of persons"
-                    
-                  />
-                </div>
-              </div>
+              )}
               <div className="">
                 <h2>Create Your Menu</h2>
-                {menuItems.map((item, index) => (
+                {menuItems.map((e, index) => (
                   <div key={index} className="menu-item flex flex-wrap" >
                     <input
                       type="text"
-                      name="name"
+                      name="menu_name"
                       placeholder="Item Name"
-                      // value={item.name}
-       className="h-10 w-[25%]"               onChange={(e) => handleChange(index, e)}
+                      value={formData.menu_name}
+                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="starters"
                       placeholder="Starters"
-                      // value={item.starters}
-   className="h-10 w-[25%]"                   onChange={(e) => handleChange(index, e)}
+                      value={formData.starters}
+                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="mainCourses"
                       placeholder="Main Courses"
-                      // value={item.mainCourses}
-className="h-10 w-[25%]"                      onChange={(e) => handleChange(index, e)}
+                      value={formData.mainCourses}
+                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="grilledItems"
                       placeholder="Grilled Items"
-                      // value={item.grilledItems}className="h-10 w-[25%]"
+                      value={formData.grilledItems} className="h-10 w-[25%]"
                       onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="breads"
                       placeholder="Breads"
-                      // value={item.breads}
-     className="h-10 w-[25%]"                 onChange={(e) => handleChange(index, e)}
+                      value={formData.breads}
+                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="desserts"
                       placeholder="Desserts"
-                      // value={item.desserts}
-   className="h-10 w-[25%]"                   onChange={(e) => handleChange(index, e)}
+                      value={formData.desserts}
+                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="beverages"
                       placeholder="Beverages"
-                      // value={item.beverages}
-  className="h-10 w-[25%]"                    onChange={(e) => handleChange(index, e)}
+                      value={formData.beverages}
+                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
                     />
                     <input
-                      type="text"
+                      type="number"
                       name="price"
                       placeholder="Price"
-                      // value={item.price}
+                      value={formData.menu_price}
                       onChange={(e) => handleChange()}
                     />
                     <button type="button" onClick={() => removeMenuItem(index)} className="border-2 border-red-400 p-1 rounded-full">Remove</button>
                   </div>
                 ))}
                 <div className="flex justify-end">
-                <button type="button" onClick={addMenuItem} className="border-2 border-green-400 rounded-full p-2 mr-[10%] ">Add Menu</button>
+                  <button type="button" onClick={addMenuItem} className="border-2 border-green-400 rounded-full p-2 mr-[10%] ">Add Menu</button>
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Suitable For
+            <div className=" gap-4 mb-4">
+              <div className="flex flex-col">
+
+                <label>
+                  Your {formData.service_type} is suitalbe for following type of events:
                 </label>
-
-                <div className="mt-1">
-                  {events.map((e, index) => (
-                    <label key={index} className="block mb-2">
-                      <input
-                        type="checkbox"
-                        id={`event_type_${index}`}
-                        name="event_type"
-                        value={formData.event_type+=formData.event_type}
-                        
-                        className="mr-2"
-                        onChange={handleChange}
-                      />
-                      {e}
-                    </label>
-                  ))}
-                </div>
-
-
+                <input type="text"
+                  placeholder="wedding, birthday party, conferences, etc..."
+                  name="event_type"
+                  value={formData.event_type}
+                  onChange={handleChange}
+                />
               </div>
 
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Sitting Arrangement
-                </label>
-                <div className="mt-1">
-                  {sitting_types.map((e, index) => (
-                    <label key={index} className="block mb-2">
-                      <input
-                        type="checkbox"
-                        id={`sitting_${index}`}
-                        name="sitting_arrangement"
-                        value={e}
-                        className="mr-2"
-                        onChange={handleChange}
-                      />
-                      {e}
-                    </label>
-                  ))}
-                </div>
-              </div>
+              {formData.service_type === "Venue" && (
+                <div className="flex flex-col">
+                  <label>
+                    Sitting Arrangement you can provide for {formData.venue_type}:
+                  </label>
+                  <input type="text"
+                    placeholder="u-shaped,round tables, banqueet etc..."
+                    name="sitting_arrangement"
+                    value={formData.sitting_arrangement}
+                    onChange={handleChange}
+                  />
+                </div>)}
             </div>
 
+            {formData.service_type === "Venue" && (
+              <div className="flex flex-col gap-4 mb-4">
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
 
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label >
                   Lighting Quality
                 </label>
-                <div className="mt-1">
-                  {lighting.map((e, index) => (
-                    <label key={index} className="block mb-2">
-                      <input
-                        type="checkbox"
-                        id={`lighting_${index}`}
-                        name="lighting_type"
-                        value={e}
-                        className="mr-2"
-                        onChange={handleChange}
-                      />
-                      {e}
-                    </label>
-                  ))}
-                </div>
-              </div>
+                <select name="lighting_type"
+                  value={formData.lighting_type}
+                  id=""
+                  onChange={handleChange}
+                >
+                  {lighting.map((e, index) => {
+                    return (
+                      <option key={index} value={e}>
+                        {e}
+                      </option>
+                    )
+                  })}
+                </select>
 
-
-            </div>
+              </div>)}
             <div className="w-[80%]">
               <label for="fname">Detailed Description:</label>
               <div>
-                <textarea form="form_id" className="w-[90%] border-4" />
+                <textarea form="form_id" className="w-[90%] border-4"
+                  name="description"
+                  value={formData.description}
+                />
               </div>
             </div>
             <div className="image-upload-container">
@@ -687,6 +726,8 @@ className="h-10 w-[25%]"                      onChange={(e) => handleChange(inde
                 multiple
                 accept="image/*"
                 onChange={handleImageChange}
+                name="imageUrl"
+                value={formData.imageUrl}
               />
               <div className="image-preview">
                 {selectedImages.map((image, index) => (

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 // // Define the schema
 // const listingSchema = mongoose.Schema({
@@ -44,39 +44,104 @@ import mongoose from 'mongoose';
 
 
 
-import { Schema, model } from 'mongoose';
+// import mongoose from 'mongoose';
 
-const listingSchema = mongoose.Schema({
-  _id: {type: String,},
-  title: { type: String, required: true },
-  description: { type: String },
-  lighting: { type: String, enum: ["High", "Medium", "Low"], required: true },
-  eventTypes: { type: [String], enum: ["Wedding", "Birthday", "Anniversary", "Mehandi", "Barat", "Walima", "Conference", "Seminar"] },
-  groundTypes: { type: [String], enum: ["Football", "Badminton", "Tennis", "Cricket", "Volleyball", "Basketball"] },
-  sittingType: { type: String, enum: ["Chevron", "Auditorium", "Banquet", "Boardroom", "Cabaret", "Classroom", "Hollow square", "U-shaped"] },
-  venueType: { type: String, enum: ["sports_arena", "banquet_hall", "marquee", "conference_hall", "hotel"], required: true },
-  servingType: { type: String, enum: ["Self-Serving", "Full-Serving"] },
-  city: { type: String, enum: ["Islamabad", "Ahmed Nager", "Ahmadpur East", "Ali Khan", "Alipur", "Arifwala", "Attock", "Bhera", "Bhalwal", "Bahawalnagar", "Bahawalpur", "Bhakkar", "Burewala"] },
-  
-  // Newly added fields
-  address: { type: String, required: true },
-  serviceType: { type: String, enum: ["Indoor", "Outdoor", "Both"] },  // Assuming options for service type
-  pricePerPerson: { type: Number, min: 0 },  // Pricing per individual
-  servingCapacity: { type: Number, min: 0 },
-  parkingCapacity: { type: Number, min: 0 },
-  numberOfVIPPersons: { type: Number, min: 0 },
-  
-  crockery: { type: Boolean, default: false },
-  servingStaffAvailability: { type: Boolean, default: false },
-  projector: { type: Boolean, default: false },
-  acHeating: { type: Boolean, default: false },
-  wifi: { type: Boolean, default: false },
-  
-  imageUrl: { type: String },  // URL of the image
-  outdoorCateringAllowance: { type: Boolean, default: false },
-  seatingCapacity: { type: Number, min: 0 },
+// const menuItemSchema = new mongoose.Schema({
+//   menu_name: { type: String, required: true },
+//   starters: { type: String },
+//   mainCourses: { type: String },
+//   grilledItems: { type: String },
+//   breads: { type: String },
+//   desserts: { type: String },
+//   beverages: { type: String },
+//   menu_price: { type: Number, min: 0 }, // Assuming price is per item
+// });
 
-  availability: { type: String, enum: ["Yes", "No"], default: "Yes" },  // Yes or No availability
+// const listingSchema = new mongoose.Schema({
+//   _id: { type: String },
+//   title: { type: String, required: true },
+//   description: { type: String },
+//   address: { type: String, required: true },
+//   City: {
+//     type: String,
+//     enum: [
+//       "Islamabad", "Ahmed Nager", "Ahmadpur East", "Ali Khan", "Alipur",
+//       "Arifwala", "Attock", "Bhera", "Bhalwal", "Bahawalnagar",
+//       "Bahawalpur", "Bhakkar", "Burewala"
+//     ]
+//   },
+//   service_type: { type: String, enum: ["Venue", "Catering"] },
+//   venue_type: { type: String, enum: ["sports_arena", "banquet_hall", "marquee", "conference_hall", "hotel"], required: true },
+//   event_type: { type: String, required: true },  // Added missing comma and closing brace
+//   seating_capacity: { type: Number, min: 0 },
+//   sitting_arrangement: { type: String, required: true },  // Added missing comma and closing brace
+//   lighting_type: { type: String, enum: ["High", "Medium"], required: true },
+//   ServingType: { type: String, enum: ["Self-Serving", "Full-Serving"] },
+//   VIP_seats: { type: Number, min: 0 },
+//   Inbond_catering: { type: String, enum: ["Yes", "No"], default: "Yes" },
+//   outdoor_catering: { type: Boolean, default: false },
+//   projector: { type: Boolean, default: false },
+//   wifi: { type: Boolean, default: false },
+//   ac_heating: { type: Boolean, default: false },
+//   parking: { type: Number, min: 0 },
+//   serving_capacity: { type: Number, min: 0 },
+//   crockery: { type: Boolean, default: false },
+//   serving_staff: { type: Boolean, default: false },
+//   ground_type: { type: [String], enum: ["Football", "Badminton", "Tennis", "Cricket", "Volleyball", "Basketball"] },
+//   price_Per_Person: { type: Number, min: 0 },
+//   imageUrl: { type: String },
+//   menuItems: { type: [menuItemSchema], default: [] } // Nested schema for menu items
+// });
+
+// const listing = mongoose.model('listings', listingSchema);
+// export default listing;
+
+
+
+import mongoose from 'mongoose';
+
+const menuItemSchema = new mongoose.Schema({
+  menu_name: { type: String },
+  starters: { type: String },
+  mainCourses: { type: String },
+  grilledItems: { type: String },
+  breads: { type: String },
+  desserts: { type: String },
+  beverages: { type: String },
+  menu_price: { type: Number }, // Removed min constraint
 });
 
-export default model('listing', listingSchema);
+const listingSchema = new mongoose.Schema({
+  _id: { type: String },
+  title: { type: String },
+  description: { type: String },
+  address: { type: String },
+  City: { type: String },  // Removed enum constraint
+  service_type: { type: String },  // Removed enum constraint
+  venue_type: { type: String },  // Removed enum and required constraints
+  event_type: { type: String },  // Removed required constraint
+  seating_capacity: { type: Number },  // Removed min constraint
+  sitting_arrangement: { type: String },  // Removed required constraint
+  lighting_type: { type: String },  // Removed enum and required constraints
+  ServingType: { type: String },  // Removed enum constraint
+  VIP_seats: { type: Number },  // Removed min constraint
+  Inbond_catering: { type: String },  // Removed enum constraint
+  outdoor_catering: { type: Boolean },
+  projector: { type: Boolean },
+  wifi: { type: Boolean },
+  ac_heating: { type: Boolean },
+  parking: { type: Number },  // Removed min constraint
+  serving_capacity: { type: Number },  // Removed min constraint
+  crockery: { type: Boolean },
+  serving_staff: { type: Boolean },
+  ground_type: { type: [String] },  // Removed enum constraint
+  price_Per_Person: { type: Number },  // Removed min constraint
+  imageUrl: { type: String },
+  menuItems: { type: [menuItemSchema], default: [] }
+});
+
+const listing = mongoose.model('listings', listingSchema);
+export default listing;
+
+
+

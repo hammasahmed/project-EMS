@@ -5,7 +5,7 @@
         "description": "A beautiful 3-bedroom apartment with sea view.",
         "price": 150,
         "city": "Karachi",
-        "imageUrl": "https://picsum.photos/seed/1/640/360",
+        "imageUrl": "https://res.cloudinary.com/dbg5ulcoj/image/upload/q_auto/2_usyour?_a=BAMCkGOY0",
         "serviceType": "venue",
         "venueType": "Sports Arena"
         
