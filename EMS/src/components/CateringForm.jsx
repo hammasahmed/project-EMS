@@ -3,7 +3,12 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import listings from "../../public/listings.json";
 
-function BookingForm() {
+function CateringForm() {
+  const location = useLocation();
+  const data = location.state;
+  console.log(data)
+  
+
   const booleanOptions = ["Select Option", "Yes", "No"];
   const options = [
     "Select Option",
@@ -12,7 +17,7 @@ function BookingForm() {
     "Slot 3",
     "Slot 4",
     "Slot 5",
-    "Slot 6",
+    "Slot 6"
   ];
   const lighting = ["Select Option", "High", "Medium", "Low"];
   const events = [
@@ -65,9 +70,7 @@ function BookingForm() {
     catering: "",
     table_services: "",
   });
-  const location = useLocation();
-  const data = location.state;
-
+ 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -92,7 +95,7 @@ function BookingForm() {
       <div className="w-[90%] sm:w-[60%] md:w-[50%] rounded-xl mt-10 border-[1px] shadow-lg m-auto">
         <div className="w-full mx-auto bg-white p-8 shadow-lg rounded-xl">
           {/* <div>{state.imgaeUrl}</div> */}
-          <h2 className="text-xl font-semibold mb-4">Booking Form</h2>
+          <h2 className="text-xl font-semibold mb-4">Catering Form</h2>
           {/* <p className="text-gray-500 mb-6">The information can be edited</p> */}
           <form>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -471,4 +474,4 @@ function BookingForm() {
   );
 }
 
-export default BookingForm;
+export default CateringForm;

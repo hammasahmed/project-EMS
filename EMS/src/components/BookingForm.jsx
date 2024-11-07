@@ -12,7 +12,7 @@ function BookingForm() {
     "Slot 3",
     "Slot 4",
     "Slot 5",
-    "Slot 6",
+    "Slot 6"
   ];
   const lighting = ["Select Option", "High", "Medium", "Low"];
   const events = [

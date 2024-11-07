@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import userSignup from './routes/user_signup.js';
 import userLogin from './routes/user_login.js'
 import listingsRoutes from './routes/listings_routes.js';
+import { configDotenv } from 'dotenv';
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.get('/',  (req, res)=> {
   res.send('hell is bad');
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+const port = process.env.PORT || 3000
+app.listen( port, () => {
+  console.log(`Server is running on port ${port}`);
 });
