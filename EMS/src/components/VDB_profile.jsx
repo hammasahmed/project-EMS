@@ -214,7 +214,7 @@ const VDB_profile = () => {
               <div className="mt-2 text-gray-500">GMT-7</div>
               <div className="mt-4">
                 <button className="cursor-pointer font-medium bg-blue-500 text-center p-2 rounded-lg text-white w-full">
-                  Upload Picture
+                  <input type="file" style={{backgroundColor:"#3b82f6", width:"100%"}} />
                 </button>
               </div>
             </div>
