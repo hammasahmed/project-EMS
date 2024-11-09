@@ -7,10 +7,11 @@ import SignUpForm from '../components/login';
 
 import ListingsPage from '../components/listingpage'
 import LoginForm from '../components/login1';
+import Navbar from '../components/navbar';
 const Home = () => {
   return (
     <>
-     
+            <Navbar />
             <Hero />
             <Featured_services />
             <Testimonial />

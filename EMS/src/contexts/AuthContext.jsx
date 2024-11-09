@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from "jwt-decode";
-
-
+import { jwtDecode } from "jwt-decode"; // Ensure this import is correct
 
 const AuthContext = createContext();
 
@@ -10,37 +8,37 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    // Check for token in local storage when app loads
     const token = localStorage.getItem('token');
     
     if (token) {
       try {
-        const  username  = jwtDecode(token); // Decode JWT
-        setUsername(username);
+        const decodedToken = jwtDecode(token); // Decode JWT
+        setUsername(decodedToken.username || decodedToken.name); // Adjust based on JWT structure
         setIsAuthenticated(true);
-       
       } catch (error) {
         console.error('Invalid token', error);
         setIsAuthenticated(false);
+        setUsername('');
       }
     }
   }, []);
 
-  const login = async (token) => {
-    console.log('Login function called'); // Check if this logs
+  const login = (token) => {
     localStorage.setItem('token', token);
-    const username  = jwtDecode(token); // Decode JWT
-    setUsername(username);
+
+    const decodedToken = jwtDecode(token);
+    setUsername(decodedToken.username || decodedToken.name); // Adjust based on JWT structure
     setIsAuthenticated(true);
-   
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token'); // Only remove auth token
+     localStorage.removeItem('role');
     setIsAuthenticated(false);
     setUsername('');
+    return true;
   };
- 
+
   return (
     <AuthContext.Provider value={{ isAuthenticated, username, login, logout }}>
       {children}

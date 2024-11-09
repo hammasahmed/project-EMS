@@ -33,11 +33,15 @@ function App() {
       <Router>
         <Navbar />
 
+<<<<<<< HEAD
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/listings" element={<Listings />} />
+=======
+                
+>>>>>>> e51a5b8002bb8680b2f9840b9e126bb43f93ebc7
 
           <Route path="/details/:id" element={<VenueDetail />} />
           <Route path="/vendordb" element={<VendorDB />} />

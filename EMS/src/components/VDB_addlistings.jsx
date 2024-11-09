@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 
-
 function VDB_addlistings(prop) {
   const booleanOptions = ["Select Option", "Yes", "No"];
 
@@ -348,8 +347,8 @@ function VDB_addlistings(prop) {
       breads: "",
       desserts: "",
       beverages: "",
-      price: ""
-    }
+      price: "",
+    },
   ]);
 
   const handleMenu = (index, event) => {
@@ -390,34 +389,36 @@ function VDB_addlistings(prop) {
   const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
     setSelectedImages((prevImages) => [...prevImages, ...files]);
-    files.map(async (_,index)=>{
+    files.map(async (_, index) => {
       const file = e.target.files[index];
-    if (!file) {
-      return <><div>No file selected</div></>;
-    }
-    try {
-      const img_data = new FormData();
-    img_data.append("file", file);
-    img_data.append("upload_preset", "eventmanagement");
-    img_data.append("cloud_name", "dbg5ulcoj");
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dbg5ulcoj/image/upload",
-      {
-        method: "POST",
-        body: img_data,
+      if (!file) {
+        return (
+          <>
+            <div>No file selected</div>
+          </>
+        );
       }
-    );
+      try {
+        const img_data = new FormData();
+        img_data.append("file", file);
+        img_data.append("upload_preset", "eventmanagement");
+        img_data.append("cloud_name", "dbg5ulcoj");
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dbg5ulcoj/image/upload",
+          {
+            method: "POST",
+            body: img_data,
+          }
+        );
 
-    const imageUrl = await res.json();
-    //Convert the imageUrl object to an array in VDB_addlistings
-    formData.imageUrl.push(imageUrl.url);  //uncomment this line
-    console.log(formData.imageUrl);
-    } catch (error) {
-      console.log(error)
-    }
-    })
-    
-    
+        const imageUrl = await res.json();
+        //Convert the imageUrl object to an array in VDB_addlistings
+        formData.imageUrl.push(imageUrl.url); //uncomment this line
+        console.log(formData.imageUrl);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
 
   const handleRemoveImage = (index) => {
@@ -432,7 +433,7 @@ function VDB_addlistings(prop) {
     });
 
     try {
-      const response = await fetch("http://your-backend-url.com/upload", {
+      const response = await fetch("../assets/", {
         method: "POST",
         body: formData,
       });
@@ -812,7 +813,7 @@ function VDB_addlistings(prop) {
                   </div>
                 </div>
               )}
-              <div className="">
+              {/* <div className="">
                 <h2>Create Your Menu</h2>
                 {menuItems.map((item, index) => (
                   <div key={index} className="menu-item flex flex-wrap">
@@ -897,7 +898,7 @@ function VDB_addlistings(prop) {
                     Add Menu
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className=" gap-4 mb-4">
               <div className="flex flex-col">
@@ -955,6 +956,7 @@ function VDB_addlistings(prop) {
               <div>
                 <textarea
                   className="w-[90%] border-4"
+                  type="text"
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
@@ -963,27 +965,37 @@ function VDB_addlistings(prop) {
             </div>
             <div className="image-upload-container mt-3">
               <p className="mb-3">You can Add 4 pictures</p>
-              <label htmlFor="file_upload" className=" w-fit bg-blue-500 p-2 rounded-lg text-white">Add Images
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleImageChange}
-                id="file_upload"
-                name="imageUrl"
-                className="hidden"
-                // value={formData.imageUrl}
-              />
+              <label
+                htmlFor="file_upload"
+                className=" w-fit bg-blue-500 p-2 rounded-lg text-white"
+              >
+                Add Images
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  id="file_upload"
+                  name="imageUrl"
+                  className="hidden"
+                  // value={formData.imageUrl}
+                />
               </label>
               <div className="flex justify-around image-preview mt-3 rounded-md">
                 {selectedImages.map((image, index) => (
-                  <div key={index} className="image-preview-item border-[1px] border-black">
+                  <div
+                    key={index}
+                    className="image-preview-item border-[1px] border-black"
+                  >
                     <img
                       src={URL.createObjectURL(image)}
                       alt={`Preview ${index + 1}`}
                       className="preview-thumbnail h-[150px] w-[150px] "
                     />
-                    <button onClick={() => handleRemoveImage(index)} className="py-2 px-5 w-full bg-blue-500 text-white  hover:bg-blue-600 transition duration-200">
+                    <button
+                      onClick={() => handleRemoveImage(index)}
+                      className="py-2 px-5 w-full bg-blue-500 text-white  hover:bg-blue-600 transition duration-200"
+                    >
                       Remove
                     </button>
                   </div>

@@ -1,7 +1,11 @@
 // ./src/SignUpForm.js
 import React, { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
+  const [role, setRole] = useState('');
   const [userSignup, setuserSignup] = useState({
     email: '',
     password: '',
@@ -20,7 +24,7 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/signup', {
+      const response = await fetch('http://localhost:5000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,15 +33,26 @@ const SignUpForm = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log('userSignup created:', data);
-        // You can add logic here to handle what happens after a successful submission
+        console.log('userSignup created:', data.role);
+        navigate('/');
+        setRole(data.role);
+        // Set role in localStorage directly using the response data
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('role', role);
+        
+        // Set role in state (for local UI use if needed)
+        
+  
+        // Redirect if necessary
+        // navigate('/');
       } else {
         console.error('Failed to create userSignup');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
@@ -70,6 +85,7 @@ const SignUpForm = () => {
             onChange={handleChange}
             className="w-full mb-4 px-3 py-2 border border-gray-300 rounded-lg"
           />
+          
           <input
             type="text"
             name="lastName"
@@ -89,7 +105,7 @@ const SignUpForm = () => {
             <option value="vendor">Vendor</option>
           </select>
 
-
+          <p>{role}</p>
           <input
             type="email"
             name="email"

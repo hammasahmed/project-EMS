@@ -97,6 +97,13 @@
 
 import mongoose from 'mongoose';
 
+const reviewSchema = new mongoose.Schema({
+  reviewer_name: { type: String, required: true },
+  rating: { type: Number, min: 1, max: 5, required: true }, // Rating between 1 and 5
+  review_content: { type: String, required: true },
+  review_date: { type: Date, default: Date.now }
+});
+
 const menuItemSchema = new mongoose.Schema({
   menu_name: { type: String },
   starters: { type: String },
@@ -105,7 +112,7 @@ const menuItemSchema = new mongoose.Schema({
   breads: { type: String },
   desserts: { type: String },
   beverages: { type: String },
-  menu_price: { type: Number }, // Removed min constraint
+  menu_price: { type: Number }
 });
 
 const listingSchema = new mongoose.Schema({
@@ -139,6 +146,7 @@ const listingSchema = new mongoose.Schema({
 
 const listing = mongoose.model('listings', listingSchema);
 export default listing;
+
 
 
 
