@@ -31,6 +31,7 @@ const LoginForm = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('user Logined succesfully', data);
+        localStorage.setItem('role', data.role);
         // setRole(data.role);
        
 

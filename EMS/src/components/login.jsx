@@ -1,6 +1,6 @@
 // ./src/SignUpForm.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -34,12 +34,14 @@ const SignUpForm = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('userSignup created:', data.role);
-        
+        navigate('/');
+        setRole(data.role);
         // Set role in localStorage directly using the response data
-        localStorage.setItem('role', data.role);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('role', role);
         
         // Set role in state (for local UI use if needed)
-        setRole(data.role);
+        
   
         // Redirect if necessary
         // navigate('/');
@@ -47,7 +49,7 @@ const SignUpForm = () => {
         console.error('Failed to create userSignup');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
     }
   };
   

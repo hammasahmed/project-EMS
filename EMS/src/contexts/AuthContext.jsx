@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     localStorage.setItem('token', token);
+
     const decodedToken = jwtDecode(token);
     setUsername(decodedToken.username || decodedToken.name); // Adjust based on JWT structure
     setIsAuthenticated(true);
@@ -32,8 +33,10 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token'); // Only remove auth token
+     localStorage.removeItem('role');
     setIsAuthenticated(false);
     setUsername('');
+    return true;
   };
 
   return (

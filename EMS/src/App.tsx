@@ -32,7 +32,7 @@ function App() {
             <ListingsPage /> */}
             <Router>
 
-                <Navbar />
+                
 
                 <Routes>
 

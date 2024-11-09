@@ -4,6 +4,7 @@ import Slider_for_Detail from "./Slider_for_Detail";
 // import BookingForm from "./BookingForm";
 
 const Details = () => {
+  const role = localStorage.getItem("role");
   const { id } = useParams(); // Get the ID from the URL
   const [listing, setListing] = useState(null);
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Details = () => {
         const data = await response.json();
         console.log("Fetched data:", data);
         const foundListing = data.find((item) => item._id.toString() === id);
+        
         console.log("Found listing:", foundListing);
         setListing(foundListing);
       } catch (error) {
@@ -379,11 +381,23 @@ const Details = () => {
             <p className="text-black">
               In-house DJ not available, Outside DJ permitted
             </p>
+
           </div>
+
         </div>
       </div>
-    </>
-  );
-};
+      {role === 'vendor' && (
+  <div className="p-6 bg-white shadow-md rounded-md mx-[4%] mt-5">
+    <label htmlFor=""></label>
+  </div>
+)}
 
+      
+    </>
+
+    
+
+
+
+  )}
 export default Details;

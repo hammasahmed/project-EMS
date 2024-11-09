@@ -60,18 +60,29 @@
 // export default Navbar;
 
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import logo from '../assets/logo1.svg';
 import { Link } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext.jsx';
+// import { set } from 'mongoose';
 
 const Navbar = () => {
+    const token = localStorage.getItem('token');
+    const [logouts, setLogouts] = useState(false);
     const { isAuthenticated, username, logout } = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
-    
+    const x = logout();
+    console.log(x)
+    // console.log(isAuthenticated)
+    // console.log(token)
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    // if (x && !sessionStorage.getItem("reloaded")) {
+    //     sessionStorage.setItem("reloaded", "true");
+    //     window.location.reload();
+    // }
 
     const role = localStorage.getItem('role'); // Fetch if needed for specific behavior
     
@@ -98,11 +109,11 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="signup mt-2">
-                {role === 'vendor' ? (
+                {isAuthenticated || token ? (
                     <div>
                         <a href="/vendordb">dashboard</a>
-                        <span>Welcome, {username}!</span>
-                        <button onClick={logout}>Logout</button>
+                        
+                        <button onClick={logout}>logout</button>
                     </div>
                 ) : (
                     <div>
