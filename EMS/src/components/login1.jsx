@@ -1,7 +1,10 @@
 // ./src/LoginForm.js
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
+  const navigate = useNavigate();
+  
+  
   const [userLogin, setuserLogin] = useState({
     email: '',
     password: '',
@@ -18,7 +21,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,6 +31,11 @@ const LoginForm = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('user Logined succesfully', data);
+        // setRole(data.role);
+       
+
+        navigate('/');
+
         // You can add logic here to handle what happens after a successful submission
       } else {
         console.error('Failed to LOGIN');
@@ -43,6 +51,7 @@ const LoginForm = () => {
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4 text-center">Log In</h2>
         <p className="text-center mb-4 ">
+          
           Don't have an account? <a href="#" className="text-green-500">Sign up</a>
         </p>
         <div className="flex justify-around mb-4 ">

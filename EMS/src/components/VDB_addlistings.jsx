@@ -3,8 +3,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from 'axios';
-
-
+// import { Upload } from "../../../backend_EMS/cloudinary";
+import pic from "../components/s.jpg"
+// Upload("../components/s.jpg")
 function VDB_addlistings(prop) {
   const booleanOptions = ["Select Option", "Yes", "No"];
 
@@ -182,7 +183,7 @@ function VDB_addlistings(prop) {
     });
 
     try {
-      const response = await fetch("http://your-backend-url.com/upload", {
+      const response = await fetch("../assets/", {
         method: "POST",
         body: formData,
       });
@@ -593,7 +594,7 @@ function VDB_addlistings(prop) {
                   </div>
                 </div>
               )}
-              <div className="">
+              {/* <div className="">
                 <h2>Create Your Menu</h2>
                 {menuItems.map((item, index) => (
                   <div key={index} className="menu-item flex flex-wrap" >
@@ -659,7 +660,7 @@ function VDB_addlistings(prop) {
                 <div className="flex justify-end">
                   <button type="button" onClick={addMenuItem} className="border-2 border-green-400 rounded-full p-2 mr-[10%] ">Add Menu</button>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className=" gap-4 mb-4">
               <div className="flex flex-col">
@@ -712,11 +713,13 @@ function VDB_addlistings(prop) {
 
               </div>)}
             <div className="w-[80%]">
-              <label for="fname">Detailed Description:</label>
+              <label>Detailed Description:</label>
               <div>
-                <textarea form="form_id" className="w-[90%] border-4"
+                <input className="w-[90%] border-4"
+                type="text"
                   name="description"
                   value={formData.description}
+                  onChange={handleChange}
                 />
               </div>
             </div>

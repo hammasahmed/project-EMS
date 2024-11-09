@@ -52,7 +52,7 @@ router.post('/signup', async (req, res) => {
     const token = jwt.sign({ id: newUser._id, email: newUser.email }, JWT_SECRET, { expiresIn: '1h' });
 
     // Send the token back to the client
-    res.status(201).send({ message: 'Signup successful', token });
+    res.status(201).send({ message: 'Signup successful', token, role: newUser.role, });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: 'Internal server error' });
