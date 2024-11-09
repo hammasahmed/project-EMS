@@ -109,7 +109,7 @@ const menuItemSchema = new mongoose.Schema({
 });
 
 const listingSchema = new mongoose.Schema({
-  _id: { type: String },
+  // _id: { type: String },
   title: { type: String },
   description: { type: String },
   address: { type: String },
@@ -123,17 +123,17 @@ const listingSchema = new mongoose.Schema({
   ServingType: { type: String },  // Removed enum constraint
   VIP_seats: { type: Number },  // Removed min constraint
   Inbond_catering: { type: String },  // Removed enum constraint
-  outdoor_catering: { type: Boolean },
-  projector: { type: Boolean },
-  wifi: { type: Boolean },
-  ac_heating: { type: Boolean },
+  outdoor_catering: { type: String },
+  projector: { type: String },
+  wifi: { type: String },
+  ac_heating: { type: String },
   parking: { type: Number },  // Removed min constraint
   serving_capacity: { type: Number },  // Removed min constraint
-  crockery: { type: Boolean },
-  serving_staff: { type: Boolean },
+  crockery: { type: String },
+  serving_staff: { type: String },
   ground_type: { type: [String] },  // Removed enum constraint
   price_Per_Person: { type: Number },  // Removed min constraint
-  imageUrl: { type: String },
+  imageUrl: { type: [String] },
   menuItems: { type: [menuItemSchema], default: [] }
 });
 
