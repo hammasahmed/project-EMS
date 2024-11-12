@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import listing from '../models/listing_model.js';
+import user from '../models/user_model.js';
 
 const router = Router();
+
+
 
 // ROUTE FOR GETTING ALL listings
 router.get('/listings', async (req, res) => {
@@ -13,7 +16,7 @@ router.get('/listings', async (req, res) => {
   }
 });
 // ROUTE FOR GETTING A SPECIFIC listing BY ID
-router.get('/listings/:_id', async (req, res) => { // change `:_id` to `:id`
+router.get('/listings/:id', async (req, res) => { // change `:_id` to `:id`
   try {
     const listingId = req.params.id;
     const listing = await listing.findById(listingId);
@@ -31,6 +34,7 @@ router.get('/listings/:_id', async (req, res) => { // change `:_id` to `:id`
 // Route for creating a new listing
 router.post('/listings', async (req, res) => {
     try {
+        // listing.populate({path: 'vendor_id', model: 'user', select: 'name'});
         const listings = new listing(req.body);
         await listings.save();
         console.log(listings);

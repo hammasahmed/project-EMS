@@ -4,19 +4,10 @@ import axios from "axios";
 
 function VDB_addlistings(prop) {
   const booleanOptions = ["Select Option", "Yes", "No"];
-
+  const menu_styling =
+    "w-[40%] mt-1 m-auto flex py-2 px-3 border-[1px] border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300";
   const lighting = ["Select Option", "High", "Medium"];
-  // const events = [
-  //   "Select Option",
-  //   "Wedding",
-  //   "Birthday",
-  //   "Anniversary",
-  //   "Mehandi",
-  //   "Barat",
-  //   "Walima",
-  //   "Conference",
-  //   "Seminar",
-  // ];
+
   const grounds = [
     "Select Option",
     "Football",
@@ -26,17 +17,6 @@ function VDB_addlistings(prop) {
     "Volleyball",
     "Basketball",
   ];
-  // const sitting_types = [
-  //   "Select Option",
-  //   "Chevron",
-  //   "Auditorium",
-  //   "Banquet",
-  //   "Boardroom",
-  //   "Cabaret",
-  //   "Classroom",
-  //   "Hollow square",
-  //   "U-shaped"
-  // ]
 
   const venueOptions = [
     "Venue Type",
@@ -287,16 +267,6 @@ function VDB_addlistings(prop) {
     "Zhob",
     "Ziarat",
   ];
-  // const cateringOptions = [
-  //   "Select Option",
-  //   "Catering Type",
-  //   "Starters",
-  //   "Main Courses",
-  //   "Grilled Items",
-  //   "Breads",
-  //   "Desserts",
-  //   "Beverages",
-  // ];
 
   const serviceOptions = ["Select Service", "Venue", "Catering"];
 
@@ -325,53 +295,63 @@ function VDB_addlistings(prop) {
     ground_type: "",
     Price_Per_Person: "",
     imageUrl: [],
-    menu_name: "",
-    starters: "",
-    mainCourses: "",
-    grilledItems: "",
-    breads: "",
-    desserts: "",
-    beverages: "",
-    menu_price: "",
+    menu: [
+      { menu_name: "" },
+      { starters: "" },
+      { mainCourses: "" },
+      { grilledItems: "" },
+      { breads: "" },
+      { desserts: "" },
+      { beverages: "" },
+      { menu_price: "" },
+    ],
   });
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [menuItems, setMenuItems] = useState([
+  const menuOptions = [
     {
-      name: "",
+      menu_name: "",
       starters: "",
       mainCourses: "",
       grilledItems: "",
       breads: "",
       desserts: "",
       beverages: "",
-      price: "",
+      menu_price: "",
     },
-  ]);
+  ];
+  //  {optionIndex==2 ?():""}
+  const optionArray = [
+    "menu_name",
+    "starters",
+    "mainCourses",
+    "grilledItems",
+    "breads",
+    "desserts",
+    "beverages",
+    "menu_price",
+  ];
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [menuItems, setMenuItems] = useState(menuOptions);
 
-  const handleMenu = (index, event) => {
-    const { name, value } = event.target;
-    const newMenuItems = [...menuItems];
-    newMenuItems[index][name] = value;
-    setMenuItems(newMenuItems);
+  const handleMenuevent = () => {
+    const newMenuItems = [];
   };
 
+  const handleMenuChange = (index_array, index_object, event) => {
+    const { name, value } = event.target;
+    console.log(name, value, index_array, index_object);
+    const updatedMenu = [...formData.menu];
+    console.log(updatedMenu);
+    updatedMenu[index_object] = { ...updatedMenu[index_object], [name]: value };
+    setFormData({ ...formData, menu: updatedMenu });
+    console.log(updatedMenu);
+    // formData.name[index]
+  };
   const addMenuItem = () => {
-    setMenuItems([
-      ...menuItems,
-      {
-        name: "",
-        starters: "",
-        mainCourses: "",
-        grilledItems: "",
-        breads: "",
-        desserts: "",
-        beverages: "",
-        price: "",
-      },
-    ]);
+    setMenuItems([...menuItems, menuOptions]);
+    console.log(menuItems);
   };
 
   const removeMenuItem = (index) => {
@@ -813,77 +793,132 @@ function VDB_addlistings(prop) {
                   </div>
                 </div>
               )}
-              {/* <div className="">
+              <div className="">
                 <h2>Create Your Menu</h2>
-                {menuItems.map((item, index) => (
+                {menuItems.map((_, index) => (
                   <div key={index} className="menu-item flex flex-wrap">
-                    <input
-                      type="text"
-                      name="menu_name"
-                      placeholder="Item Name"
-                      value={formData.menu_name}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="text"
-                      name="starters"
-                      placeholder="Starters"
-                      value={formData.starters}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="text"
-                      name="mainCourses"
-                      placeholder="Main Courses"
-                      value={formData.mainCourses}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="text"
-                      name="grilledItems"
-                      placeholder="Grilled Items"
-                      value={formData.grilledItems}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="text"
-                      name="breads"
-                      placeholder="Breads"
-                      value={formData.breads}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="text"
-                      name="desserts"
-                      placeholder="Desserts"
-                      value={formData.desserts}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="text"
-                      name="beverages"
-                      placeholder="Beverages"
-                      value={formData.beverages}
-                      className="h-10 w-[25%]"
-                      onChange={(e) => handleChange(index, e)}
-                    />
-                    <input
-                      type="number"
-                      name="price"
-                      placeholder="Price"
-                      value={formData.menu_price}
-                      onChange={(e) => handleChange()}
-                    />
+                    {optionArray.map((option, optionIndex) => (
+                      <>
+                        {optionIndex == 0 ? (
+                          <input
+                            type="text"
+                            name="menu_name"
+                            placeholder="Menu Name"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 1 ? (
+                          <input
+                            type="text"
+                            name="starters"
+                            placeholder="Starters"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 2 ? (
+                          <input
+                            type="text"
+                            name="mainCourses"
+                            placeholder="Main Courses"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 3 ? (
+                          <input
+                            type="text"
+                            name="grilledItems"
+                            placeholder="Grilled Items"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 4 ? (
+                          <input
+                            type="text"
+                            name="breads"
+                            placeholder="Breads"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+
+                        {optionIndex == 5 ? (
+                          <input
+                            type="text"
+                            name="desserts"
+                            placeholder="Desserts"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 6 ? (
+                          <input
+                            type="text"
+                            name="beverages"
+                            placeholder="Beverages"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+
+                        {optionIndex == 7 ? (
+                          <input
+                            type="number"
+                            name="menu_price"
+                            placeholder="Menu Price"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </>
+                    ))}
                     <button
                       type="button"
                       onClick={() => removeMenuItem(index)}
-                      className="border-2 border-red-400 p-1 rounded-full"
+                      className=" bg-red-600 p-1 w-[90%] my-2 m-auto rounded-md text-white"
                     >
                       Remove
                     </button>
@@ -893,12 +928,12 @@ function VDB_addlistings(prop) {
                   <button
                     type="button"
                     onClick={addMenuItem}
-                    className="border-2 border-green-400 rounded-full p-2 mr-[10%] "
+                    className="bg-green-600 rounded-md p-2 mr-[2%] mt-3 "
                   >
                     Add Menu
                   </button>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className=" gap-4 mb-4">
               <div className="flex flex-col">

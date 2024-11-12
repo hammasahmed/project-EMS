@@ -1,12 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import Slider_for_Detail from "./Slider_for_Detail";
+
 // import BookingForm from "./BookingForm";
+import AuthContext from "../contexts/AuthContext.jsx";
 
 const Details = () => {
   const role = localStorage.getItem("role");
+  const token =  localStorage.getItem('token');
   const { id } = useParams(); // Get the ID from the URL
   const [listing, setListing] = useState(null);
+  const {isAuthenticated,logout} = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchListing = async () => {
@@ -24,6 +28,8 @@ const Details = () => {
         
         console.log("Found listing:", foundListing);
         setListing(foundListing);
+       
+        console.log(token)
       } catch (error) {
         console.error("Error fetching listing details:", error);
       }
@@ -40,8 +46,16 @@ const Details = () => {
     );
   }
   const submitHandler = (e) => {
+    
     e.preventDefault();
-    navigate("/BookingForm", { state: listing });
+    
+    if(token){
+      navigate("/BookingForm", { state: listing });
+      
+    }
+    else{
+      navigate('/login');
+    }
   };
 
   return (
@@ -256,6 +270,7 @@ const Details = () => {
                 <h1 className="text-3xl sm:text-4xl font-bold font-sans pt-5 pb-5 mt-5">
                   {listing.title}
                 </h1>
+                <h1>{console.log(isAuthenticated)}</h1>
                 <div className="w-full shadow-lg rounded-lg bg-gray-200 object-fill">
                   <Slider_for_Detail passid={listing.imageUrl}/>  {/*passid={listing.}*/}
                 </div>
@@ -266,7 +281,7 @@ const Details = () => {
                     Price: Starting From ${listing?.Price_Per_Person}
                   </div>
                   <div className="text-lg">
-                    <b>Capacity:</b> {listing?.event_type=="Catering" ? listing.seating_capacity:listing.serving_capacity} Admi
+                    <b>{listing?.service_type} Capacity:</b> {listing?.event_type=="Catering" ?<b>{listing?.serving_capacity}</b> :<b>{listing?.seating_capacity} </b>}Admi
                   </div>
                   <div className="text-lg">
                     <b>Location:</b> {listing?.City}
@@ -301,19 +316,21 @@ const Details = () => {
                 </p>
                 <h3 className="font-semibold mt-4 text-gray-700">{listing?.service_type} Capacity</h3>
                 <p>
-                   {listing?.event_type=="Catering" ?<b></b> :<b>Book Now</b>}
+                   {listing?.event_type=="Catering" ?<b>{listing?.serving_capacity}</b> :<b>{listing?.seating_capacity} </b>}
                  people
                 </p>
                 <h3 className="font-semibold mt-4  text-gray-700">
                   Menue Offered
                 </h3>
                 <p>
-                  {listing?.starters}
-                  {listing?.mainCourses}
-                  {listing?.grilleItems}
-                  {listing?.breads}
-                  {listing?.desserts}
-                  {listing?.beverages}
+                  {listing?.menu.map((menu) =>(
+                    <div>
+                      {Object.entries(menu).map(([key, value]) => (
+                        <li>{key}: {value}</li>
+                      ))}
+                    </div>
+                  ))}
+                  
                 </p>
                 <h3 className="font-semibold mt-4  text-gray-700">
                   Menue Price

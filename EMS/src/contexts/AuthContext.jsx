@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+
   const login = (token) => {
     localStorage.setItem('token', token);
 
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }) => {
      localStorage.removeItem('role');
     setIsAuthenticated(false);
     setUsername('');
-    return true;
+    
   };
 
   return (

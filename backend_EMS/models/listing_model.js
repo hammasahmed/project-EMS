@@ -96,6 +96,7 @@
 
 
 import mongoose from 'mongoose';
+import user from './user_model.js';
 
 const reviewSchema = new mongoose.Schema({
   reviewer_name: { type: String, required: true },
@@ -115,8 +116,21 @@ const menuItemSchema = new mongoose.Schema({
   menu_price: { type: Number }
 });
 
+const MenuSchema = new mongoose.Schema({
+  menu_name: { type: String},
+  starters: { type: String },
+  mainCourses: { type: String},
+  grilledItems: { type: String},
+  breads: { type: String, },
+  desserts: { type: String },
+  beverages: { type: String},
+  menu_price: { type: String}
+}, { _id: false})
+
+
 const listingSchema = new mongoose.Schema({
   // _id: { type: String },
+  vendor_id: { type:String, unique: true},
   title: { type: String },
   description: { type: String },
   address: { type: String },
@@ -141,8 +155,10 @@ const listingSchema = new mongoose.Schema({
   ground_type: { type: [String] },  // Removed enum constraint
   price_Per_Person: { type: Number },  // Removed min constraint
   imageUrl: { type: [String] },
-  menuItems: { type: [menuItemSchema], default: [] }
+  menu:[{type:MenuSchema}]
 });
+
+
 
 const listing = mongoose.model('listings', listingSchema);
 export default listing;

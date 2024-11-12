@@ -4,9 +4,9 @@ import contact from "../assets/contact.svg";
 import person from "../assets/food1.png";
 
 
-const VDB_profile = () => {
+function  UserProfile() {
   return (
-    <>
+    <div>
       {/* Header */}
       <div className="w-full font-sans border-[1px] border-[#c2c9d666] flex h-16 p-3 justify-end bg-white">
         <div className="rounded-full h-fit w-fit mr-3 mt-2">
@@ -138,7 +138,7 @@ const VDB_profile = () => {
                   </div>
                 </div>
                 <button
-                  type="submit"
+                  type=""
                   className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
                 >
                   Submit
@@ -148,8 +148,8 @@ const VDB_profile = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default VDB_profile;
+export default UserProfile;
