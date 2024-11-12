@@ -1,11 +1,7 @@
-
-
 import React from "react";
 import { useState } from "react";
-import axios from 'axios';
-// import { Upload } from "../../../backend_EMS/cloudinary";
-import pic from "../components/s.jpg"
-// Upload("../components/s.jpg")
+import axios from "axios";
+
 function VDB_addlistings(prop) {
   const booleanOptions = ["Select Option", "Yes", "No"];
 
@@ -48,40 +44,261 @@ function VDB_addlistings(prop) {
     "banquet_hall",
     "marquee",
     "conference_hall",
-    "hotel"
+    "hotel",
   ];
 
-  const ServingType = ["Select Option", '', 'Self-Serving', 'Full-Serving'];
+  const ServingType = ["Select Option", "", "Self-Serving", "Full-Serving"];
 
-  const City = ["Select Option", "Islamabad", "Ahmed Nager", "Ahmadpur East", "Ali Khan", "Alipur", "Arifwala", "Attock", "Bhera", "Bhalwal",
-    "Bahawalnagar", "Bahawalpur", "Bhakkar", "Burewala", "Chillianwala", "Chakwal", "Chichawatni", "Chiniot", "Chishtian", "Daska",
-    "Darya Khan", "Dera Ghazi", "Dhaular", "Dina", "Dinga", "Dipalpur", "Faisalabad", "Fateh Jhang", "Ghakhar Mandi", "Gojra", "Gujranwala",
-    "Gujrat", "Gujar Khan", "Hafizabad", "Haroonabad", "Hasilpur", "Haveli", "Lakha", "Jalalpur", "Jattan", "Jampur", "Jaranwala", "Jhang", "Jhelum",
-    "Kalabagh", "Karor Lal", "Kasur", "Kamalia", "Kamoke", "Khanewal", "Khanpur", "Kharian", "Khushab", "Kot Adu", "Jauharabad",
-    "Lahore", "Lalamusa", "Layyah", "Liaquat Pur", "Lodhran", "Malakwal", "Mamoori", "Mailsi", "Mandi Bahauddin", "mian Channu",
-    "Mianwali", "Multan", "Murree", "Muridke", "Mianwali Bangla", "Muzaffargarh", "Narowal", "Okara", "Renala Khurd", "Pakpattan",
-    "Pattoki", "Pir Mahal", "Qaimpur", "Qila Didar", "Rabwah", "Raiwind", "Rajanpur", "Rahim Yar", "Rawalpindi", "Sadiqabad",
-    "Safdarabad", "Sahiwal", "Sangla Hill", "Sarai Alamgir", "Sargodha", "Shakargarh", "Sheikhupura", "Sialkot", "Sohawa",
-    "Soianwala", "Siranwali", "Talagang", "Taxila", "Toba Tek", "Vehari", "Wah Cantonment", "Wazirabad", "Badin", "Bhirkan",
-    "Rajo Khanani", "Chak", "Dadu", "Digri", "Diplo", "Dokri", "Ghotki", "Haala", "Hyderabad", "Islamkot", "Jacobabad", "Jamshoro",
-    "Jungshahi", "Kandhkot", "Kandiaro", "Karachi", "Kashmore", "Keti Bandar", "Khairpur", "Kotri", "Larkana", "Matiari", "Mehar",
-    "Mirpur Khas", "Mithani", "Mithi", "Mehrabpur", "Moro", "Nagarparkar", "Naudero", "Naushahro Feroze", "Naushara", "Nawabshah",
-    "Nazimabad", "Qambar", "Qasimabad", "Ranipur", "Ratodero", "Rohri", "Sakrand", "Sanghar", "Shahbandar", "Shahdadkot", "Shahdadpur",
-    "Shahpur Chakar", "Shikarpaur", "Sukkur", "Tangwani", "Tando Adam", "Tando Allahyar", "Tando Muhammad", "Thatta", "Umerkot", "Warah",
-    "Abbottabad", "Adezai", "Alpuri", "Akora Khattak", "Ayubia", "Banda Daud", "Bannu", "Batkhela", "Battagram", "Birote", "Chakdara",
-    "Charsadda", "Chitral", "Daggar", "Dargai", "Darya Khan", "dera Ismail", "Doaba", "Dir", "Drosh", "Hangu", "Haripur", "Karak", "Kohat",
-    "Kulachi", "Lakki Marwat", "Latamber", "Madyan", "Mansehra", "Mardan", "Mastuj", "Mingora", "Nowshera", "Paharpur", "Pabbi",
-    "Peshawar", "Saidu Sharif", "Shorkot", "Shewa Adda", "Swabi", "Swat", "Tangi", "Tank", "Thall", "Timergara", "Tordher", "Awaran",
-    "Barkhan", "Chagai", "Dera Bugti", "Gwadar", "Harnai", "Jafarabad", "Jhal Magsi", "Kacchi", "Kalat", "Kech", "Kharan", "Khuzdar",
-    "Killa Abdullah", "Killa Saifullah", "Kohlu", "Lasbela", "Lehri", "Loralai", "Mastung", "Musakhel", "Nasirabad", "Nushki", "Panjgur",
-    "Pishin valley", "Quetta", "Sherani", "Sibi", "Sohbatpur", "Washuk", "Zhob", "Ziarat"]
-  const cateringOptions = [
-    "Select Option", "Catering Type", "Starters", "Main Courses", "Grilled Items", "Breads", "Desserts", "Beverages"
+  const City = [
+    "Select Option",
+    "Islamabad",
+    "Ahmed Nager",
+    "Ahmadpur East",
+    "Ali Khan",
+    "Alipur",
+    "Arifwala",
+    "Attock",
+    "Bhera",
+    "Bhalwal",
+    "Bahawalnagar",
+    "Bahawalpur",
+    "Bhakkar",
+    "Burewala",
+    "Chillianwala",
+    "Chakwal",
+    "Chichawatni",
+    "Chiniot",
+    "Chishtian",
+    "Daska",
+    "Darya Khan",
+    "Dera Ghazi",
+    "Dhaular",
+    "Dina",
+    "Dinga",
+    "Dipalpur",
+    "Faisalabad",
+    "Fateh Jhang",
+    "Ghakhar Mandi",
+    "Gojra",
+    "Gujranwala",
+    "Gujrat",
+    "Gujar Khan",
+    "Hafizabad",
+    "Haroonabad",
+    "Hasilpur",
+    "Haveli",
+    "Lakha",
+    "Jalalpur",
+    "Jattan",
+    "Jampur",
+    "Jaranwala",
+    "Jhang",
+    "Jhelum",
+    "Kalabagh",
+    "Karor Lal",
+    "Kasur",
+    "Kamalia",
+    "Kamoke",
+    "Khanewal",
+    "Khanpur",
+    "Kharian",
+    "Khushab",
+    "Kot Adu",
+    "Jauharabad",
+    "Lahore",
+    "Lalamusa",
+    "Layyah",
+    "Liaquat Pur",
+    "Lodhran",
+    "Malakwal",
+    "Mamoori",
+    "Mailsi",
+    "Mandi Bahauddin",
+    "mian Channu",
+    "Mianwali",
+    "Multan",
+    "Murree",
+    "Muridke",
+    "Mianwali Bangla",
+    "Muzaffargarh",
+    "Narowal",
+    "Okara",
+    "Renala Khurd",
+    "Pakpattan",
+    "Pattoki",
+    "Pir Mahal",
+    "Qaimpur",
+    "Qila Didar",
+    "Rabwah",
+    "Raiwind",
+    "Rajanpur",
+    "Rahim Yar",
+    "Rawalpindi",
+    "Sadiqabad",
+    "Safdarabad",
+    "Sahiwal",
+    "Sangla Hill",
+    "Sarai Alamgir",
+    "Sargodha",
+    "Shakargarh",
+    "Sheikhupura",
+    "Sialkot",
+    "Sohawa",
+    "Soianwala",
+    "Siranwali",
+    "Talagang",
+    "Taxila",
+    "Toba Tek",
+    "Vehari",
+    "Wah Cantonment",
+    "Wazirabad",
+    "Badin",
+    "Bhirkan",
+    "Rajo Khanani",
+    "Chak",
+    "Dadu",
+    "Digri",
+    "Diplo",
+    "Dokri",
+    "Ghotki",
+    "Haala",
+    "Hyderabad",
+    "Islamkot",
+    "Jacobabad",
+    "Jamshoro",
+    "Jungshahi",
+    "Kandhkot",
+    "Kandiaro",
+    "Karachi",
+    "Kashmore",
+    "Keti Bandar",
+    "Khairpur",
+    "Kotri",
+    "Larkana",
+    "Matiari",
+    "Mehar",
+    "Mirpur Khas",
+    "Mithani",
+    "Mithi",
+    "Mehrabpur",
+    "Moro",
+    "Nagarparkar",
+    "Naudero",
+    "Naushahro Feroze",
+    "Naushara",
+    "Nawabshah",
+    "Nazimabad",
+    "Qambar",
+    "Qasimabad",
+    "Ranipur",
+    "Ratodero",
+    "Rohri",
+    "Sakrand",
+    "Sanghar",
+    "Shahbandar",
+    "Shahdadkot",
+    "Shahdadpur",
+    "Shahpur Chakar",
+    "Shikarpaur",
+    "Sukkur",
+    "Tangwani",
+    "Tando Adam",
+    "Tando Allahyar",
+    "Tando Muhammad",
+    "Thatta",
+    "Umerkot",
+    "Warah",
+    "Abbottabad",
+    "Adezai",
+    "Alpuri",
+    "Akora Khattak",
+    "Ayubia",
+    "Banda Daud",
+    "Bannu",
+    "Batkhela",
+    "Battagram",
+    "Birote",
+    "Chakdara",
+    "Charsadda",
+    "Chitral",
+    "Daggar",
+    "Dargai",
+    "Darya Khan",
+    "dera Ismail",
+    "Doaba",
+    "Dir",
+    "Drosh",
+    "Hangu",
+    "Haripur",
+    "Karak",
+    "Kohat",
+    "Kulachi",
+    "Lakki Marwat",
+    "Latamber",
+    "Madyan",
+    "Mansehra",
+    "Mardan",
+    "Mastuj",
+    "Mingora",
+    "Nowshera",
+    "Paharpur",
+    "Pabbi",
+    "Peshawar",
+    "Saidu Sharif",
+    "Shorkot",
+    "Shewa Adda",
+    "Swabi",
+    "Swat",
+    "Tangi",
+    "Tank",
+    "Thall",
+    "Timergara",
+    "Tordher",
+    "Awaran",
+    "Barkhan",
+    "Chagai",
+    "Dera Bugti",
+    "Gwadar",
+    "Harnai",
+    "Jafarabad",
+    "Jhal Magsi",
+    "Kacchi",
+    "Kalat",
+    "Kech",
+    "Kharan",
+    "Khuzdar",
+    "Killa Abdullah",
+    "Killa Saifullah",
+    "Kohlu",
+    "Lasbela",
+    "Lehri",
+    "Loralai",
+    "Mastung",
+    "Musakhel",
+    "Nasirabad",
+    "Nushki",
+    "Panjgur",
+    "Pishin valley",
+    "Quetta",
+    "Sherani",
+    "Sibi",
+    "Sohbatpur",
+    "Washuk",
+    "Zhob",
+    "Ziarat",
   ];
+  // const cateringOptions = [
+  //   "Select Option",
+  //   "Catering Type",
+  //   "Starters",
+  //   "Main Courses",
+  //   "Grilled Items",
+  //   "Breads",
+  //   "Desserts",
+  //   "Beverages",
+  // ];
 
-
-  const serviceOptions = ["Select Service", "Venue", "Catering"
-  ];
+  const serviceOptions = ["Select Service", "Venue", "Catering"];
 
   const [formData, setFormData] = useState({
     title: "",
@@ -107,7 +324,7 @@ function VDB_addlistings(prop) {
     serving_staff: "",
     ground_type: "",
     Price_Per_Person: "",
-    imageUrl: "",
+    imageUrl: [],
     menu_name: "",
     starters: "",
     mainCourses: "",
@@ -116,34 +333,23 @@ function VDB_addlistings(prop) {
     desserts: "",
     beverages: "",
     menu_price: "",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   });
   const [timeSlots, setTimeSlots] = useState([]);
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
   const [menuItems, setMenuItems] = useState([
-    { name: '', starters: '', mainCourses: '', grilledItems: '', breads: '', desserts: '', beverages: '', price: '' }
+    {
+      name: "",
+      starters: "",
+      mainCourses: "",
+      grilledItems: "",
+      breads: "",
+      desserts: "",
+      beverages: "",
+      price: "",
+    },
   ]);
-
-
-
 
   const handleMenu = (index, event) => {
     const { name, value } = event.target;
@@ -153,24 +359,68 @@ function VDB_addlistings(prop) {
   };
 
   const addMenuItem = () => {
-    setMenuItems([...menuItems, { name: '', starters: '', mainCourses: '', grilledItems: '', breads: '', desserts: '', beverages: '', price: '' }]);
+    setMenuItems([
+      ...menuItems,
+      {
+        name: "",
+        starters: "",
+        mainCourses: "",
+        grilledItems: "",
+        breads: "",
+        desserts: "",
+        beverages: "",
+        price: "",
+      },
+    ]);
   };
 
   const removeMenuItem = (index) => {
     setMenuItems(menuItems.filter((_, i) => i !== index));
   };
 
-
-
-
-
-
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedImages((prevImages) => [...prevImages, ...files]);
-  };
+  // const handleImageChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   setSelectedImages((prevImages) => [...prevImages, ...files]);
+  // };
 
   // Remove an image from the preview
+  const [imageInputs, setImageInputs] = useState([]);
+
+  const handleImageChange = async (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedImages((prevImages) => [...prevImages, ...files]);
+    files.map(async (_, index) => {
+      const file = e.target.files[index];
+      if (!file) {
+        return (
+          <>
+            <div>No file selected</div>
+          </>
+        );
+      }
+      try {
+        const img_data = new FormData();
+        img_data.append("file", file);
+        img_data.append("upload_preset", "eventmanagement");
+        img_data.append("cloud_name", "dbg5ulcoj");
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dbg5ulcoj/image/upload",
+          {
+            method: "POST",
+            body: img_data,
+          }
+        );
+
+        const imageUrl = await res.json();
+        //Convert the imageUrl object to an array in VDB_addlistings
+        formData.imageUrl.push(imageUrl.url); //uncomment this line
+        console.log(formData.imageUrl);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
+
   const handleRemoveImage = (index) => {
     setSelectedImages(selectedImages.filter((_, i) => i !== index));
   };
@@ -202,40 +452,32 @@ function VDB_addlistings(prop) {
   const addTimeSlot = () => {
     if (startTime && endTime) {
       setTimeSlots([...timeSlots, { start: startTime, end: endTime }]);
-      setStartTime(''); // Reset inputs after adding
-      setEndTime('');
+      setStartTime(""); // Reset inputs after adding
+      setEndTime("");
     }
   };
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData)
+    console.log(formData);
     try {
-      await axios.post("http://localhost:3000/listings", formData);
+      await axios.post(`http://localhost:5000/listings`, formData);
       alert("Data submitted successfully!");
-  } catch (error) {
+    } catch (error) {
       alert("Error submitting data");
-  }
-  }
-
-
-
+    }
+  };
 
   return (
-    <div
-      className=" bg-slate-300"
-
-    >
-
+    <div className=" bg-slate-300">
       <div className="w-[90%] sm:w-[60%] md:w-[60%] rounded-xl mt-10 border-[1px] shadow-lg m-auto">
         <div className="w-full mx-auto bg-white p-8 shadow-lg rounded-xl">
           <h2 className="text-xl font-semibold mb-4">Add Listing</h2>
@@ -243,7 +485,7 @@ function VDB_addlistings(prop) {
           <form>
             <div className="  gap-4 mb-4 ">
               <div>
-                <label className="block text-sm font-medium text-gray-700" >
+                <label className="block text-sm font-medium text-gray-700">
                   Title
                 </label>
                 <input
@@ -254,11 +496,10 @@ function VDB_addlistings(prop) {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   placeholder="Beautiful Marquee at my home"
                   onChange={handleChange}
-
                 />
               </div>
 
-              <label className="block text-sm font-medium text-gray-700" >
+              <label className="block text-sm font-medium text-gray-700">
                 Address
               </label>
               <input
@@ -269,13 +510,9 @@ function VDB_addlistings(prop) {
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Dhoke Khaby, Chungi No. 2"
                 onChange={handleChange}
-
               />
-
             </div>
             <div className=" gap-4 mb-4 w-[100%]">
-
-
               <select
                 name="service_type"
                 value={formData.service_type}
@@ -283,9 +520,7 @@ function VDB_addlistings(prop) {
                 onChange={handleChange}
               >
                 {serviceOptions.map((option, index) => (
-                  <option key={index}>
-                    {option}
-                  </option>
+                  <option key={index}>{option}</option>
                 ))}
               </select>
 
@@ -297,39 +532,33 @@ function VDB_addlistings(prop) {
                   onChange={handleChange}
                 >
                   {venueOptions.map((option, index) => (
-                    <option key={index}   >
-
-                      {option}
-                    </option>
+                    <option key={index}>{option}</option>
                   ))}
-                </select>)}
-
+                </select>
+              )}
 
               {formData.service_type === "Venue" && (
-
-                <select className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
+                <select
+                  className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
                   name="ServingType"
                   value={formData.ServingType}
                 >
-
                   {ServingType.map((type, index) => (
                     <option key={index} value={type}>
-                      {type || 'Select Serving Type'}
+                      {type || "Select Serving Type"}
                     </option>
                   ))}
-                </select>)}
+                </select>
+              )}
 
               <select
                 name="City"
                 value={formData.City}
-
                 className="border-2 h-10 rounded-xl pl-4 w-[100%]"
                 onChange={handleChange}
               >
                 {City.map((option, index) => (
-                  <option key={index} >
-                    {option}
-                  </option>
+                  <option key={index}>{option}</option>
                 ))}
               </select>
               <label className="block text-sm font-medium text-gray-700">
@@ -361,7 +590,6 @@ function VDB_addlistings(prop) {
               )}
               <div className=" gap-4 mb-4">
                 {formData.service_type === "Venue" && (
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Parking Capacity
@@ -375,33 +603,33 @@ function VDB_addlistings(prop) {
                       onChange={handleChange}
                       type="number"
                     ></input>
-                  </div>)}
-                  {formData.venue_type === "sports_arena" && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Ground Type
-                  </label>
-                  <select
-                    id="ground"
-                    value={formData.ground_type}
-                    name="ground_type"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {grounds.map((e, index) => {
-                      return (
-                        <option key={index} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>)}
-
+                  </div>
+                )}
+                {formData.venue_type === "sports_arena" && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Ground Type
+                    </label>
+                    <select
+                      id="ground"
+                      value={formData.ground_type}
+                      name="ground_type"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                    >
+                      {grounds.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                )}
               </div>
               <div className=" gap-4 mb-4">
                 {formData.service_type === "Venue" && (
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       No.of VIP Persons
@@ -415,75 +643,71 @@ function VDB_addlistings(prop) {
                       onChange={handleChange}
                       type="number"
                     ></input>
-                  </div>)}
-                  {formData.service_type === "Catering" && (
-                <div>
-                
-                  <label className="block text-sm font-medium text-gray-700">
-                    Crockry
-                  </label>
-                  <select
-                    name="Crockry"
-                    value={formData.Crockry}
-                    // value={formData.projector}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {booleanOptions.map((e, index) => {
-                      return (
-                        <option key={index}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
+                  </div>
+                )}
+                {formData.service_type === "Catering" && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Crockry
+                    </label>
+                    <select
+                      name="Crockry"
+                      value={formData.Crockry}
+                      // value={formData.projector}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return <option key={index}>{e}</option>;
+                      })}
+                    </select>
 
-                  <label className="block text-sm font-medium text-gray-700">
-                    Serving Staff Availibility
-                  </label>
-                  <select
-                    name="serving_staff"
-                    value={formData.serving_staff}
-                    // value={formData.projector}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {booleanOptions.map((e, index) => {
-                      return (
-                        <option key={index} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>)}
+                    <label className="block text-sm font-medium text-gray-700">
+                      Serving Staff Availibility
+                    </label>
+                    <select
+                      name="serving_staff"
+                      value={formData.serving_staff}
+                      // value={formData.projector}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                )}
                 {formData.venue_type === "conference_hall" && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Projector
-                  </label>
-                  <select
-                    name="projector"
-                    value={formData.projector}
-                    // value={formData.projector}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {booleanOptions.map((e, index) => {
-                      return (
-                        <option key={index} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>)}
-
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Projector
+                    </label>
+                    <select
+                      name="projector"
+                      value={formData.projector}
+                      // value={formData.projector}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                )}
               </div>
 
               <div className=" gap-4 mb-4">
                 {formData.service_type === "Venue" && (
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       AC / Heating
@@ -505,33 +729,31 @@ function VDB_addlistings(prop) {
                     </select>
                   </div>
                 )}
-                                {formData.venue_type === "conference_hall" && (
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Wifi
-                  </label>
-                  <select
-                    name="wifi"
-                    value={formData.wifi}
-                    // value={formData.wifi}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {booleanOptions.map((e, index) => {
-                      return (
-                        <option key={index} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>)}
-
+                {formData.venue_type === "conference_hall" && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Wifi
+                    </label>
+                    <select
+                      name="wifi"
+                      value={formData.wifi}
+                      // value={formData.wifi}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                )}
               </div>
 
               {formData.service_type === "Venue" && (
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Outdoor Catering Allowed
@@ -541,7 +763,6 @@ function VDB_addlistings(prop) {
                     value={formData.outdoor_catering}
                     // value={formData.catering}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-
                     onChange={handleChange}
                   >
                     {booleanOptions.map((e, index) => {
@@ -552,11 +773,10 @@ function VDB_addlistings(prop) {
                       );
                     })}
                   </select>
-                </div>)}
+                </div>
+              )}
               {formData.service_type === "Venue" && (
                 <div className=" gap-4 mb-4">
-
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Inbound Catering Service
@@ -589,7 +809,6 @@ function VDB_addlistings(prop) {
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       onChange={handleChange}
                       placeholder="No. of persons"
-
                     />
                   </div>
                 </div>
@@ -597,33 +816,37 @@ function VDB_addlistings(prop) {
               {/* <div className="">
                 <h2>Create Your Menu</h2>
                 {menuItems.map((item, index) => (
-                  <div key={index} className="menu-item flex flex-wrap" >
+                  <div key={index} className="menu-item flex flex-wrap">
                     <input
                       type="text"
                       name="menu_name"
                       placeholder="Item Name"
                       value={formData.menu_name}
-                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
+                      className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="starters"
                       placeholder="Starters"
                       value={formData.starters}
-                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
+                      className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="mainCourses"
                       placeholder="Main Courses"
                       value={formData.mainCourses}
-                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
+                      className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="grilledItems"
                       placeholder="Grilled Items"
-                      value={formData.grilledItems} className="h-10 w-[25%]"
+                      value={formData.grilledItems}
+                      className="h-10 w-[25%]"
                       onChange={(e) => handleChange(index, e)}
                     />
                     <input
@@ -631,21 +854,24 @@ function VDB_addlistings(prop) {
                       name="breads"
                       placeholder="Breads"
                       value={formData.breads}
-                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
+                      className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="desserts"
                       placeholder="Desserts"
                       value={formData.desserts}
-                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
+                      className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="text"
                       name="beverages"
                       placeholder="Beverages"
                       value={formData.beverages}
-                      className="h-10 w-[25%]" onChange={(e) => handleChange(index, e)}
+                      className="h-10 w-[25%]"
+                      onChange={(e) => handleChange(index, e)}
                     />
                     <input
                       type="number"
@@ -654,21 +880,34 @@ function VDB_addlistings(prop) {
                       value={formData.menu_price}
                       onChange={(e) => handleChange()}
                     />
-                    <button type="button" onClick={() => removeMenuItem(index)} className="border-2 border-red-400 p-1 rounded-full">Remove</button>
+                    <button
+                      type="button"
+                      onClick={() => removeMenuItem(index)}
+                      className="border-2 border-red-400 p-1 rounded-full"
+                    >
+                      Remove
+                    </button>
                   </div>
                 ))}
                 <div className="flex justify-end">
-                  <button type="button" onClick={addMenuItem} className="border-2 border-green-400 rounded-full p-2 mr-[10%] ">Add Menu</button>
+                  <button
+                    type="button"
+                    onClick={addMenuItem}
+                    className="border-2 border-green-400 rounded-full p-2 mr-[10%] "
+                  >
+                    Add Menu
+                  </button>
                 </div>
               </div> */}
             </div>
             <div className=" gap-4 mb-4">
               <div className="flex flex-col">
-
                 <label>
-                  Your {formData.service_type} is suitalbe for following type of events:
+                  Your {formData.service_type} is suitalbe for following type of
+                  events:
                 </label>
-                <input type="text"
+                <input
+                  type="text"
                   placeholder="wedding, birthday party, conferences, etc..."
                   name="event_type"
                   value={formData.event_type}
@@ -679,25 +918,25 @@ function VDB_addlistings(prop) {
               {formData.service_type === "Venue" && (
                 <div className="flex flex-col">
                   <label>
-                    Sitting Arrangement you can provide for {formData.venue_type}:
+                    Sitting Arrangement you can provide for{" "}
+                    {formData.venue_type}:
                   </label>
-                  <input type="text"
+                  <input
+                    type="text"
                     placeholder="u-shaped,round tables, banqueet etc..."
                     name="sitting_arrangement"
                     value={formData.sitting_arrangement}
                     onChange={handleChange}
                   />
-                </div>)}
+                </div>
+              )}
             </div>
 
             {formData.service_type === "Venue" && (
               <div className="flex flex-col gap-4 mb-4">
-
-
-                <label >
-                  Lighting Quality
-                </label>
-                <select name="lighting_type"
+                <label>Lighting Quality</label>
+                <select
+                  name="lighting_type"
                   value={formData.lighting_type}
                   id=""
                   onChange={handleChange}
@@ -707,40 +946,58 @@ function VDB_addlistings(prop) {
                       <option key={index} value={e}>
                         {e}
                       </option>
-                    )
+                    );
                   })}
                 </select>
-
-              </div>)}
+              </div>
+            )}
             <div className="w-[80%]">
               <label>Detailed Description:</label>
               <div>
-                <input className="w-[90%] border-4"
-                type="text"
+                <textarea
+                  className="w-[90%] border-4"
+                  type="text"
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                 />
               </div>
             </div>
-            <div className="image-upload-container">
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleImageChange}
-                name="imageUrl"
-                value={formData.imageUrl}
-              />
-              <div className="image-preview">
+            <div className="image-upload-container mt-3">
+              <p className="mb-3">You can Add 4 pictures</p>
+              <label
+                htmlFor="file_upload"
+                className=" w-fit bg-blue-500 p-2 rounded-lg text-white"
+              >
+                Add Images
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  id="file_upload"
+                  name="imageUrl"
+                  className="hidden"
+                  // value={formData.imageUrl}
+                />
+              </label>
+              <div className="flex justify-around image-preview mt-3 rounded-md">
                 {selectedImages.map((image, index) => (
-                  <div key={index} className="image-preview-item">
+                  <div
+                    key={index}
+                    className="image-preview-item border-[1px] border-black"
+                  >
                     <img
                       src={URL.createObjectURL(image)}
                       alt={`Preview ${index + 1}`}
-                      className="preview-thumbnail"
+                      className="preview-thumbnail h-[150px] w-[150px] "
                     />
-                    <button onClick={() => handleRemoveImage(index)}>Remove</button>
+                    <button
+                      onClick={() => handleRemoveImage(index)}
+                      className="py-2 px-5 w-full bg-blue-500 text-white  hover:bg-blue-600 transition duration-200"
+                    >
+                      Remove
+                    </button>
                   </div>
                 ))}
               </div>

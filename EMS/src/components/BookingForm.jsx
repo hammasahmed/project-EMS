@@ -63,7 +63,7 @@ function BookingForm() {
     wifi: "",
     ac_heating: "",
     catering: "",
-    table_services: "",
+    table_services: ""
   });
   const location = useLocation();
   const data = location.state;
@@ -97,7 +97,7 @@ function BookingForm() {
           <form>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700" form="Name">
                   Name
                 </label>
                 <input
@@ -112,7 +112,7 @@ function BookingForm() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700" form="Date">
                   Select Date
                 </label>
                 {/* <input
@@ -135,7 +135,7 @@ function BookingForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               {/* Event Time */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700" form="time">
                   Event Time
                 </label>
                 <select

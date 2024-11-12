@@ -12,7 +12,7 @@ const Details = () => {
     const fetchListing = async () => {
       //
       try {
-        const response = await fetch("/listings.json");
+        const response = await fetch("http://localhost:5000/listings");
 
         // const response = await fetch('http://localhost:3000/listings');
         if (!response.ok) {
@@ -45,6 +45,7 @@ const Details = () => {
   };
 
   return (
+    
     // < >
     // <div className=" flex flex-col md:flex-row lg:flex-row xl:flex-row sm:w-full bg-gray-200">
     //   <div className=" w-[65%] px-[3%] border-2 border-black">
@@ -250,154 +251,192 @@ const Details = () => {
     // </>
 
     <>
-      <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row sm:w-full">
-        <div className="w-full md:w-[65%] px-[4%] ">
-          <h1 className="text-3xl sm:text-4xl font-bold font-sans pt-5 pb-5 mt-5">
-            {listing.title}
-          </h1>
-          <div className="w-full shadow-lg rounded-lg bg-gray-200 object-fill">
-            <Slider_for_Detail passid={listing.pictures} />
-          </div>
-        </div>
+    <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row sm:w-full">
+              <div className="w-full md:w-[65%] px-[4%] ">
+                <h1 className="text-3xl sm:text-4xl font-bold font-sans pt-5 pb-5 mt-5">
+                  {listing.title}
+                </h1>
+                <div className="w-full shadow-lg rounded-lg bg-gray-200 object-fill">
+                  <Slider_for_Detail passid={listing.imageUrl}/>  {/*passid={listing.}*/}
+                </div>
+              </div>
+              <div className="w-full md:w-[40%] p-[4%] mt-5">
+                <div className="flex flex-col justify-around p-5 mt-10 shadow-xl h-auto md:h-[300px] md:mt-5">
+                  <div className="text-xl sm:text-2xl font-bold">
+                    Price: Starting From ${listing?.Price_Per_Person}
+                  </div>
+                  <div className="text-lg">
+                    <b>Capacity:</b> {listing?.event_type=="Catering" ? listing.seating_capacity:listing.serving_capacity} Admi
+                  </div>
+                  <div className="text-lg">
+                    <b>Location:</b> {listing?.City}
+                  </div>
+                  <div className="text-lg">
+                    <b>Address:</b>{listing?.address}
+                  </div>
+                  <div className="text-center mt-4">
+                    <button
+                      className="rounded-3xl  text-lg py-2 px-4 bg-[#06c911]  hover:bg-[#9c198b] hover:text-white"
+                      type="submit"
+                      onClick={submitHandler}
+                    >
+                      {listing?.event_type=="Catering" ?<b>Check for Availability</b> :<b>Book Now</b>}
+                      
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>   
+            <div className="rounded-lg  shadow-sm mx-[4%] mt-10 p-4">
+              <h2 className="text-xl sm:text-2xl my-4">
+                About {listing?.service_type}
+              </h2>
+              <hr />
+              <div className="text-justify p-2">
+                <p>
+                  {listing?.description}
+                </p>
+                <h3 className="font-semibold mt-4  text-gray-700">Space Available</h3>
+                <p>
+                </p>
+                <h3 className="font-semibold mt-4 text-gray-700">{listing?.service_type} Capacity</h3>
+                <p>
+                   {listing?.event_type=="Catering" ?<b></b> :<b>Book Now</b>}
+                 people
+                </p>
+                <h3 className="font-semibold mt-4  text-gray-700">
+                  Menue Offered
+                </h3>
+                <p>
+                  {listing?.starters}
+                  {listing?.mainCourses}
+                  {listing?.grilleItems}
+                  {listing?.breads}
+                  {listing?.desserts}
+                  {listing?.beverages}
+                </p>
+                <h3 className="font-semibold mt-4  text-gray-700">
+                  Menue Price
+                </h3>
+                <p>
+                  {listing.menu_price}
+                </p>
+                <h3 className="font-semibold mt-4 text-gray-700">
+                  Suitable For
+                </h3>
+                <p className="list-disc ml-4">
+                 {listing?.event_type}
+                </p>
+                <h3 className="font-semibold mt-4 text-gray-700">Location</h3>
+                <p>The {listing?.service_type} is located in {listing?.City}, {listing?.address}.</p>
+                <p>
+    {listing.title}</p>
+    <p>
+    {listing.description}</p>
+    <p>
+    {listing.address}</p>
+    <p>
+    {listing.City}</p>
+    <p>
+    {listing.service_type}</p>
+    <p><br />
+    {listing.venue_type}<br />
+    {listing.event_type}<br />
+    {listing.seating_capacity}<br />
+    {listing.sitting_arrangement}<br />
+    {listing.lighting_type}<br />
+    {listing.ServingType}<br />
+    {listing.VIP_seats}<br />
+    {listing.Inbond_catering}<br />
+    {listing.outdoor_catering}
+    {listing.projector}<br />
+    {listing.wifi}<br />
+    {listing.ac_heating}<br />
+    {listing.parking}<br />
+    {listing.serving_capacity}<br />
+    {listing.Crockry}<br />
+    {listing.serving_staff}<br />
+    {listing.ground_type}<br />
+    {listing.Price_Per_Person}<br />
+    {/* {listing.imageUrl}<br /> */}
+    {listing.menu_name},<br />
+    {listing.starters},<br />
+    {listing.mainCourses},<br />
+    {listing.grilledItems}<br />
+    {listing.breads}<br />
+    {listing.desserts}<br />
+    {listing.beverages}<br />
+    {listing.menu_price}<br />
 
-        <div className="w-full md:w-[40%] p-[4%] mt-5">
-          <div className="flex flex-col justify-around p-5 mt-10 shadow-xl h-auto md:h-[300px] md:mt-5">
-            <div className="text-xl sm:text-2xl font-bold">
-              Price: Starting From ${listing.price}
-            </div>
-            <div className="text-lg">
-              <b>Capacity:</b> {listing.capacity} Admi
-            </div>
-            <div className="text-lg">
-              <b>Location:</b> Shumali Koria
-            </div>
-            <div className="text-lg">
-              <b>Address:</b> St# 01, Road# 01, Shumali Korea
-            </div>
-            <div className="text-center mt-4">
-              <button
-                className="rounded-3xl  text-lg py-2 px-4 bg-[#06c911]  hover:bg-[#9c198b] hover:text-white"
-                type="submit"
-                onClick={submitHandler}
-              >
-                <b>Check for Availability</b>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+                </p>
 
-      {/* About Section */}
-      <div className="rounded-lg  shadow-sm mx-[4%] mt-10 p-4">
-        <h2 className="text-xl sm:text-2xl my-4">
-          About {listing.serviceType}
-        </h2>
-        <hr />
-        <div className="text-justify p-2">
-          <p>
-            Umaid Palace- An Organic Retreat is a wedding venue located in
-            Jaipur, offering a royal and spacious location for weddings and
-            events.
-          </p>
-          <h3 className="font-semibold mt-4  text-gray-700">Space Available</h3>
-          <p>
-            The venue has 2 lawns, a terrace area, a poolside, and banquet halls
-            for your events.
-          </p>
-          <h3 className="font-semibold mt-4 text-gray-700">Capacity</h3>
-          <p>
-            With indoor and outdoor spaces, it accommodates up to 1500 guests in
-            the largest spaces.
-          </p>
-          <h3 className="font-semibold mt-4  text-gray-700">
-            Cuisines Offered
-          </h3>
-          <p>
-            In-house catering is available, with options to bring in outside
-            caterers as needed.
-          </p>
-          <h3 className="font-semibold mt-4 text-gray-700">
-            Facilities Provided
-          </h3>
-          <ul className="list-disc ml-4">
-            <li>In-house and outside catering options</li>
-            <li>Outside decorators permitted</li>
-            <li>Parking available</li>
-          </ul>
-          <h3 className="font-semibold mt-4 text-gray-700">Location</h3>
-          <p>The venue is located in Jaipur, Dausa.</p>
-        </div>
-      </div>
 
-      {/* Details Section */}
-      <div className="p-6 bg-white shadow-md rounded-md mx-[4%] mt-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
-          <div>
-            <h3 className="font-semibold text-gray-700">
-              Been on Evento Since
-            </h3>
-            <p className="text-black">6 years 1 month</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Room Count</h3>
-            <p className="text-black">73 Rooms</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Space</h3>
-            <p className="text-black">Indoor, Outdoor, Poolside, Terrace</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Room Price</h3>
-            <p className="text-black">₹ 9,500 per room</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Start of Venue</h3>
-            <p className="text-black">2001</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Parking</h3>
-            <p className="text-black">Sufficient parking available</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Catering Policy</h3>
-            <p className="text-black  ">Inhouse & outside catering allowed</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Small Party Venue</h3>
-            <p className="text-black">Less than 50 Pax allowed</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Decor Policy</h3>
-            <p className="text-black">Outside decorators permitted</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">Features</h3>
-            <p className="text-black">
-              Small Function Venue, Outside Caterer & Decorator Allowed
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-700">DJ Policy</h3>
-            <p className="text-black">
-              In-house DJ not available, Outside DJ permitted
-            </p>
-
-          </div>
-
-        </div>
-      </div>
-      {role === 'vendor' && (
+              </div>
+            </div>
+      
+            {/* Details Section */}
+            <div className="p-6 bg-white shadow-md rounded-md mx-[4%] mt-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+                <div>
+                  <h3 className="font-semibold text-gray-700">
+                    Been on Evento Since
+                  </h3>
+                  <p className="text-black">6 years 1 month</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Room Count</h3>
+                  <p className="text-black">73 Rooms</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Space</h3>
+                  <p className="text-black">Indoor, Outdoor, Poolside, Terrace</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Room Price</h3>
+                  <p className="text-black">₹ 9,500 per room</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Start of Venue</h3>
+                  <p className="text-black">2001</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Parking</h3>
+                  <p className="text-black">Sufficient parking available</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Catering Policy</h3>
+                  <p className="text-black  ">Inhouse & outside catering allowed</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Small Party Venue</h3>
+                  <p className="text-black">Less than 50 Pax allowed</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Decor Policy</h3>
+                  <p className="text-black">Outside decorators permitted</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">Features</h3>
+                  <p className="text-black">
+                    Small Function Venue, Outside Caterer & Decorator Allowed
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-700">DJ Policy</h3>
+                  <p className="text-black">
+                    In-house DJ not available, Outside DJ permitted
+                  </p>
+                </div>
+              </div>
+            </div>
+            {role === 'vendor' && (
   <div className="p-6 bg-white shadow-md rounded-md mx-[4%] mt-5">
     <label htmlFor=""></label>
   </div>
 )}
 
-      
-    </>
+</>
+  );
+};
 
-    
-
-
-
-  )}
 export default Details;

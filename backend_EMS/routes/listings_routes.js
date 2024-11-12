@@ -13,7 +13,7 @@ router.get('/listings', async (req, res) => {
   }
 });
 // ROUTE FOR GETTING A SPECIFIC listing BY ID
-router.get('/listings/:id', async (req, res) => { // change `:_id` to `:id`
+router.get('/listings/:_id', async (req, res) => { // change `:_id` to `:id`
   try {
     const listingId = req.params.id;
     const listing = await listing.findById(listingId);
@@ -33,6 +33,7 @@ router.post('/listings', async (req, res) => {
     try {
         const listings = new listing(req.body);
         await listings.save();
+        console.log(listings);
         res.status(201).send(listings);
     } catch (error) {
         res.status(400).send(console.log(error));
