@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import userSignup from './routes/user_signup.js';
 import userLogin from './routes/user_login.js'
 import listingsRoutes from './routes/listings_routes.js';
+import bookings from './routes/user_bookings.js'
 import { configDotenv } from 'dotenv';
 
 const app = express();
@@ -28,6 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', userSignup);
 app.use('/', listingsRoutes);
 app.use('/',userLogin )
+
+app.use('/',bookings)
 
 app.get('/',  (req, res)=> {
   res.send('hell is bad');

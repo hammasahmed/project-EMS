@@ -2,8 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import listings from "../../public/listings.json";
+import axios from "axios";
 
 function BookingForm() {
+  const location = useLocation();
+  const data = location.state;
+  console.log(data);
+
+  const role = localStorage.getItem('role');
+
   const booleanOptions = ["Select Option", "Yes", "No"];
   const options = [
     "Select Option",
@@ -12,7 +19,7 @@ function BookingForm() {
     "Slot 3",
     "Slot 4",
     "Slot 5",
-    "Slot 6"
+    "Slot 6",
   ];
   const lighting = ["Select Option", "High", "Medium", "Low"];
   const events = [
@@ -48,8 +55,10 @@ function BookingForm() {
   ];
   const services = ["Select Option", "Self Service", "Platter"];
   const [formData, setFormData] = useState({
+    listings_id: data._id,
     name: "",
-    selectedoption: "",
+    start_time: "",
+    end_time: "",
     event_type: "",
     persons: "",
     date: "",
@@ -63,10 +72,8 @@ function BookingForm() {
     wifi: "",
     ac_heating: "",
     catering: "",
-    table_services: ""
+    table_services: "",
   });
-  const location = useLocation();
-  const data = location.state;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -76,9 +83,19 @@ function BookingForm() {
     });
   };
 
+  const businessLogic = () => {};
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitted data", formData);
+    try {
+      axios.post("http://localhost:5000/api/bookings", formData) .then((response) => {
+        console.log(response.data); // Handle response data
+      })
+      .catch((error) => console.error('Error:', error));;
+    } catch (error) {
+      alert("Error submitting data", error);
+    }
+    // console.log("Submitted data", formData);
   };
 
   return (
@@ -94,10 +111,13 @@ function BookingForm() {
           {/* <div>{state.imgaeUrl}</div> */}
           <h2 className="text-xl font-semibold mb-4">Booking Form</h2>
           {/* <p className="text-gray-500 mb-6">The information can be edited</p> */}
-          <form>
+          <form onSubmit={handleSubmit} method="POST">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700" form="Name">
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  form="Name"
+                >
                   Name
                 </label>
                 <input
@@ -108,11 +128,14 @@ function BookingForm() {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   placeholder="Sofia"
                   onChange={handleChange}
-                  required
+                  // required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700" form="Date">
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  form="Date"
+                >
                   Select Date
                 </label>
                 {/* <input
@@ -128,32 +151,41 @@ function BookingForm() {
                   name="date"
                   onChange={handleChange}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  required
+                  // required
                 />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               {/* Event Time */}
               <div>
-                <label className="block text-sm font-medium text-gray-700" form="time">
-                  Event Time
-                </label>
-                <select
-                  id="time"
-                  name="selectedoption"
-                  value={formData.time}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  onChange={handleChange}
-                  required
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  form="time"
                 >
-                  {options.map((o, index) => {
-                    return (
-                      <option key={index} value={o}>
-                        {o}
-                      </option>
-                    );
-                  })}
-                </select>
+                  Event Start Time
+                </label>
+                <input
+                  type="time"
+                  onChange={handleChange}
+                  name="start_time"
+                  value={formData.start_time}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  form="time"
+                >
+                  Event End Time
+                </label>
+                <input
+                  type="time"
+                  onChange={handleChange}
+                  name="end_time"
+                  value={formData.end_time}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                />
               </div>
 
               {/* Phone number */}
@@ -169,13 +201,9 @@ function BookingForm() {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   onChange={handleChange}
                   placeholder="Phone number"
-                  required
+                  // required
                 />
               </div>
-            </div>
-
-            {/* Type of Event */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Type of Event
@@ -185,7 +213,7 @@ function BookingForm() {
                   name="event_type"
                   value={formData.event_type}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  required
+                  // required
                   onChange={handleChange}
                 >
                   {events.map((e, index) => {
@@ -197,7 +225,10 @@ function BookingForm() {
                   })}
                 </select>
               </div>
+            </div>
 
+            {/* Type of Event */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               {/* No of Persons */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -211,53 +242,59 @@ function BookingForm() {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   onChange={handleChange}
                   placeholder="No. of persons"
-                  required
+                  // required
                 />
               </div>
             </div>
 
             {/* Parking Capacity */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Parking Capacity
-                </label>
-                <input
-                  id="Parking"
-                  name="parking"
-                  value={formData.parking}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  onChange={handleChange}
-                  type="number"
-                ></input>
-              </div>
+              {data?.venueType == "Venue" ? (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Parking Capacity
+                    </label>
+                    <input
+                      id="Parking"
+                      name="parking"
+                      value={formData.parking}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      onChange={handleChange}
+                      type="number"
+                    ></input>
+                  </div>
 
-              {/* Catering Services */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Catering Service
-                </label>
-                <select
-                  id="catering"
-                  name="catering"
-                  value={formData.catering}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  required
-                  onChange={handleChange}
-                >
-                  {booleanOptions.map((e, index) => {
-                    return (
-                      <option key={index} value={e}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
+                  {/* Catering Services */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Catering Service
+                    </label>
+                    <select
+                      id="catering"
+                      name="catering"
+                      value={formData.catering}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                      // required
+                      onChange={handleChange}
+                    >
+                      {booleanOptions.map((e, index) => {
+                        return (
+                          <option key={index} value={e}>
+                            {e}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </>
+              ) : (
+                ""
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {data?.serviceType == "venue" &&
+              {data?.serviceType == "Venue" &&
               data?.venueType == "Sports Arena" ? (
                 <>
                   {/* Ground Type */}
@@ -323,7 +360,7 @@ function BookingForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {data?.serviceType == "venue" &&
+              {data?.serviceType == "Venue" &&
               (data?.venueType == "Banquet Hall" ||
                 data?.venueType == "Marquee") ? (
                 <>
