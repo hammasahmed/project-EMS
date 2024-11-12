@@ -1,5 +1,6 @@
 // ./src/LoginForm.js
 import React, { useState } from 'react';
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -18,6 +19,10 @@ const LoginForm = () => {
     });
   };
 
+
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -30,8 +35,14 @@ const LoginForm = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log('user Logined succesfully', data);
+        // console.log('user Logined succesfully', data);
+        localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
+        
+        const token = localStorage.getItem('token');
+        const decodedToken = jwtDecode(token);
+        localStorage.setItem('id', decodedToken.id);
+        console.log(decodedToken.id)
         // setRole(data.role);
        
 
@@ -44,7 +55,41 @@ const LoginForm = () => {
     } catch (error) {
       console.error('Error:', error);
     }
+    
+
+    try {
+      const userId = localStorage.getItem('id');
+        const response = await fetch(`http://localhost:5000/user/${userId}`);
+        if (!response.ok) {
+            throw new Error('User not found');
+        }
+        const data = await response.json();
+        localStorage.setItem('role', data.role);
+        console.log(data);  // Log data to verify contents
+        return data; // Return user data without setting state
+    } catch (err) {
+        setError(err.message);
+    }
+
+
   };
+
+    
+  const fetchUser = async () => {
+    try {
+      const userId = localStorage.getItem('id');
+        const response = await fetch(`http://localhost:5000/user/${userId}`);
+        if (!response.ok) {
+            throw new Error('User not found');
+        }
+        const data = await response.json();
+        localStorage.setItem('role', data.role);
+        console.log(data);  // Log data to verify contents
+        return data; // Return user data without setting state
+    } catch (err) {
+        setError(err.message);
+    }
+};
 
 
   return (
