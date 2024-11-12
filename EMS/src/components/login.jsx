@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 const SignUpForm = () => {
   const navigate = useNavigate();
 
-  const [role, setRole] = useState('');
+  // const [role, setRole] = useState('');
   const [userSignup, setuserSignup] = useState({
     email: '',
     password: '',
@@ -35,10 +35,10 @@ const SignUpForm = () => {
         const data = await response.json();
         console.log('userSignup created:', data.role);
         navigate('/');
-        setRole(data.role);
+        // setRole(data.role);
         // Set role in localStorage directly using the response data
         localStorage.setItem('token', data.token);
-        localStorage.setItem('role', role);
+        localStorage.setItem('role', data.role);
         
         // Set role in state (for local UI use if needed)
         
@@ -105,7 +105,7 @@ const SignUpForm = () => {
             <option value="vendor">Vendor</option>
           </select>
 
-          <p>{role}</p>
+          
           <input
             type="email"
             name="email"

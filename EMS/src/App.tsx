@@ -18,6 +18,10 @@ import CateringForm from "./components/CateringForm";
 import UserDashboard from "./pages/UserDashboard";
 import Add_listings from './components/VDB_addlistings'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import BookingForm from './components/BookingForm'
+import CateringForm from './components/CateringForm'
+import CustomerDB from './pages/customerDB'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   // x
@@ -44,6 +48,7 @@ function App() {
           <Route path="/vendordb" element={<VendorDB />} />
           <Route path="/BookingForm" element={<BookingForm />} />
           <Route path="/CateringForm" element={<CateringForm />} />
+          <Route path="/customerdb" element={<CustomerDB />} />
           <Route path="/UserDashboard" element={<UserDashboard />} />
           <Route path="/add_listings" element={<Add_listings />} />
         </Routes>

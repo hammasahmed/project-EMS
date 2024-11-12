@@ -63,6 +63,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import logo from '../assets/logo1.svg';
 import { Link } from 'react-router-dom';
+
 import AuthContext from '../contexts/AuthContext.jsx';
 // import { set } from 'mongoose';
 
@@ -71,10 +72,10 @@ const Navbar = () => {
     const [logouts, setLogouts] = useState(false);
     const { isAuthenticated, username, logout } = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
-    const x = logout();
-    console.log(x)
+    
+    // console.log(x)
     // console.log(isAuthenticated)
-    // console.log(token)
+     console.log(token)
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
@@ -109,11 +110,11 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="signup mt-2">
-                {isAuthenticated || token ? (
-                    <div>
-                        <a href="/vendordb">dashboard</a>
-                        
-                        <button onClick={logout}>logout</button>
+                {token ? (
+                    <div >
+                        <button className='border-2 border-green-700 rounded-full hover:bg-green-500 hover:text-white px-2 py-1'>{role === 'user' ? <Link to="/customerdb">dashboard</Link> : <a href="/vendordb">dashboard</a>}</button>
+                    
+                        <button onClick={logout} className='border-[1px]  border-red-700 px-2 py-1 rounded-full hover:bg-red-500 hover:text-white ml-4'>logout</button>
                     </div>
                 ) : (
                     <div>

@@ -1,11 +1,18 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
+// import Notification from "./notification.js";
+const notificationSchema = new mongoose.Schema({
+  message: String,
+price: String,
+// Add any other fields here
+});
 const userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     role: { type: String, default: 'user' },
     email: String,
-    password: String
+    password: String,
+    notification: { type: [notificationSchema], default: [] } 
   });
 
 
