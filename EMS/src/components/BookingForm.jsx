@@ -9,7 +9,6 @@ function BookingForm() {
   const data = location.state;
   console.log(data);
 
-  const role = localStorage.getItem('role');
 
   const booleanOptions = ["Select Option", "Yes", "No"];
   const options = [
@@ -55,7 +54,7 @@ function BookingForm() {
   ];
   const services = ["Select Option", "Self Service", "Platter"];
   const [formData, setFormData] = useState({
-    listings_id: data.id,
+    listings_id: "",
     name: "",
     start_time: "",
     end_time: "",
@@ -75,6 +74,11 @@ function BookingForm() {
     table_services: "",
   });
 
+  const handleOther = () =>{
+    setFormData({...formData, listings_id: data._id});
+    console.log(formData.listings_id)
+  }
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -85,7 +89,8 @@ function BookingForm() {
 
   const businessLogic = () => {};
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
+    handleOther();
     event.preventDefault();
     try {
       axios.post("http://localhost:5000/api/bookings", formData) .then((response) => {
@@ -97,7 +102,7 @@ function BookingForm() {
     }
     // console.log("Submitted data", formData);
   };
-
+  
   return (
     <div
       className=" border-2 border-black align-center h-[140vh] "

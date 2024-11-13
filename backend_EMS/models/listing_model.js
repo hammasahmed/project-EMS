@@ -105,27 +105,7 @@ const reviewSchema = new mongoose.Schema({
   review_date: { type: Date, default: Date.now }
 });
 
-const menuItemSchema = new mongoose.Schema({
-  menu_name: { type: String },
-  starters: { type: String },
-  mainCourses: { type: String },
-  grilledItems: { type: String },
-  breads: { type: String },
-  desserts: { type: String },
-  beverages: { type: String },
-  menu_price: { type: Number }
-});
 
-// const MenuSchema = new mongoose.Schema({
-//   menu_name: { type: String},
-//   starters: { type: String },
-//   mainCourses: { type: String},
-//   grilledItems: { type: String},
-//   breads: { type: String, },
-//   desserts: { type: String },
-//   beverages: { type: String},
-//   menu_price: { type: String}
-// }, { _id: false})
 const MenuSchema = new mongoose.Schema({
   menu_name: { type: String},
   starters: { type: String},
