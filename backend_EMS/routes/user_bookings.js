@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import bookings from '../models/booking_models.js';
-import { jwtDecode } from "jwt-decode"
+// import { jwtDecode } from "jwt-decode"
 
 
-const user_id = "672e43a517ccdf1ed9c45ead";
+// const user_id = "672e43a517ccdf1ed9c45ead";
 const router = Router();
 
 // Api to get the data from Booking Form and Catering Form

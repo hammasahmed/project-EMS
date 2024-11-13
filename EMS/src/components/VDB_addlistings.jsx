@@ -7,7 +7,8 @@ function VDB_addlistings(prop) {
   const menu_styling =
     "w-[40%] mt-1 m-auto flex py-2 px-3 border-[1px] border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300";
   const lighting = ["Select Option", "High", "Medium"];
-
+  const v_id = localStorage.getItem("id");
+  console.log(v_id)
   const grounds = [
     "Select Option",
     "Football",
@@ -271,6 +272,7 @@ function VDB_addlistings(prop) {
   const serviceOptions = ["Select Service", "Venue", "Catering"];
 
   const [formData, setFormData] = useState({
+    vendor_id: v_id,
     title: "",
     description: "",
     address: "",

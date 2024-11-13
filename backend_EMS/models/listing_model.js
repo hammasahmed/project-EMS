@@ -130,7 +130,7 @@ const MenuSchema = new mongoose.Schema({
 
 const listingSchema = new mongoose.Schema({
   // _id: { type: String },
-  vendor_id: { type:String, unique: true},
+  vendor_id: { type:String},
   title: { type: String },
   description: { type: String },
   address: { type: String },

@@ -7,10 +7,12 @@ import axios from "axios";
 function BookingForm() {
   const location = useLocation();
   const data = location.state;
-  console.log(data);
+  const vendor_id = data.vendor_id;
+  console.log(data.vendor_id);
 
   const role = localStorage.getItem('role');
-
+  const customerId = localStorage.getItem('id');
+  console.log(customerId)
   const booleanOptions = ["Select Option", "Yes", "No"];
   const options = [
     "Select Option",
@@ -55,7 +57,8 @@ function BookingForm() {
   ];
   const services = ["Select Option", "Self Service", "Platter"];
   const [formData, setFormData] = useState({
-    listings_id: data._id,
+    customer_id: customerId,
+    listings_id: data.id,
     name: "",
     start_time: "",
     end_time: "",

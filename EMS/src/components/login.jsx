@@ -39,9 +39,16 @@ const SignUpForm = () => {
         // Set role in localStorage directly using the response data
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
-        
+        localStorage.setItem('id', data.id);
+        console.log(data);
         // Set role in state (for local UI use if needed)
-        
+        const token = localStorage.getItem('token');
+        const decodedToken = jwtDecode(token);
+        localStorage.setItem('id', decodedToken.id);
+        console.log(decodedToken.id)
+        // setRole(data.role);
+
+        navigate(-1);
   
         // Redirect if necessary
         // navigate('/');
@@ -52,6 +59,10 @@ const SignUpForm = () => {
       console.log('Error:', error);
     }
   };
+  
+
+
+
   
 
   return (
