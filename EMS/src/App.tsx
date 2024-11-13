@@ -18,6 +18,11 @@ import CateringForm from "./components/CateringForm";
 import UserDashboard from "./pages/UserDashboard";
 import Add_listings from './components/VDB_addlistings'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6e37dfead225e05777f5718711e7e0336adbf961
 import CustomerDB from './pages/customerDB'
 
 function App() {
@@ -34,9 +39,10 @@ function App() {
             <LoginForm />
             <ListingsPage /> */}
       <Router>
-        <Navbar />
+       
 
         <Routes>
+        
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
