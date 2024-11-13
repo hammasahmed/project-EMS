@@ -27,7 +27,7 @@ function VDB_addlistings(prop) {
     "hotel",
   ];
 
-  const ServingType = ["Select Option", "", "Self-Serving", "Full-Serving"];
+  const ServingType = ["Select Option", "Self-Serving", "Full-Serving"];
 
   const City = [
     "Select Option",
@@ -296,14 +296,24 @@ function VDB_addlistings(prop) {
     Price_Per_Person: "",
     imageUrl: [],
     menu: [
-      { menu_name: "" },
-      { starters: "" },
-      { mainCourses: "" },
-      { grilledItems: "" },
-      { breads: "" },
-      { desserts: "" },
-      { beverages: "" },
-      { menu_price: "" },
+      // { menu_name: "" },
+      // { starters: "" },
+      // { mainCourses: "" },
+      // { grilledItems: "" },
+      // { breads: "" },
+      // { desserts: "" },
+      // { beverages: "" },
+      // { menu_price: "" },
+      {
+        menu_name: "",
+        starters: "",
+        mainCourses: "",
+        grilledItems: "",
+        breads: "",
+        desserts: "",
+        beverages: "",
+        menu_price: "",
+      },
     ],
   });
   const menuOptions = [
@@ -339,19 +349,45 @@ function VDB_addlistings(prop) {
     const newMenuItems = [];
   };
 
-  const handleMenuChange = (index_array, index_object, event) => {
+  const handleMenuChange = (menuIndex, event) => {
     const { name, value } = event.target;
-    console.log(name, value, index_array, index_object);
-    const updatedMenu = [...formData.menu];
-    console.log(updatedMenu);
-    updatedMenu[index_object] = { ...updatedMenu[index_object], [name]: value };
-    setFormData({ ...formData, menu: updatedMenu });
-    console.log(updatedMenu);
-    // formData.name[index]
+
+    setFormData((prevData) => {
+      const updatedMenu = [...prevData.menu];
+      updatedMenu[menuIndex] = {
+        ...updatedMenu[menuIndex],
+        [name]: value, // Update the specific category with the new value
+      };
+      console.log(updatedMenu);
+      return { ...prevData, menu: updatedMenu };
+    });
+    // console.log(name, value, index_array, index_object);
+    // const updatedMenu = [...formData.menu];
+    // console.log(updatedMenu);
+    // updatedMenu[index_object] = { ...updatedMenu[index_object], [name]: value };
+    // setFormData({ ...formData, menu: updatedMenu });
+    // console.log(updatedMenu);
   };
   const addMenuItem = () => {
+    // setMenuItems([...menuItems, menuOptions]);
+    // console.log(menuItems);
     setMenuItems([...menuItems, menuOptions]);
-    console.log(menuItems);
+    setFormData((prevData) => ({
+      ...prevData,
+      menu: [
+        ...prevData.menu,
+        {
+          menu_name: "",
+          starters: "",
+          mainCourses: "",
+          grilledItems: "",
+          breads: "",
+          desserts: "",
+          beverages: "",
+          menu_price: "",
+        },
+      ],
+    }));
   };
 
   const removeMenuItem = (index) => {
@@ -522,10 +558,11 @@ function VDB_addlistings(prop) {
                   className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
                   name="ServingType"
                   value={formData.ServingType}
+                  onChange={handleChange}
                 >
                   {ServingType.map((type, index) => (
                     <option key={index} value={type}>
-                      {type || "Select Serving Type"}
+                      {type}
                     </option>
                   ))}
                 </select>
@@ -795,126 +832,76 @@ function VDB_addlistings(prop) {
               )}
               <div className="">
                 <h2>Create Your Menu</h2>
-                {menuItems.map((_, index) => (
+                {menuItems.map((object, index) => (
                   <div key={index} className="menu-item flex flex-wrap">
-                    {optionArray.map((option, optionIndex) => (
-                      <>
-                        {optionIndex == 0 ? (
-                          <input
-                            type="text"
-                            name="menu_name"
-                            placeholder="Menu Name"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {optionIndex == 1 ? (
-                          <input
-                            type="text"
-                            name="starters"
-                            placeholder="Starters"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {optionIndex == 2 ? (
-                          <input
-                            type="text"
-                            name="mainCourses"
-                            placeholder="Main Courses"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {optionIndex == 3 ? (
-                          <input
-                            type="text"
-                            name="grilledItems"
-                            placeholder="Grilled Items"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {optionIndex == 4 ? (
-                          <input
-                            type="text"
-                            name="breads"
-                            placeholder="Breads"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
+                    <input
+                      type="text"
+                      name="menu_name"
+                      placeholder="Menu Name"
+                      value={formData.menu[index]["menu_name"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="starters"
+                      placeholder="Starters"
+                      value={formData.menu[index]["starters"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
 
-                        {optionIndex == 5 ? (
-                          <input
-                            type="text"
-                            name="desserts"
-                            placeholder="Desserts"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {optionIndex == 6 ? (
-                          <input
-                            type="text"
-                            name="beverages"
-                            placeholder="Beverages"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
+                    <input
+                      type="text"
+                      name="mainCourses"
+                      placeholder="Main Courses"
+                      value={formData.menu[index]["mainCourses"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
 
-                        {optionIndex == 7 ? (
-                          <input
-                            type="number"
-                            name="menu_price"
-                            placeholder="Menu Price"
-                            value={formData.menu[optionIndex][option]}
-                            className={menu_styling}
-                            onChange={(e) =>
-                              handleMenuChange(index, optionIndex, e)
-                            }
-                          />
-                        ) : (
-                          ""
-                        )}
-                      </>
-                    ))}
+                    <input
+                      type="text"
+                      name="grilledItems"
+                      placeholder="Grilled Items"
+                      value={formData.menu[index]["grilledItems"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+
+                    <input
+                      type="text"
+                      name="breads"
+                      placeholder="Breads"
+                      value={formData.menu[index]["breads"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+
+                    <input
+                      type="text"
+                      name="desserts"
+                      placeholder="Desserts"
+                      value={formData.menu[index]["desserts"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="beverages"
+                      placeholder="Beverages"
+                      value={formData.menu[index]["beverages"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <input
+                      type="number"
+                      name="menu_price"
+                      placeholder="Menu Price"
+                      value={formData.menu[index]["menu_price"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
                     <button
                       type="button"
                       onClick={() => removeMenuItem(index)}
@@ -924,6 +911,7 @@ function VDB_addlistings(prop) {
                     </button>
                   </div>
                 ))}
+               
                 <div className="flex justify-end">
                   <button
                     type="button"
@@ -1053,3 +1041,127 @@ function VDB_addlistings(prop) {
 }
 
 export default VDB_addlistings;
+
+
+
+
+                    {/* {optionArray.map((option, optionIndex) => (
+                      <>
+                        {optionIndex == 0 ? (
+                          <input
+                            type="text"
+                            name="menu_name"
+                            placeholder="Menu Name"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 1 ? (
+                          <input
+                            type="text"
+                            name="starters"
+                            placeholder="Starters"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 2 ? (
+                          <input
+                            type="text"
+                            name="mainCourses"
+                            placeholder="Main Courses"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 3 ? (
+                          <input
+                            type="text"
+                            name="grilledItems"
+                            placeholder="Grilled Items"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 4 ? (
+                          <input
+                            type="text"
+                            name="breads"
+                            placeholder="Breads"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+
+                        {optionIndex == 5 ? (
+                          <input
+                            type="text"
+                            name="desserts"
+                            placeholder="Desserts"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {optionIndex == 6 ? (
+                          <input
+                            type="text"
+                            name="beverages"
+                            placeholder="Beverages"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+
+                        {optionIndex == 7 ? (
+                          <input
+                            type="number"
+                            name="menu_price"
+                            placeholder="Menu Price"
+                            value={formData.menu[optionIndex][option]}
+                            className={menu_styling}
+                            onChange={(e) =>
+                              handleMenuChange(index, optionIndex, e)
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </>
+                    )
+                    )
+                    } */}

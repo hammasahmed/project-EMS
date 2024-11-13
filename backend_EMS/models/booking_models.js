@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
 const booking_schema = new mongoose.Schema({
-
-  // user_id:{ type:mongoose.Schema.Types.ObjectId ,  unique: true, ref: "users" },
-  listing_id: { type:String },
+  listings_id: { type:String },
   role:{type:String},
   date:{ type: String },
   start_time:{ type: String },

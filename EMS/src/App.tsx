@@ -18,10 +18,7 @@ import CateringForm from "./components/CateringForm";
 import UserDashboard from "./pages/UserDashboard";
 import Add_listings from './components/VDB_addlistings'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import BookingForm from './components/BookingForm'
-import CateringForm from './components/CateringForm'
 import CustomerDB from './pages/customerDB'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   // x

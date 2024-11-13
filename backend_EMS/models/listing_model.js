@@ -116,21 +116,32 @@ const menuItemSchema = new mongoose.Schema({
   menu_price: { type: Number }
 });
 
+// const MenuSchema = new mongoose.Schema({
+//   menu_name: { type: String},
+//   starters: { type: String },
+//   mainCourses: { type: String},
+//   grilledItems: { type: String},
+//   breads: { type: String, },
+//   desserts: { type: String },
+//   beverages: { type: String},
+//   menu_price: { type: String}
+// }, { _id: false})
 const MenuSchema = new mongoose.Schema({
   menu_name: { type: String},
-  starters: { type: String },
+  starters: { type: String},
   mainCourses: { type: String},
   grilledItems: { type: String},
-  breads: { type: String, },
-  desserts: { type: String },
+  breads: { type: String},
+  desserts: { type: String},
   beverages: { type: String},
   menu_price: { type: String}
-}, { _id: false})
+});
+
 
 
 const listingSchema = new mongoose.Schema({
   // _id: { type: String },
-  vendor_id: { type:String, unique: true},
+  vendor_id: { type:String},
   title: { type: String },
   description: { type: String },
   address: { type: String },
@@ -155,7 +166,7 @@ const listingSchema = new mongoose.Schema({
   ground_type: { type: [String] },  // Removed enum constraint
   price_Per_Person: { type: Number },  // Removed min constraint
   imageUrl: { type: [String] },
-  menu:[{type:MenuSchema}]
+  menu:[MenuSchema]
 });
 
 

@@ -55,7 +55,7 @@ function BookingForm() {
   ];
   const services = ["Select Option", "Self Service", "Platter"];
   const [formData, setFormData] = useState({
-    listings_id: data._id,
+    listings_id: data.id,
     name: "",
     start_time: "",
     end_time: "",

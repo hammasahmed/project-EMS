@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate();
