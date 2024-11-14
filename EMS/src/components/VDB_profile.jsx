@@ -5,6 +5,49 @@ import person from "../assets/food1.png";
 
 
 const VDB_profile = () => {
+  const firstName = localStorage.getItem('firstName');
+  const lastName = localStorage.getItem('lastName');
+  const email = localStorage.getItem('email');
+  const role = localStorage.getItem('role');
+  console.log(firstName, lastName);
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0]; // Get only the first file
+  
+    // Check if a file was selected
+    if (!file) {
+      console.log("No file selected");
+      return;
+    }
+  
+    try {
+      const img_data = new FormData();
+      img_data.append("file", file);
+      img_data.append("upload_preset", "eventmanagement");
+      img_data.append("cloud_name", "dbg5ulcoj");
+  
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dbg5ulcoj/image/upload",
+        {
+          method: "POST",
+          body: img_data,
+        }
+      );
+  
+      const imageUrl = await res.json();
+  
+      // Assuming formData.imageUrl is an array to hold image URLs, we set the first entry here
+      formData.imageUrl = [imageUrl.url]; // Update with the uploaded image URL
+      console.log(formData.imageUrl);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
+
+
+
   return (
     <>
       {/* Header */}
@@ -38,13 +81,13 @@ const VDB_profile = () => {
                 <img src={person} className="h-28 w-28 rounded-full" />
               </div>
               <div className="text-2xl mt-4">
-                <b>Sofia Rivers</b>
+                <b>{firstName + " " + lastName}</b>
               </div>
-              <div className="mt-2 text-gray-500">Los Angeles, USA</div>
+              <div className="mt-2 text-gray-500">{email}</div>
               <div className="mt-2 text-gray-500">GMT-7</div>
               <div className="mt-4">
                 <button className="cursor-pointer font-medium bg-blue-500 text-center p-2 rounded-lg text-white w-full">
-                  <input type="file" style={{backgroundColor:"#3b82f6", width:"100%"}} />
+                  <input onChange={handleImageChange} type="file" style={{backgroundColor:"#3b82f6", width:"100%"}} />
                 </button>
               </div>
             </div>
@@ -65,6 +108,7 @@ const VDB_profile = () => {
                       type="text"
                       id="first-name"
                       name="first-name"
+                      defaultValue={firstName}
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="Sofia"
                     />
@@ -79,6 +123,8 @@ const VDB_profile = () => {
                       name="last-name"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="Rivers"
+                      defaultValue={lastName}
+
                     />
                   </div>
                 </div>
@@ -93,20 +139,10 @@ const VDB_profile = () => {
                       name="email"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="sofia@devias.io"
+                      defaultValue={email}
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700" >
-                      Phone number
-                    </label>
-                    <input
-                      type="number"
-                      id="phone"
-                      name="phone"
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                      placeholder="Phone number"
-                    />
-                  </div>
+                 
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
@@ -126,7 +162,7 @@ const VDB_profile = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700"  >
-                      City
+                      Role
                     </label>
                     <input
                       type="text"
@@ -134,6 +170,7 @@ const VDB_profile = () => {
                       name="city"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="City"
+                      defaultValue={role}
                     />
                   </div>
                 </div>

@@ -17,6 +17,7 @@ import BookingForm from "./components/BookingForm";
 import CateringForm from "./components/CateringForm";
 import UserDashboard from "./pages/UserDashboard";
 import Add_listings from './components/VDB_addlistings'
+import Payment from './pages/payment'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/customerdb" element={<CustomerDB />} />
           <Route path="/UserDashboard" element={<UserDashboard />} />
           <Route path="/add_listings" element={<Add_listings />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </Router>
     </div>

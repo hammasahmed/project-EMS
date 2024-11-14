@@ -101,8 +101,8 @@ import user from './user_model.js';
 const reviewSchema = new mongoose.Schema({
   reviewer_name: { type: String, required: true },
   rating: { type: Number, min: 1, max: 5, required: true }, // Rating between 1 and 5
-  review_content: { type: String, required: true },
-  review_date: { type: Date, default: Date.now }
+  review_content: { type: String, required: true }
+  
 });
 
 const menuItemSchema = new mongoose.Schema({
@@ -155,7 +155,8 @@ const listingSchema = new mongoose.Schema({
   ground_type: { type: [String] },  // Removed enum constraint
   price_Per_Person: { type: Number },  // Removed min constraint
   imageUrl: { type: [String] },
-  menu:[{type:MenuSchema}]
+  menu:[{type:MenuSchema}],
+  reviews: [reviewSchema]
 });
 
 

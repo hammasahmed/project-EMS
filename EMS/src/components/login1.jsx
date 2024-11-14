@@ -64,6 +64,9 @@ const LoginForm = () => {
         }
         const data = await response.json();
         localStorage.setItem('role', data.role);
+        localStorage.setItem('firstName', data.firstName);
+        localStorage.setItem('lastName', data.lastName);
+        localStorage.setItem('email', data.email);
         console.log(data);  // Log data to verify contents
         return data; // Return user data without setting state
     } catch (err) {
