@@ -5,6 +5,7 @@ const booking_schema = new mongoose.Schema({
   vendor_id: { type: String },
   listings_id: { type: String },
   role: { type: String },
+  name: { type: String },
   date: { type: String },
   start_time: { type: String },
   end_time: { type: String },
@@ -21,9 +22,8 @@ const booking_schema = new mongoose.Schema({
   table_services: { type: String },
   projector: { type: String },
   wifi: { type: String },
-  notification: { type: Number },
-  status: { type: String },
   price: { type: String },
+  remarks: { type: String },
 });
 
 const bookings = mongoose.model("bookings", booking_schema);

@@ -12,6 +12,11 @@ const Details = () => {
   const [listing, setListing] = useState(null);
   const {isAuthenticated,logout} = useContext(AuthContext);
   const navigate = useNavigate();
+
+// State for the review form
+const [newReview, setNewReview] = useState({ name: "", comment: "", stars: 0 });
+const [reviews, setReviews] = useState([]);
+
   useEffect(() => {
     const fetchListing = async () => {
       //
@@ -58,6 +63,38 @@ const Details = () => {
     }
   };
 
+
+
+    // Handle input changes for the review form
+  const handleReviewChange = (e) => {
+    const { name, value } = e.target;
+    setNewReview((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Submit the review
+  const submitReview = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/listings/${id}/add-review`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify(newReview),
+      });
+      if (response.ok) {
+        const updatedListing = await response.json();
+        setReviews(updatedListing.reviews);
+        setNewReview({ name: "", comment: "", stars: 0 }); // Clear the form after submitting
+      } else {
+        console.error("Failed to submit review");
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
+
+
+
+    
   return (
     
     // < >
@@ -390,7 +427,62 @@ const Details = () => {
 
               </div>
             </div>
-      
+
+
+                  {/* Existing Reviews Section */}
+      <div className="rounded-lg shadow-sm mx-[4%] mt-10 p-4">
+        <h2 className="text-xl sm:text-2xl my-4">Reviews</h2>
+        {reviews.length > 0 ? (
+          reviews.map((review, index) => (
+            <div key={index} className="border-b p-2">
+              <p><strong>{review.name}:</strong> {review.comment}</p>
+              <p>Rating: {"★".repeat(review.stars)}{"☆".repeat(5 - review.stars)}</p>
+            </div>
+          ))
+        ) : (
+          <p>No reviews yet.</p>
+        )}
+      </div>
+
+      {/* Add a New Review Section */}
+      {role === 'vendor' && (
+        <div className="p-6 bg-white shadow-md rounded-md mx-[4%] mt-5">
+          <h2 className="text-xl sm:text-2xl my-4">Add Your Review</h2>
+          <form onSubmit={submitReview}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={newReview.name}
+              onChange={handleReviewChange}
+              className="border p-2 rounded mb-2 w-full"
+              required
+            />
+            <textarea
+              name="comment"
+              placeholder="Comment"
+              value={newReview.comment}
+              onChange={handleReviewChange}
+              className="border p-2 rounded mb-2 w-full"
+              required
+            />
+            <input
+              type="number"
+              name="stars"
+              min="1"
+              max="5"
+              placeholder="Rating (1-5)"
+              value={newReview.stars}
+              onChange={(e) => handleReviewChange({ target: { name: 'stars', value: parseInt(e.target.value) } })}
+              className="border p-2 rounded mb-2 w-full"
+              required
+            />
+            <button type="submit" className="rounded-3xl py-2 px-4 bg-green-500 text-white">Submit Review</button>
+          </form>
+        </div>
+      )}
+
+                
             {/* Details Section */}
             <div className="p-6 bg-white shadow-md rounded-md mx-[4%] mt-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">

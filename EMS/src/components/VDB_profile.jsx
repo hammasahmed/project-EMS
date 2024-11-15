@@ -5,10 +5,11 @@ import person from "../assets/food1.png";
  
 
 const VDB_profile = ({component}) => {
-
-
-
-
+const firstName = localStorage.getItem('firstName');
+const lastName = localStorage.getItem('lastName');
+const email = localStorage.getItem('email');
+const role = localStorage.getItem('role');
+console.log(firstName, lastName);
 
   const [profilepic,setProfilePic] = useState(person)
 
@@ -79,9 +80,9 @@ const VDB_profile = ({component}) => {
                 <img src={profilepic} className="preview-thumbnail h-28 w-28 rounded-full" />
               </div>
               <div className="text-2xl mt-4">
-                <b>Sofia Rivers</b>
+                <b>{firstName + " " + lastName}</b>
               </div>
-              <div className="mt-2 text-gray-500">Los Angeles, USA</div>
+              <div className="mt-2 text-gray-500">{email}</div>
               <div className="mt-2 text-gray-500">GMT-7</div>
               <div className="mt-4">
                 <button className="cursor-pointer font-medium bg-blue-500 text-center p-2 rounded-lg text-white w-full">
@@ -89,6 +90,7 @@ const VDB_profile = ({component}) => {
                   <input type="file" id="profile" name="image" accept="image/*"
                   onChange={Uploadingfile}
                   className="hidden"/>
+                  {/* <input onChange={handleImageChange} type="file" style={{backgroundColor:"#3b82f6", width:"100%"}} /> */}
                 </button>
               </div>
             </div>
@@ -109,6 +111,7 @@ const VDB_profile = ({component}) => {
                       type="text"
                       id="first-name"
                       name="first-name"
+                      defaultValue={firstName}
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="Sofia"
                     />
@@ -123,6 +126,8 @@ const VDB_profile = ({component}) => {
                       name="last-name"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="Rivers"
+                      defaultValue={lastName}
+
                     />
                   </div>
                 </div>
@@ -137,20 +142,10 @@ const VDB_profile = ({component}) => {
                       name="email"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="sofia@devias.io"
+                      defaultValue={email}
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700" >
-                      Phone number
-                    </label>
-                    <input
-                      type="number"
-                      id="phone"
-                      name="phone"
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                      placeholder="Phone number"
-                    />
-                  </div>
+                 
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
@@ -170,7 +165,7 @@ const VDB_profile = ({component}) => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700"  >
-                      City
+                      Role
                     </label>
                     <input
                       type="text"
@@ -178,6 +173,7 @@ const VDB_profile = ({component}) => {
                       name="city"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="City"
+                      defaultValue={role}
                     />
                   </div>
                 </div>

@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema({
     role: { type: String, default: 'user' },
     email: String,
     password: String,
+    imageUrl: String ,
     notification: { type: [notificationSchema], default: [] } 
   });
 
