@@ -134,7 +134,7 @@ const ListingsPage = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await fetch('/public/listings.json');
+                const response = await fetch('http://localhost:5000/listings');
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

@@ -1,22 +1,63 @@
-import React from "react";
+import React,{useState} from "react";
 import notification from "../assets/notification.svg";
 import contact from "../assets/contact.svg";
 import person from "../assets/food1.png";
+ 
+
+const VDB_profile = ({component}) => {
 
 
-const VDB_profile = () => {
+
+
+
+  const [profilepic,setProfilePic] = useState(person)
+
+  // URL.createObjectURL(event.target.files[0])
+  
+  const Uploadingfile = async(event)=>{
+    const file = event.target.files[0];
+    setProfilePic(()=> URL.createObjectURL(file))
+  if (!file) {
+    return (
+      <>
+        <div>No file selected</div>
+      </>
+    );
+  }
+  try {
+    const img_data = new FormData();
+    img_data.append("file", file);
+    img_data.append("upload_preset", "eventmanagement");
+    img_data.append("cloud_name", "dbg5ulcoj");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dbg5ulcoj/image/upload",
+      {
+        method: "POST",
+        body: img_data,
+      }
+    );
+  
+    const imageUrl = await res.json();
+    console.log(imageUrl.url)
+    return imageUrl.url;
+  } catch (error) {
+    console.log(error);
+  }
+  }
+
   return (
     <>
       {/* Header */}
       <div className="w-full font-sans border-[1px] border-[#c2c9d666] flex h-16 p-3 justify-end bg-white">
         <div className="rounded-full h-fit w-fit mr-3 mt-2">
           <img src={notification} className="h-7 w-7" />
+          <p className="absolute top-8 right-36 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{component}</p>
         </div>
         <div className="rounded-full h-fit w-fit mr-3">
           <img src={contact} alt="" className="h-10 w-10" />
         </div>
         <div className="rounded-full h-fit w-fit mr-3">
-          <img src={person} alt="" className="h-10 w-10 rounded-full" />
+          <img src={profilepic} alt="" className="preview-thumbnail h-10 w-10 rounded-full" />
         </div>
       </div>
 
@@ -35,7 +76,7 @@ const VDB_profile = () => {
           <div className="h-fit w-[90%] sm:w-72 rounded-xl mt-10 border-[1px] shadow-lg">
             <div className="flex flex-col justify-center text-center h-full p-4">
               <div className="flex justify-center">
-                <img src={person} className="h-28 w-28 rounded-full" />
+                <img src={profilepic} className="preview-thumbnail h-28 w-28 rounded-full" />
               </div>
               <div className="text-2xl mt-4">
                 <b>Sofia Rivers</b>
@@ -44,7 +85,10 @@ const VDB_profile = () => {
               <div className="mt-2 text-gray-500">GMT-7</div>
               <div className="mt-4">
                 <button className="cursor-pointer font-medium bg-blue-500 text-center p-2 rounded-lg text-white w-full">
-                  <input type="file" style={{backgroundColor:"#3b82f6", width:"100%"}} />
+                  <label htmlFor="profile">Add Profile Picture</label>
+                  <input type="file" id="profile" name="image" accept="image/*"
+                  onChange={Uploadingfile}
+                  className="hidden"/>
                 </button>
               </div>
             </div>

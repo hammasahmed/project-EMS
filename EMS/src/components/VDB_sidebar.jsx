@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Sidebar = ({ setSelectedComponent }) => {
+const Sidebar = ({ setSelectedComponent ,component}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => {
@@ -24,13 +24,13 @@ const Sidebar = ({ setSelectedComponent }) => {
           className="mb-4 text-2xl flex items-center"
           onClick={() => setSelectedComponent("Home")}
         >
-          🎫 {isExpanded && "My Listings"}
+          🎫 {isExpanded && "My Listings" }
         </button>
         <button
           className="mb-4 text-2xl flex items-center"
           onClick={() => setSelectedComponent("Search")}
         >
-          🎪 {isExpanded && "Bookings"}
+          🎪 {isExpanded && `Bookings (${component})` }
         </button>
         <button
           className="mb-4 text-2xl flex items-center"

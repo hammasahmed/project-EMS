@@ -21,11 +21,10 @@ function VDB_addlistings(prop) {
 
   const venueOptions = [
     "Venue Type",
-    "sports_arena",
-    "banquet_hall",
-    "marquee",
-    "conference_hall",
-    "hotel",
+    "Sports Arena",
+    "Banquet Hall",
+    "Marquee",
+    "Conference Hall",
   ];
 
   const ServingType = ["Select Option", "Self-Serving", "Full-Serving"];
@@ -298,14 +297,6 @@ function VDB_addlistings(prop) {
     Price_Per_Person: "",
     imageUrl: [],
     menu: [
-      // { menu_name: "" },
-      // { starters: "" },
-      // { mainCourses: "" },
-      // { grilledItems: "" },
-      // { breads: "" },
-      // { desserts: "" },
-      // { beverages: "" },
-      // { menu_price: "" },
       {
         menu_name: "",
         starters: "",
@@ -330,27 +321,10 @@ function VDB_addlistings(prop) {
       menu_price: "",
     },
   ];
-  //  {optionIndex==2 ?():""}
-  const optionArray = [
-    "menu_name",
-    "starters",
-    "mainCourses",
-    "grilledItems",
-    "breads",
-    "desserts",
-    "beverages",
-    "menu_price",
-  ];
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
   const [menuItems, setMenuItems] = useState(menuOptions);
 
-  const handleMenuevent = () => {
-    const newMenuItems = [];
-  };
-
+ 
   const handleMenuChange = (menuIndex, event) => {
     const { name, value } = event.target;
 
@@ -402,7 +376,7 @@ function VDB_addlistings(prop) {
   // };
 
   // Remove an image from the preview
-  const [imageInputs, setImageInputs] = useState([]);
+  // const [imageInputs, setImageInputs] = useState([]);
 
   const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
@@ -439,9 +413,9 @@ function VDB_addlistings(prop) {
     });
   };
 
-  const handleRemoveImage = (index) => {
-    setSelectedImages(selectedImages.filter((_, i) => i !== index));
-  };
+  // const handleRemoveImage = (index) => {
+  //   setSelectedImages(selectedImages.filter((_, i) => i !== index));
+  // };
 
   const handleUpload = async () => {
     // You may want to compress images here if needed
@@ -467,13 +441,13 @@ function VDB_addlistings(prop) {
   };
 
   // Function to handle adding a new time slot
-  const addTimeSlot = () => {
-    if (startTime && endTime) {
-      setTimeSlots([...timeSlots, { start: startTime, end: endTime }]);
-      setStartTime(""); // Reset inputs after adding
-      setEndTime("");
-    }
-  };
+  // const addTimeSlot = () => {
+  //   if (startTime && endTime) {
+  //     setTimeSlots([...timeSlots, { start: startTime, end: endTime }]);
+  //     setStartTime(""); // Reset inputs after adding
+  //     setEndTime("");
+  //   }
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -1017,16 +991,16 @@ function VDB_addlistings(prop) {
                       alt={`Preview ${index + 1}`}
                       className="preview-thumbnail h-[150px] w-[150px] "
                     />
-                    <button
+                    {/* <button
                       onClick={() => handleRemoveImage(index)}
                       className="py-2 px-5 w-full bg-blue-500 text-white  hover:bg-blue-600 transition duration-200"
                     >
                       Remove
-                    </button>
+                    </button> */}
                   </div>
                 ))}
               </div>
-              <button onClick={handleUpload}>Upload Images</button>
+              {/* <button onClick={handleUpload}>Upload Images</button> */}
             </div>
             <button
               type="submit"
