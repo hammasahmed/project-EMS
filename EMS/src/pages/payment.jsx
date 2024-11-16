@@ -3,7 +3,7 @@ import easypaisa from '../assets/easypaisa.png'
 import shop from '../assets/shop.png'
 import visa from '../assets/visa.png'
 import mastercard from '../assets/mastercard.png'
-import bank from '../assets/bank.png'
+import bank from '../assets/bank.png' 
 const Payment = () => {
     return (
         <div>
