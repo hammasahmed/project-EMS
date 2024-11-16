@@ -30,7 +30,7 @@
 //                 setFilteredListings(data);
 
 //                 // Extract unique cities from data
-//                 const uniqueCities = [...new Set(data.map(listing => listing.city))];
+//                 const uniqueCities = [...new Set(data.map(listing => listing.City))];
 //                 setCities(uniqueCities);
 //             } catch (error) {
 //                 console.error('Error fetching listings:', error);
@@ -42,9 +42,9 @@
 
 //     useEffect(() => {
 //         const filtered = listings.filter(listing => {
-//             const cityMatch = selectedCity ? listing.city === selectedCity : true;
+//             const cityMatch = selectedCity ? listing.City === selectedCity : true;
 //             const priceMatch = selectedPrice ?
-//                 (selectedPrice === '201' ? listing.price > 200 : listing.price <= parseInt(selectedPrice)) : true;
+//                 (selectedPrice === '201' ? listing.price_Per_Person > 200 : listing.price_Per_Person <= parseInt(selectedPrice)) : true;
 
 //             return cityMatch && priceMatch;
 //         });
@@ -101,7 +101,7 @@
 //                             key={listing._id}
 //                             title={listing.title}
 //                             description={listing.description}
-//                             price={listing.price}
+//                             price={listing.price_Per_Person}
 //                             imageUrl={listing.imageUrl}
 //                         />
 //                     ))
@@ -175,14 +175,14 @@ const Listings = () => {
         setFilteredListings(data);
 
         // Extract unique cities from data
-        const uniqueCities = [...new Set(data.map((listing) => listing.city))];
+        const uniqueCities = [...new Set(data.map((listing) => listing.City))];
         setCities(uniqueCities);
         const uniqueservice = [
-          ...new Set(data.map((listing) => listing.serviceType)),
+          ...new Set(data.map((listing) => listing.service_type)),
         ];
         setserviceTypes(uniqueservice);
         const uniqueVservice = [
-          ...new Set(data.map((listing) => listing.venueType)),
+          ...new Set(data.map((listing) => listing.venue_type)),
         ];
         setvenueTypes(uniqueVservice);
         const uniqueCservice = [
@@ -199,20 +199,20 @@ const Listings = () => {
 
   useEffect(() => {
     const filtered = listings.filter((listing) => {
-      const cityMatch = selectedCity ? listing.city === selectedCity : true;
+      const cityMatch = selectedCity ? listing.City === selectedCity : true;
       const priceMatch = selectedPrice
         ? selectedPrice === "201"
-          ? listing.price > 200
-          : listing.price <= parseInt(selectedPrice)
+          ? listing.price_Per_Person > 200
+          : listing.price_Per_Person <= parseInt(selectedPrice)
         : true;
       const serviceTypeMatch = selectedServiceType
-        ? listing.serviceType === selectedServiceType
+        ? listing.service_type === selectedServiceType
         : true;
       // Only apply venueType filter if the service type is "venue"
       const venueTypeMatch =
         selectedServiceType === "venue"
           ? selectedVenueType
-            ? listing.venueType === selectedVenueType
+            ? listing.service_type === selectedVenueType
             : true
           : true;
 
@@ -220,7 +220,7 @@ const Listings = () => {
       const cateringTypeMatch =
         selectedServiceType === "catering"
           ? selectedCateringType
-            ? listing.cateringType === selectedCateringType
+            ? listing.service_type === selectedCateringType
             : true
           : true;
       return (
@@ -390,8 +390,8 @@ const Listings = () => {
               <Listing
                 title={listing.title}
                 description={listing.description}
-                price={listing.price}
-                imageUrl={listing.imageUrl}
+                price={listing.price_Per_Person}
+                imageUrl={listing.imageUrl[0]}
               />
             </Link>
           ))
