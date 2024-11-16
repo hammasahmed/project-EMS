@@ -14,7 +14,6 @@ const CustomerDB = () => {
         return <VDB_mylistings />;
       case 'Search':
         return <VDB_bookings />;
-      
       case 'Setting':
         return <VDB_profile />;
       default:

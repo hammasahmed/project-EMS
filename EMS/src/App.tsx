@@ -17,11 +17,11 @@ import BookingForm from "./components/BookingForm";
 import CateringForm from "./components/CateringForm";
 import UserDashboard from "./pages/UserDashboard";
 import Add_listings from './components/VDB_addlistings'
-import Payment from './pages/payment'
+// import Payment from './pages/payment'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-
 import CustomerDB from './pages/customerDB'
+import User_bookings from "./components/User_bookings";
+import Payment from './pages/payment'
 
 function App() {
   // x
@@ -52,6 +52,8 @@ function App() {
           <Route path="/customerdb" element={<CustomerDB />} />
           <Route path="/UserDashboard" element={<UserDashboard />} />
           <Route path="/add_listings" element={<Add_listings />} />
+          <Route path="/User_bookings" element={<User_bookings />} />
+          {/* <Route path="/Payment" element={<Payment />} /> */}
           <Route path="/payment" element={<Payment />} />
         </Routes>
       </Router>

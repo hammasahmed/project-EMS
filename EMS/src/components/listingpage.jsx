@@ -163,9 +163,10 @@ const ListingsPage = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                setLoading(true);
-                const response = await fetch('http://localhost:5000/listings/');
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const response = await fetch('http://localhost:5000/listings');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 const data = await response.json();
                 console.log(data)
                 setListings(data);

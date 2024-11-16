@@ -3,17 +3,15 @@ import React from 'react'
 import {useState,useEffect} from 'react'
 // import {axios} from 'axios'
 
-const VDB_bookings = ({setComponent}) => {
-  const userid = localStorage.getItem('userId');
-  console.log(userid)
+const User_bookings = ({setComponent}) => {
+//   const userid = localStorage.getItem('userId');
+const customerId = localStorage.getItem('id')
+  console.log(customerId)
   const [data, setData] = useState([]);
 
-  const [formData, setFormData] = useState({
-    price: "",
-    remarks: ""   
-  });
+ 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/bookings/${userid}`,) 
+    fetch(`http://localhost:5000/api/bookings/data/${customerId}`,) 
       .then((response) => response.json())
       .then((data) => {
         setData(data); // Set the data in state
@@ -24,28 +22,14 @@ const VDB_bookings = ({setComponent}) => {
       console.log(data)
   },[] );
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    console.log(name,value)
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
   // Handler for when the Accept button is clicked
-  const handleClick = (object) => {
-    const del  = data.filter((d) => d._id !== object._id)
-    setData(del)
-  };
-
   // Handler for when the Reject button is clicked
  
 
   const submitHandler = (booking_id)=>{
     // e.preventDefault();
     console.log(booking_id)
-    axios.put(`http://localhost:5000/api/bookings/data/${booking_id}`, formData)
+    axios.post(`http://localhost:5000/transactions}`, formData)
     .then((response) => {
         console.log("Booking updated:", response.data);
     })
@@ -58,7 +42,7 @@ const VDB_bookings = ({setComponent}) => {
   return (
     <div className='flex justify-start flex-col h-fit m-auto '>
       <h1 className="border-2 border-black m-0 p-0">My Bookings</h1>
-      {
+      { 
         data.map((item, index) => (
           <div key={index} className="flex flex-col rounded-lg">
             <div className="w-full rounded-xl mt-8 border-[1px] shadow-lg m-auto">
@@ -323,8 +307,9 @@ const VDB_bookings = ({setComponent}) => {
               <input
                 type="text"
                 name='price'
+                value={item.price}
                 className={input_styling} 
-                onChange={handleChange}
+                disabled
                 
                 // required
               />
@@ -332,8 +317,9 @@ const VDB_bookings = ({setComponent}) => {
               <label className={label_styling} htmlFor='remarks'>Remarks</label>
               <textarea type ="text "
                name='remarks'
-                className="mt-2 block h-[100px] w-[100%] px-3 py-2 border-2 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                onChange={handleChange} /></div>
+               value ={item.remarks}
+               className="mt-2 block h-[100px] w-[100%] px-3 py-2 border-2 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                 /></div>
             </div>
           
             </div>
@@ -341,25 +327,11 @@ const VDB_bookings = ({setComponent}) => {
             <button
               className=" py-2 w-32  mt-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
               type='button'
-              onClick={()=>{
-                submitHandler(item._id);
-                handleClick(item);
-              }}                 
+              onClick={handlePayment}                 
             >
-              Accept 
+              Pay Now
             </button>
-            <button
-              type="button"
-              // value = {item.status}
-              onClick={() =>{
-                submitHandler(item._id);
-                handleClick(item);
-              }
-              }
-              className=" py-2 w-32  mt-3 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-200"
-                >
-              Reject
-            </button>
+          
             </div>
             </>
           </form>
@@ -370,9 +342,9 @@ const VDB_bookings = ({setComponent}) => {
 
           </div>
         ))
-      }
+}
     </div>
   )
 }
 
-export default VDB_bookings
+export default User_bookings

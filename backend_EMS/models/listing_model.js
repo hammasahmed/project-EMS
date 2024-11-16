@@ -39,8 +39,6 @@
 // // Export the model
 // export default listing;
 
-
-
 // import mongoose from 'mongoose';
 
 // const menuItemSchema = new mongoose.Schema({
@@ -93,19 +91,16 @@
 // const listing = mongoose.model('listings', listingSchema);
 // export default listing;
 
-
-
-import mongoose from 'mongoose';
-import user from './user_model.js';
+import mongoose from "mongoose";
+import user from "./user_model.js";
 
 const reviewSchema = new mongoose.Schema({
   reviewer_name: { type: String, required: true },
   rating: { type: Number, min: 1, max: 5, required: true }, // Rating between 1 and 5
-  review_content: { type: String, required: true }
-  
+  review_content: { type: String, required: true },
 });
 
-const menuItemSchema = new mongoose.Schema({
+const MenuSchema = new mongoose.Schema({
   menu_name: { type: String },
   starters: { type: String },
   mainCourses: { type: String },
@@ -113,57 +108,39 @@ const menuItemSchema = new mongoose.Schema({
   breads: { type: String },
   desserts: { type: String },
   beverages: { type: String },
-  menu_price: { type: Number }
+  menu_price: { type: String },
 });
-
-const MenuSchema = new mongoose.Schema({
-  menu_name: { type: String},
-  starters: { type: String },
-  mainCourses: { type: String},
-  grilledItems: { type: String},
-  breads: { type: String, },
-  desserts: { type: String },
-  beverages: { type: String},
-  menu_price: { type: String}
-}, { _id: false})
-
 
 const listingSchema = new mongoose.Schema({
   // _id: { type: String },
-  vendor_id: { type:String},
+  vendor_id: { type: String },
   title: { type: String },
   description: { type: String },
   address: { type: String },
-  City: { type: String },  // Removed enum constraint
-  service_type: { type: String },  // Removed enum constraint
-  venue_type: { type: String },  // Removed enum and required constraints
-  event_type: { type: String },  // Removed required constraint
-  seating_capacity: { type: Number },  // Removed min constraint
-  sitting_arrangement: { type: String },  // Removed required constraint
-  lighting_type: { type: String },  // Removed enum and required constraints
-  ServingType: { type: String },  // Removed enum constraint
-  VIP_seats: { type: Number },  // Removed min constraint
-  Inbond_catering: { type: String },  // Removed enum constraint
+  City: { type: String }, // Removed enum constraint
+  service_type: { type: String }, // Removed enum constraint
+  venue_type: { type: String }, // Removed enum and required constraints
+  event_type: { type: String }, // Removed required constraint
+  seating_capacity: { type: Number }, // Removed min constraint
+  sitting_arrangement: { type: String }, // Removed required constraint
+  lighting_type: { type: String }, // Removed enum and required constraints
+  ServingType: { type: String }, // Removed enum constraint
+  VIP_seats: { type: Number }, // Removed min constraint
+  Inbond_catering: { type: String }, // Removed enum constraint
   outdoor_catering: { type: String },
   projector: { type: String },
   wifi: { type: String },
   ac_heating: { type: String },
-  parking: { type: Number },  // Removed min constraint
-  serving_capacity: { type: Number },  // Removed min constraint
+  parking: { type: Number }, // Removed min constraint
+  serving_capacity: { type: Number }, // Removed min constraint
   crockery: { type: String },
   serving_staff: { type: String },
-  ground_type: { type: [String] },  // Removed enum constraint
-  price_Per_Person: { type: Number },  // Removed min constraint
+  ground_type: { type: [String] }, // Removed enum constraint
+  price_Per_Person: { type: Number }, // Removed min constraint
   imageUrl: { type: [String] },
-  menu:[{type:MenuSchema}],
-  reviews: [reviewSchema]
+  menu: [MenuSchema],
+  reviews: [reviewSchema],
 });
 
-
-
-const listing = mongoose.model('listings', listingSchema);
+const listing = mongoose.model("listings", listingSchema);
 export default listing;
-
-
-
-

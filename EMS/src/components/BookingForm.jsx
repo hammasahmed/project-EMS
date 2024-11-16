@@ -8,11 +8,12 @@ function BookingForm() {
   const location = useLocation();
   const data = location.state;
   const vendor_id = data.vendor_id;
-  console.log(data.vendor_id);
-
+  const listings_id = data._id;
   const role = localStorage.getItem('role');
   const customerId = localStorage.getItem('id');
-  console.log(customerId)
+  console.log("cutomerid",customerId)
+  console.log("vendor",data.vendor_id);
+  console.log("listings",data._id)
   const booleanOptions = ["Select Option", "Yes", "No"];
   const options = [
     "Select Option",
@@ -57,26 +58,33 @@ function BookingForm() {
   ];
   const services = ["Select Option", "Self Service", "Platter"];
   const [formData, setFormData] = useState({
-    customer_id: customerId,
-    listings_id: data.id,
+    customer_id:customerId,
+    vendor_id:data.vendor_id,
+    listings_id:data._id,
     name: "",
     start_time: "",
     end_time: "",
+    city:data.City,
+    service:data.service_type,
     event_type: "",
     persons: "",
     date: "",
     phone: "",
     parking: "",
-    ground_type: "",
-    sitting_arrangement: "",
-    lighting_type: "",
-    VIP_seats: "",
-    projector: "",
-    wifi: "",
-    ac_heating: "",
-    catering: "",
-    table_services: "",
+    ground_type: "Nil",
+    sitting_arrangement: "Nil",
+    lighting_type: "Nil",
+    VIP_seats: "Nil",
+    projector: "Nil",
+    wifi: "Nil",
+    ac_heating: "Nil",
+    catering: "Nil",
+    table_services: "Nil",
+    menu: '',
+    price: "",
+    remarks:""
   });
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -86,9 +94,9 @@ function BookingForm() {
     });
   };
 
-  const businessLogic = () => {};
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
+    console.log(formData);
     event.preventDefault();
     try {
       axios.post("http://localhost:5000/api/bookings", formData) .then((response) => {
@@ -100,7 +108,7 @@ function BookingForm() {
     }
     // console.log("Submitted data", formData);
   };
-
+ 
   return (
     <div
       className=" border-2 border-black align-center h-[140vh] "
@@ -252,7 +260,7 @@ function BookingForm() {
 
             {/* Parking Capacity */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {data?.venueType == "Venue" ? (
+              {data?.service_type == "Venue" ? (
                 <>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
@@ -297,8 +305,8 @@ function BookingForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {data?.serviceType == "Venue" &&
-              data?.venueType == "Sports Arena" ? (
+              {data?.service_type == "Venue" &&
+              data?.venue_type == "Sports Arena" ? (
                 <>
                   {/* Ground Type */}
                   <div>
@@ -363,9 +371,9 @@ function BookingForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {data?.serviceType == "Venue" &&
-              (data?.venueType == "Banquet Hall" ||
-                data?.venueType == "Marquee") ? (
+              {data?.service_type == "Venue" &&
+              (data?.venue_type == "Banquet Hall" ||
+                data?.venue_type == "Marquee") ? (
                 <>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
@@ -415,8 +423,8 @@ function BookingForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {data?.serviceType == "venue" &&
-              data?.venueType == "Conference Hall" ? (
+              {data?.service_type == "Venue" &&
+              data?.venue_type == "Conference Hall" ? (
                 <>
                   {/* projector */}
                   <div>
@@ -467,10 +475,10 @@ function BookingForm() {
               )}
 
               {/* AC/ heating */}
-              {data?.serviceType == "venue" &&
-              (data?.venueType == "Banquet Hall" ||
-                data?.venueType == "Marquee" ||
-                data?.venueType == "Conference Hall") ? (
+              {data?.service_type == "Venue" &&
+              (data?.venue_type == "Banquet Hall" ||
+                data?.venue_type == "Marquee" ||
+                data?.venue_type == "Conference Hall") ? (
                 <>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">

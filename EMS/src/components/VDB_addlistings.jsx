@@ -21,14 +21,13 @@ function VDB_addlistings(prop) {
 
   const venueOptions = [
     "Venue Type",
-    "sports_arena",
-    "banquet_hall",
-    "marquee",
-    "conference_hall",
-    "hotel",
+    "Sports Arena",
+    "Banquet Hall",
+    "Marquee",
+    "Conference Hall",
   ];
 
-  const ServingType = ["Select Option", "", "Self-Serving", "Full-Serving"];
+  const ServingType = ["Select Option", "Self-Serving", "Full-Serving"];
 
   const City = [
     "Select Option",
@@ -298,14 +297,16 @@ function VDB_addlistings(prop) {
     Price_Per_Person: "",
     imageUrl: [],
     menu: [
-      { menu_name: "" },
-      { starters: "" },
-      { mainCourses: "" },
-      { grilledItems: "" },
-      { breads: "" },
-      { desserts: "" },
-      { beverages: "" },
-      { menu_price: "" },
+      {
+        menu_name: "",
+        starters: "",
+        mainCourses: "",
+        grilledItems: "",
+        breads: "",
+        desserts: "",
+        beverages: "",
+        menu_price: "",
+      },
     ],
   });
   const menuOptions = [
@@ -320,40 +321,49 @@ function VDB_addlistings(prop) {
       menu_price: "",
     },
   ];
-  //  {optionIndex==2 ?():""}
-  const optionArray = [
-    "menu_name",
-    "starters",
-    "mainCourses",
-    "grilledItems",
-    "breads",
-    "desserts",
-    "beverages",
-    "menu_price",
-  ];
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
   const [menuItems, setMenuItems] = useState(menuOptions);
 
-  const handleMenuevent = () => {
-    const newMenuItems = [];
-  };
-
-  const handleMenuChange = (index_array, index_object, event) => {
+ 
+  const handleMenuChange = (menuIndex, event) => {
     const { name, value } = event.target;
-    console.log(name, value, index_array, index_object);
-    const updatedMenu = [...formData.menu];
-    console.log(updatedMenu);
-    updatedMenu[index_object] = { ...updatedMenu[index_object], [name]: value };
-    setFormData({ ...formData, menu: updatedMenu });
-    console.log(updatedMenu);
-    // formData.name[index]
+
+    setFormData((prevData) => {
+      const updatedMenu = [...prevData.menu];
+      updatedMenu[menuIndex] = {
+        ...updatedMenu[menuIndex],
+        [name]: value, // Update the specific category with the new value
+      };
+      console.log(updatedMenu);
+      return { ...prevData, menu: updatedMenu };
+    });
+    // console.log(name, value, index_array, index_object);
+    // const updatedMenu = [...formData.menu];
+    // console.log(updatedMenu);
+    // updatedMenu[index_object] = { ...updatedMenu[index_object], [name]: value };
+    // setFormData({ ...formData, menu: updatedMenu });
+    // console.log(updatedMenu);
   };
   const addMenuItem = () => {
+    // setMenuItems([...menuItems, menuOptions]);
+    // console.log(menuItems);
     setMenuItems([...menuItems, menuOptions]);
-    console.log(menuItems);
+    setFormData((prevData) => ({
+      ...prevData,
+      menu: [
+        ...prevData.menu,
+        {
+          menu_name: "",
+          starters: "",
+          mainCourses: "",
+          grilledItems: "",
+          breads: "",
+          desserts: "",
+          beverages: "",
+          menu_price: "",
+        },
+      ],
+    }));
   };
 
   const removeMenuItem = (index) => {
@@ -366,7 +376,7 @@ function VDB_addlistings(prop) {
   // };
 
   // Remove an image from the preview
-  const [imageInputs, setImageInputs] = useState([]);
+  // const [imageInputs, setImageInputs] = useState([]);
 
   const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
@@ -403,9 +413,9 @@ function VDB_addlistings(prop) {
     });
   };
 
-  const handleRemoveImage = (index) => {
-    setSelectedImages(selectedImages.filter((_, i) => i !== index));
-  };
+  // const handleRemoveImage = (index) => {
+  //   setSelectedImages(selectedImages.filter((_, i) => i !== index));
+  // };
 
   const handleUpload = async () => {
     // You may want to compress images here if needed
@@ -431,13 +441,13 @@ function VDB_addlistings(prop) {
   };
 
   // Function to handle adding a new time slot
-  const addTimeSlot = () => {
-    if (startTime && endTime) {
-      setTimeSlots([...timeSlots, { start: startTime, end: endTime }]);
-      setStartTime(""); // Reset inputs after adding
-      setEndTime("");
-    }
-  };
+  // const addTimeSlot = () => {
+  //   if (startTime && endTime) {
+  //     setTimeSlots([...timeSlots, { start: startTime, end: endTime }]);
+  //     setStartTime(""); // Reset inputs after adding
+  //     setEndTime("");
+  //   }
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -524,10 +534,11 @@ function VDB_addlistings(prop) {
                   className="border-2 h-10 rounded-xl pl-4 w-[100%] my-[2%]"
                   name="ServingType"
                   value={formData.ServingType}
+                  onChange={handleChange}
                 >
                   {ServingType.map((type, index) => (
                     <option key={index} value={type}>
-                      {type || "Select Serving Type"}
+                      {type}
                     </option>
                   ))}
                 </select>
@@ -797,9 +808,220 @@ function VDB_addlistings(prop) {
               )}
               <div className="">
                 <h2>Create Your Menu</h2>
-                {menuItems.map((_, index) => (
+                {menuItems.map((object, index) => (
                   <div key={index} className="menu-item flex flex-wrap">
-                    {optionArray.map((option, optionIndex) => (
+                    <input
+                      type="text"
+                      name="menu_name"
+                      placeholder="Menu Name"
+                      value={formData.menu[index]["menu_name"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="starters"
+                      placeholder="Starters"
+                      value={formData.menu[index]["starters"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+
+                    <input
+                      type="text"
+                      name="mainCourses"
+                      placeholder="Main Courses"
+                      value={formData.menu[index]["mainCourses"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+
+                    <input
+                      type="text"
+                      name="grilledItems"
+                      placeholder="Grilled Items"
+                      value={formData.menu[index]["grilledItems"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+
+                    <input
+                      type="text"
+                      name="breads"
+                      placeholder="Breads"
+                      value={formData.menu[index]["breads"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+
+                    <input
+                      type="text"
+                      name="desserts"
+                      placeholder="Desserts"
+                      value={formData.menu[index]["desserts"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <input
+                      type="text"
+                      name="beverages"
+                      placeholder="Beverages"
+                      value={formData.menu[index]["beverages"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <input
+                      type="number"
+                      name="menu_price"
+                      placeholder="Menu Price"
+                      value={formData.menu[index]["menu_price"]}
+                      className={menu_styling}
+                      onChange={(e) => handleMenuChange(index, e)}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeMenuItem(index)}
+                      className=" bg-red-600 p-1 w-[90%] my-2 m-auto rounded-md text-white"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+               
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={addMenuItem}
+                    className="bg-green-600 rounded-md p-2 mr-[2%] mt-3 "
+                  >
+                    Add Menu
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className=" gap-4 mb-4">
+              <div className="flex flex-col">
+                <label>
+                  Your {formData.service_type} is suitalbe for following type of
+                  events:
+                </label>
+                <input
+                  type="text"
+                  placeholder="wedding, birthday party, conferences, etc..."
+                  name="event_type"
+                  value={formData.event_type}
+                  onChange={handleChange}
+                />
+              </div>
+
+              {formData.service_type === "Venue" && (
+                <div className="flex flex-col">
+                  <label>
+                    Sitting Arrangement you can provide for{" "}
+                    {formData.venue_type}:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="u-shaped,round tables, banqueet etc..."
+                    name="sitting_arrangement"
+                    value={formData.sitting_arrangement}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
+            </div>
+
+            {formData.service_type === "Venue" && (
+              <div className="flex flex-col gap-4 mb-4">
+                <label>Lighting Quality</label>
+                <select
+                  name="lighting_type"
+                  value={formData.lighting_type}
+                  id=""
+                  onChange={handleChange}
+                >
+                  {lighting.map((e, index) => {
+                    return (
+                      <option key={index} value={e}>
+                        {e}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            )}
+            <div className="w-[80%]">
+              <label>Detailed Description:</label>
+              <div>
+                <textarea
+                  className="w-[90%] border-4"
+                  type="text"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="image-upload-container mt-3">
+              <p className="mb-3">You can Add 4 pictures</p>
+              <label
+                htmlFor="file_upload"
+                className=" w-fit bg-blue-500 p-2 rounded-lg text-white"
+              >
+                Add Images
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  id="file_upload"
+                  name="imageUrl"
+                  className="hidden"
+                  // value={formData.imageUrl}
+                />
+              </label>
+              <div className="flex justify-around image-preview mt-3 rounded-md">
+                {selectedImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="image-preview-item border-[1px] border-black"
+                  >
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Preview ${index + 1}`}
+                      className="preview-thumbnail h-[150px] w-[150px] "
+                    />
+                    {/* <button
+                      onClick={() => handleRemoveImage(index)}
+                      className="py-2 px-5 w-full bg-blue-500 text-white  hover:bg-blue-600 transition duration-200"
+                    >
+                      Remove
+                    </button> */}
+                  </div>
+                ))}
+              </div>
+              {/* <button onClick={handleUpload}>Upload Images</button> */}
+            </div>
+            <button
+              type="submit"
+              className=" py-2 px-5 ml-[85%] bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default VDB_addlistings;
+
+
+
+
+                    {/* {optionArray.map((option, optionIndex) => (
                       <>
                         {optionIndex == 0 ? (
                           <input
@@ -916,142 +1138,6 @@ function VDB_addlistings(prop) {
                           ""
                         )}
                       </>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => removeMenuItem(index)}
-                      className=" bg-red-600 p-1 w-[90%] my-2 m-auto rounded-md text-white"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-                <div className="flex justify-end">
-                  <button
-                    type="button"
-                    onClick={addMenuItem}
-                    className="bg-green-600 rounded-md p-2 mr-[2%] mt-3 "
-                  >
-                    Add Menu
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className=" gap-4 mb-4">
-              <div className="flex flex-col">
-                <label>
-                  Your {formData.service_type} is suitalbe for following type of
-                  events:
-                </label>
-                <input
-                  type="text"
-                  placeholder="wedding, birthday party, conferences, etc..."
-                  name="event_type"
-                  value={formData.event_type}
-                  onChange={handleChange}
-                />
-              </div>
-
-              {formData.service_type === "Venue" && (
-                <div className="flex flex-col">
-                  <label>
-                    Sitting Arrangement you can provide for{" "}
-                    {formData.venue_type}:
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="u-shaped,round tables, banqueet etc..."
-                    name="sitting_arrangement"
-                    value={formData.sitting_arrangement}
-                    onChange={handleChange}
-                  />
-                </div>
-              )}
-            </div>
-
-            {formData.service_type === "Venue" && (
-              <div className="flex flex-col gap-4 mb-4">
-                <label>Lighting Quality</label>
-                <select
-                  name="lighting_type"
-                  value={formData.lighting_type}
-                  id=""
-                  onChange={handleChange}
-                >
-                  {lighting.map((e, index) => {
-                    return (
-                      <option key={index} value={e}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            )}
-            <div className="w-[80%]">
-              <label>Detailed Description:</label>
-              <div>
-                <textarea
-                  className="w-[90%] border-4"
-                  type="text"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="image-upload-container mt-3">
-              <p className="mb-3">You can Add 4 pictures</p>
-              <label
-                htmlFor="file_upload"
-                className=" w-fit bg-blue-500 p-2 rounded-lg text-white"
-              >
-                Add Images
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  id="file_upload"
-                  name="imageUrl"
-                  className="hidden"
-                  // value={formData.imageUrl}
-                />
-              </label>
-              <div className="flex justify-around image-preview mt-3 rounded-md">
-                {selectedImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className="image-preview-item border-[1px] border-black"
-                  >
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt={`Preview ${index + 1}`}
-                      className="preview-thumbnail h-[150px] w-[150px] "
-                    />
-                    <button
-                      onClick={() => handleRemoveImage(index)}
-                      className="py-2 px-5 w-full bg-blue-500 text-white  hover:bg-blue-600 transition duration-200"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <button onClick={handleUpload}>Upload Images</button>
-            </div>
-            <button
-              type="submit"
-              className=" py-2 px-5 ml-[85%] bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default VDB_addlistings;
+                    )
+                    )
+                    } */}
