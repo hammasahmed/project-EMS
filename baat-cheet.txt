@@ -1,0 +1,76 @@
+For Card Payment this json request data is used
+
+{
+    "pp_IsRegisteredCustomer": "Yes",
+    "pp_ShouldTokenizeCardNumber": "No",
+    "pp_CustomerID": "test",
+    "pp_CustomerEmail": "test@test.com",
+    "pp_CustomerMobile": "03222852628",
+    "pp_TxnType": "MPAY",
+    "pp_TxnRefNo": "T20190508094416",
+    "pp_MerchantID": "MC137527",
+    "pp_Password": "",
+    "pp_Amount": "10",
+    "pp_TxnCurrency": "PKR",
+    "pp_TxnDateTime": "20190508094416",
+    "pp_C3DSecureID": "",
+    "pp_TxnExpiryDateTime": "20190509094416",
+    "pp_BillReference": "billRef",
+    "pp_Description": "Description of transaction",
+    "pp_CustomerCardNumber": "",
+    "pp_CustomerCardExpiry": "1120",
+    "pp_CustomerCardCvv": "111",
+    "pp_SecureHash": ""
+}
+
+
+for direct Payment
+{
+  "pp_CustomerID": "25352",
+  "pp_CustomerEmail": "abc@abc.com",
+  "pp_CustomerMobile": "",
+  "pp_Version": "1.1",
+  "pp_TxnType": "MPAY",
+  "pp_TxnRefNo": "T20221127181230",
+  "pp_MerchantID": "",
+  "pp_Password": "",
+  "pp_Amount": "20000",
+  "pp_TxnCurrency": "PKR",
+  "pp_TxnDateTime": "20221110140406",
+  "pp_TxnExpiryDateTime": "20221117140406",
+  "pp_BillReference": "billRef",
+  "pp_Description": "Description of transaction",
+  "pp_CustomerCardNumber": "5123456789012346",
+  "pp_CustomerCardCVV": "123",
+  "pp_CustomerCardExpiry": "12/22",
+  "pp_SecureHash": "",
+  "pp_DiscountedAmount": "",
+  "pp_DiscountBank": "",
+  "pp_UsageMode": "API"
+}
+
+// For Mobile Account this JSON dat  is used
+{
+  "pp_Version": "1.1",
+  "pp_TxnType": "MWALLET",
+  "pp_Language": "EN",
+  "pp_MerchantID": "Merc0003",
+  "pp_SubMerchantID": "",
+  "pp_Password": "0123456789",
+  "pp_BankID": "",
+  "pp_ProductID": "",
+  "pp_TxnRefNo": "",
+  "pp_Amount": "10000",
+  "pp_TxnCurrency": "PKR",
+  "pp_TxnDateTime": "",
+  "pp_BillReference": "billref",
+  "pp_Description": "Description of transaction",
+  "pp_TxnExpiryDateTime": "",
+  "pp_ReturnURL": "http://localhost/MerchantSimulator/HttpRequestDemoServer/Index",
+  "pp_SecureHash": "",
+  "ppmpf_1": "",
+  "ppmpf_2": "",
+  "ppmpf_3": "",
+  "ppmpf_4": "",
+  "ppmpf_5": ""
+}
