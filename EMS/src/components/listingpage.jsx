@@ -112,25 +112,54 @@
 
 // export default ListingsPage;
 import React, { useEffect, useState } from 'react';
-import Listing from './listing';
+import Listing from './listing.jsx';
 import ReactPaginate from 'react-paginate';
+import { useLocation } from 'react-router-dom';
+
+// Reusable Dropdown Component
+const Dropdown = ({ id, label, value, onChange, options }) => (
+    <div>
+        <label htmlFor={id} className="text-sm font-medium text-gray-700 p-3">{label}</label>
+        <select
+            id={id}
+            value={value}
+            onChange={onChange}
+            className="w-80 p-2 border border-gray-300 rounded-md"
+        >
+            {options.map(option => (
+               <option 
+               key={option.value || option} 
+               value={option.value || option}
+           >
+               {option.label || option}
+           </option>
+            ))}
+        </select>
+    </div>
+);
 
 const ListingsPage = () => {
     const [listings, setListings] = useState([]);
     const [filteredListings, setFilteredListings] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage] = useState(10);
-    const [selectedCity, setSelectedCity] = useState('');
-    const [selectedPrice, setSelectedPrice] = useState('');
+    const [filters, setFilters] = useState({ city: '', price: '' });
     const [cities, setCities] = useState([]);
-    const [priceRanges] = useState([
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const priceRanges = [
         { label: 'Any', value: '' },
         { label: 'Under $50', value: '50' },
         { label: '$50 - $100', value: '100' },
         { label: '$100 - $200', value: '200' },
         { label: 'Over $200', value: '201' }
-    ]);
+    ];
 
+    const location = useLocation();
+    const { name } = location.state || {};
+    console.log(cities)
+    // Fetch Listings
     useEffect(() => {
         const fetchListings = async () => {
             try {
@@ -139,74 +168,76 @@ const ListingsPage = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
+                console.log(data)
                 setListings(data);
                 setFilteredListings(data);
 
-                // Extract unique cities from data
-                const uniqueCities = [...new Set(data.map(listing => listing.city))];
+                // Extract unique cities
+                const uniqueCities = [...new Set(data.map(listing => listing.City))];
+                console.log(uniqueCities);
                 setCities(uniqueCities);
+                data.forEach((listing, index) => {
+                    console.log(`Listing ${index}:`, listing);
+                });
             } catch (error) {
-                console.error('Error fetching listings:', error);
+                setError('Failed to fetch listings. Please try again later.');
+                console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchListings();
     }, []);
 
+    // Apply Filters
     useEffect(() => {
         const filtered = listings.filter(listing => {
-            const cityMatch = selectedCity ? listing.city === selectedCity : true;
-            const priceMatch = selectedPrice ? 
-                (selectedPrice === '201' ? listing.price > 200 : listing.price <= parseInt(selectedPrice)) : true;
-            
+            const cityMatch = filters.city ? listing.City === filters.city : true;
+            const priceMatch = filters.price
+                ? (filters.price === '201' ? +listing.price > 200 : +listing.price <= parseInt(filters.price))
+                : true;
             return cityMatch && priceMatch;
         });
 
         setFilteredListings(filtered);
-        setCurrentPage(0); // Reset to first page when filtering
-    }, [selectedCity, selectedPrice, listings]);
+        setCurrentPage(0); // Reset to first page when filters change
+    }, [filters, listings]);
 
+    // Pagination Logic
     const indexOfLastListing = (currentPage + 1) * itemsPerPage;
     const indexOfFirstListing = indexOfLastListing - itemsPerPage;
     const currentListings = filteredListings.slice(indexOfFirstListing, indexOfLastListing);
 
-    const handlePageChange = (selectedPage) => {
-        setCurrentPage(selectedPage.selected);
-    };
+    const handlePageChange = ({ selected }) => setCurrentPage(selected);
 
+    if (loading) return <p>Loading listings...</p>;
+    if (error) return <p className="text-red-700">{error}</p>;
+    console.log(options);
     return (
-        <div> 
-            <div className="flex gap-8  flex-wrap my-[10vh] ">
-                <div className=''>
-                    <label htmlFor="city" className=" text-sm font-medium text-gray-700 p-3 ">City</label>
-                    <select
-                        id="city"
-                        value={selectedCity}
-                        onChange={(e) => setSelectedCity(e.target.value)}
-                        className="w-80 p-2 border border-gray-300 rounded-md"
-                    >
-                        <option value="">All Cities</option>
-                        {cities.map(city => (
-                            <option key={city} value={city}>{city}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div>
-                    <label htmlFor="price" className=" text-sm font-medium text-gray-700 p-4">Price</label>
-                    <select
-                        id="price"
-                        value={selectedPrice}
-                        onChange={(e) => setSelectedPrice(e.target.value)}
-                        className="w-80 p-2 border border-gray-300 rounded-md"
-                    >
-                        {priceRanges.map(range => (
-                            <option key={range.value} value={range.value}>{range.label}</option>
-                        ))}
-                    </select>
-                </div>
+        <div>
+            {name && <h1 className="text-3xl font-bold mb-4">Welcome, {name}!</h1>}
+            
+            <div className="flex gap-8 flex-wrap my-[10vh]">
+                {/* City Filter */}
+                <Dropdown
+    id="city"
+    label="City"
+    value={selectedCity}
+    onChange={(e) => setSelectedCity(e.target.value)}
+    options={['All Cities', ...cities]} // Assuming `cities` is a list of strings
+/>
+                {/* Price Filter */}
+                <Dropdown
+                    id="price"
+                    label="Price"
+                    value={filters.price}
+                    onChange={e => setFilters({ ...filters, price: e.target.value })}
+                    options={priceRanges}
+                />
             </div>
 
+            {/* Listings Section */}
             <div className="listings-page flex flex-wrap justify-evenly bg-black">
                 {currentListings.length > 0 ? (
                     currentListings.map(listing => (
@@ -219,10 +250,11 @@ const ListingsPage = () => {
                         />
                     ))
                 ) : (
-                    <p className="col-span-3 text-center text-red-700">No listings found</p>
+                    <p className="text-center text-red-700">No listings found</p>
                 )}
             </div>
 
+            {/* Pagination */}
             <ReactPaginate
                 previousLabel={'← Previous'}
                 nextLabel={'Next →'}
@@ -247,3 +279,4 @@ const ListingsPage = () => {
 };
 
 export default ListingsPage;
+
