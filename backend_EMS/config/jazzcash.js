@@ -32,27 +32,27 @@ const JC = {
     });
   },
 
-  refund: (data, callback) => {
-    Jazzcash.setData(data);
-    Jazzcash.createRequest('REFUND').then(res => {
-      res = JSON.parse(res);
-      console.log(res);
+  // refund: (data, callback) => {
+  //   Jazzcash.setData(data);
+  //   Jazzcash.createRequest('REFUND').then(res => {
+  //     res = JSON.parse(res);
+  //     console.log(res);
 
-      // callback function
-      callback(res);
-    });
-  },
+  //     // callback function
+  //     callback(res);
+  //   });
+  // },
 
-  inquiry: (data, callback) => {
-    Jazzcash.setData(data);
-    Jazzcash.createRequest('INQUIRY').then(res => {
-      res = JSON.parse(res);
-      console.log(res);
+  // inquiry: (data, callback) => {
+  //   Jazzcash.setData(data);
+  //   Jazzcash.createRequest('INQUIRY').then(res => {
+  //     res = JSON.parse(res);
+  //     console.log(res);
 
-      // callback function
-      callback(res);
-    });
-  },
+  //     // callback function
+  //     callback(res);
+  //   });
+  // },
 };
 
 export default JC;
