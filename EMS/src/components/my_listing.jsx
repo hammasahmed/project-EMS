@@ -566,10 +566,21 @@ const My_listing = () => {
     event.preventDefault();
     console.log(formData);
     try {
-      await axios.post(`http://localhost:5000/listings`, formData);
-      alert("Data submitted successfully!");
+      const response = await fetch('http://localhost:5000/listing/${listing._id}', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+    
+      if (response.ok) {
+        alert('Data submitted successfully!');
+      } else {
+        alert('Error submitting data');
+      }
     } catch (error) {
-      alert("Error submitting data");
+      alert('Error submitting data');
     }
   };
 
@@ -584,6 +595,7 @@ const My_listing = () => {
 
         const data = await response.json();
         setListings(data); // Set the fetched listings to state
+        console.log(data[0]._id)
       } catch (error) {
         console.error("Error fetching listings:", error);
       }
@@ -630,8 +642,9 @@ const My_listing = () => {
                           <input
                             type="text"
                             id="first-name"
-                            value={formData.title}
+                            // defaultValue={listing.title}
                             name="title"
+                            defaultValue={listing.title}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                             placeholder="Beautiful Marquee at my home"
                             onChange={handleChange}

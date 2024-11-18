@@ -80,7 +80,7 @@ router.post('/listings/:id/add-review', async (req, res) => {
     }
 
     // Find listing by ID and add a new review
-    const updatedListing = await Listing.findByIdAndUpdate(
+    const updatedListing = await listing.findByIdAndUpdate(
       id,
       {
         $push: {

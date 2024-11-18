@@ -315,7 +315,7 @@ const [reviews, setReviews] = useState([]);
               <div className="w-full md:w-[40%] p-[4%] mt-5">
                 <div className="flex flex-col justify-around p-5 mt-10 shadow-xl h-auto md:h-[300px] md:mt-5">
                   <div className="text-xl sm:text-2xl font-bold">
-                    Price: Starting From ${listing?.Price_Per_Person}
+                    Price: Starting From ${listing?.price_Per_Person}
                   </div>
                   <div className="text-lg">
                     <b>{listing?.service_type} Capacity:</b> {listing?.event_type=="Catering" ?<b>{listing?.serving_capacity}</b> :<b>{listing?.seating_capacity} </b>}Admi
