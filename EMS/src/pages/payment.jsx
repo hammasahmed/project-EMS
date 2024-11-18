@@ -1,32 +1,28 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import axios from "axios"
+import crypto from "crypto";
 
 function Payment() {
     const [form,formData] = useState([])
-    
-    const HandleSubmit = (e) => {
-      const {name,value} =e.target;
-    console.log(name,value)}
-    //   try{
-    //     axios.post("http://localhost:5000/api/payment").then((response) => {
-    //       console.log(response.data);
-    //     }).then((error) => console.error(error));
-    //   }catch (error) {
-    //     alert("Error", error);
-    //   }
-
-    // const submitForm = () => {
-    //   axios.post("https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Purchase/PAY").then((response) => {
-        
-    //   }).then((error) => console.error(error));
-    // }
+    const [color,SetColor] = useState("blue")
+    const HandleSubmit = () => {
+      try{
+        axios.post("http://localhost:5000/api/payment").then((response) => {
+          console.log(response.data);
+        }).then((error) => console.log(error));
+      }catch (error) {
+        alert("Error", error);
+      }
+    }
+   
+  
     const input_styling = "mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
   return (
     <div>
    <h1>Payment Page</h1>
      <button type="submit" className="bg-blue-500 mt-2 px-5 rounded-lg w-64 h-10"
       style={{ backgroundColor: {color} }}
-      onClick={()=> {SetColor("red");HandleSubmit()}}>JAZZ CASH Payment
+      onClick={HandleSubmit}>JAZZ CASH Payment
      </button>
      </div>
   )
