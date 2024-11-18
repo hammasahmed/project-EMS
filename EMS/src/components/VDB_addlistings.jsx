@@ -404,6 +404,7 @@ function VDB_addlistings(prop) {
         );
 
         const imageUrl = await res.json();
+        console.log(formData)
         //Convert the imageUrl object to an array in VDB_addlistings
         formData.imageUrl.push(imageUrl.url); //uncomment this line
         console.log(formData.imageUrl);
