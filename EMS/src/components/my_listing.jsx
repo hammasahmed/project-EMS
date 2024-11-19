@@ -562,27 +562,32 @@ const My_listing = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formData);
+  const handleSubmit = async ( listingId) => {
+    // Prevent form submission behavior
+
+    console.log('Form Data:', formData);
+
     try {
-      const response = await fetch('http://localhost:5000/listing/${listing._id}', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-    
-      if (response.ok) {
-        alert('Data submitted successfully!');
-      } else {
-        alert('Error submitting data');
-      }
+        const response = await fetch(`http://localhost:5000/update/${listingId}`, { // Corrected URL syntax
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData), // Ensure formData is properly initialized
+        });
+
+        if (response.ok) {
+            alert('Data submitted successfully!');
+        } else {
+            const errorData = await response.json();
+            alert(`Error submitting data: ${errorData.message || 'Unknown error'}`);
+        }
     } catch (error) {
-      alert('Error submitting data');
+        console.error('Error:', error);
+        alert('Error submitting data');
     }
-  };
+};
+
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -609,6 +614,40 @@ const My_listing = () => {
     setCurrentListing(currentListing && currentListing._id === listing._id ? null : listing);
   };
 
+
+  const handleDelete = async (listingId) => {
+    try {
+        // Send DELETE request to the backend using fetch
+        const response = await fetch(`http://localhost:5000/delete/${listingId}`, {
+            method: 'DELETE',  // HTTP method to delete
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        // Check if the request was successful
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.message); // Log the success message
+            alert('Document deleted successfully');
+            // Optionally, you can update the UI here (e.g., remove the item from the list)
+        } else {
+            
+            const data = await response.json();
+            console.error('Error:', data.message);
+            alert('Error deleting document');
+
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while deleting the document');
+    }
+};
+
+const handleDeleteClick = (object) => {
+  const del  = data.filter((d) => d._id !== object._id)
+  setListings(del)
+};
   return (
     <div>
       <h1>My Listings</h1>
@@ -619,12 +658,16 @@ const My_listing = () => {
               <img src={listing.imageUrl[0]} className='w-[10%]' alt="" />
               <h2>{listing.title}</h2>
               <p>{listing.description}</p>
+              <p>{listing._id}</p>
               <button
                 className='transition-all rounded-full p-2 bg-green-500 text-white m-1 w-[10%]'
                 onClick={() => toggleUpdateView(listing)}
               >
                 Update
               </button>
+              <button  onClick={() => {handleDelete(listing._id);
+                handleDeleteClick(listing);
+              }} className='transition-all rounded-full p-2 bg-red-500 text-white m-1 w-[10%]'>Delete</button>
 
               {/* Show the form if this listing is the current one being updated */}
               {currentListing && currentListing._id === listing._id && (
@@ -1214,9 +1257,9 @@ const My_listing = () => {
                       <button
                         type="submit"
                         className=" py-2 px-5 ml-[85%] bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
-                        onClick={handleSubmit}
+                        onClick={() =>handleSubmit(listing._id)}
                       >
-                        Submit
+                        Submit{}
                       </button>
                     </form>
                   </div>

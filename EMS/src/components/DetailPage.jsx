@@ -11,12 +11,13 @@ const Details = () => {
   const { id } = useParams(); // Get the ID from the URL
   const [listing, setListing] = useState(null);
   const {isAuthenticated,logout} = useContext(AuthContext);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  console.log(error)
 // State for the review form
 const [newReview, setNewReview] = useState({ name: "", comment: "", stars: 0 });
 const [reviews, setReviews] = useState([]);
-
+console.log(newReview)
   useEffect(() => {
     const fetchListing = async () => {
       //
@@ -28,12 +29,13 @@ const [reviews, setReviews] = useState([]);
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+
         console.log("Fetched data:", data);
         const foundListing = data.find((item) => item._id.toString() === id);
         
         console.log("Found listing:", foundListing);
         setListing(foundListing);
-       
+       setReviews(foundListing.reviews || []);
         console.log(token)
       } catch (error) {
         console.error("Error fetching listing details:", error);
@@ -64,37 +66,65 @@ const [reviews, setReviews] = useState([]);
   };
 
 
+  
 
     // Handle input changes for the review form
-  const handleReviewChange = (e) => {
-    const { name, value } = e.target;
-    setNewReview((prev) => ({ ...prev, [name]: value }));
-  };
+    const handleReviewChange = (e) => {
+    
+      const { name, value } = e.target;
+      
+      // For stars, ensure it’s a number and only if it’s a valid integer
+      if (name === 'stars') {
+        setNewReview((prev) => ({
+          ...prev,
+          [name]: value ? parseInt(value) : 0, // if there's no valid value, set it to 0
+        }));
+      } else {
+        setNewReview((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+    };
+    
 
   // Submit the review
   const submitReview = async (e) => {
     e.preventDefault();
+    const { name, comment, stars } = newReview;
+
+    // Basic validation
+    if (!name || !comment || stars <= 0) {
+      setError("All fields are required and stars must be greater than 0.");
+      return;
+    }
+
     try {
       const response = await fetch(`http://localhost:5000/listings/${id}/add-review`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(newReview),
       });
-      if (response.ok) {
-        const updatedListing = await response.json();
-        setReviews(updatedListing.reviews);
-        setNewReview({ name: "", comment: "", stars: 0 }); // Clear the form after submitting
-      } else {
-        console.error("Failed to submit review");
+
+      if (!response.ok) {
+        throw new Error("Failed to submit review");
       }
+
+      const savedReview = await response.json();
+      setReviews((prev) => [...prev, savedReview]); // Update the reviews list
+      setNewReview({ name: "", comment: "", stars: 0 }); // Reset the form
+      setError(""); // Clear any errors
     } catch (error) {
-      console.error("Error submitting review:", error);
+      console.error(error);
+      setError("An error occurred while submitting the review.");
     }
   };
 
 
-
-    
+    console.log(newReview)
   return (
     
     // < >

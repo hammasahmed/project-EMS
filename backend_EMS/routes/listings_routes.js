@@ -45,15 +45,45 @@ router.post('/listings', async (req, res) => {
 });
 
 // Route for updating a listing by ID
-router.put('/listing/:id', (req, res) => {
-  const listingId = req.params.id;
-  res.send(`listing ID: ${listingId} updated`);
+router.put('/update/:id', async (req, res) => {
+  const { id } = req.params; // Get the ID from the route parameter
+  const updateData = req.body; // Get the updated data from the request body
+
+  try {
+      const updatedDocument = await listing.findByIdAndUpdate(
+          id, 
+          updateData, 
+          { new: true } // `new: true` ensures the returned document is the updated one
+      );
+
+      if (!updatedDocument) {
+          return res.status(404).json({ message: 'Document not found' });
+      }
+
+      res.status(200).json({ message: 'Document updated successfully', updatedDocument });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+  }
 });
 
+
 // Route for deleting a listing by ID
-router.delete('/listing/:id', (req, res) => {
-  const listingId = req.params.id;
-  res.send(`listing ID: ${listingId} deleted`);
+router.delete('/delete/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const result = await listing.findByIdAndDelete(id);
+
+      if (!result) {
+          return res.status(404).json({ message: 'Document not found' });
+      }
+
+      res.status(200).json({ message: 'Document deleted successfully' });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+  }
 });
 
 
@@ -72,8 +102,8 @@ router.get('/listings/vendor/:vendor_id', async (req, res) => {
 router.post('/listings/:id/add-review', async (req, res) => {
   try {
     const { id } = req.params;
-    const { reviewer_name, comment, stars } = req.body;
-
+    const { name, comment, stars } = req.body;
+    console.log(req.body);
     // Validate that stars are within the allowed range
     if (stars < 0 || stars > 5) {
       return res.status(400).json({ message: 'Stars must be between 0 and 5' });
@@ -83,8 +113,8 @@ router.post('/listings/:id/add-review', async (req, res) => {
     const updatedListing = await listing.findByIdAndUpdate(
       id,
       {
-        $push: {
-          reviews: { reviewer_name, comment, stars }
+        $push: {                                                                                              
+          reviews: { name, comment, stars }
         }
       },
       { new: true }
