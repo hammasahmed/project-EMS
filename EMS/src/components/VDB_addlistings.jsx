@@ -8,7 +8,7 @@ function VDB_addlistings(prop) {
     "w-[40%] mt-1 m-auto flex py-2 px-3 border-[1px] border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300";
   const lighting = ["Select Option", "High", "Medium"];
   const v_id = localStorage.getItem("id");
-  console.log(v_id)
+  console.log(v_id);
   const grounds = [
     "Select Option",
     "Football",
@@ -26,7 +26,7 @@ function VDB_addlistings(prop) {
     "Marquee",
     "Conference Hall",
   ];
-
+  const [errors, setErrors] = useState({}); 
   const ServingType = ["Select Option", "Self-Serving", "Full-Serving"];
 
   const City = [
@@ -324,7 +324,6 @@ function VDB_addlistings(prop) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [menuItems, setMenuItems] = useState(menuOptions);
 
- 
   const handleMenuChange = (menuIndex, event) => {
     const { name, value } = event.target;
 
@@ -404,7 +403,7 @@ function VDB_addlistings(prop) {
         );
 
         const imageUrl = await res.json();
-        console.log(formData)
+        console.log(formData);
         //Convert the imageUrl object to an array in VDB_addlistings
         formData.imageUrl.push(imageUrl.url); //uncomment this line
         console.log(formData.imageUrl);
@@ -450,16 +449,34 @@ function VDB_addlistings(prop) {
   //   }
   // };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+  
+    // Update the specific input value
     setFormData({
       ...formData,
       [name]: value,
     });
+  
+    // Real-time validation
+    if ((type === "text" && value.trim() === "") || (type === "number" && value === "")) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "Input cannot be blank.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "", // Clear the error
+      }));
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+
+   
     console.log(formData);
     try {
       await axios.post(`http://localhost:5000/listings`, formData);
@@ -486,10 +503,12 @@ function VDB_addlistings(prop) {
                   id="first-name"
                   value={formData.title}
                   name="title"
+                  required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                   placeholder="Beautiful Marquee at my home"
                   onChange={handleChange}
                 />
+                 {errors.name}
               </div>
 
               <label className="block text-sm font-medium text-gray-700">
@@ -503,6 +522,7 @@ function VDB_addlistings(prop) {
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Dhoke Khaby, Chungi No. 2"
                 onChange={handleChange}
+                required
               />
             </div>
             <div className=" gap-4 mb-4 w-[100%]">
@@ -676,7 +696,7 @@ function VDB_addlistings(prop) {
                     </select>
                   </div>
                 )}
-                {formData.venue_type === "conference_hall" && (
+                {formData.venue_type === "Conference Hall" && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Projector
@@ -723,7 +743,7 @@ function VDB_addlistings(prop) {
                     </select>
                   </div>
                 )}
-                {formData.venue_type === "conference_hall" && (
+                {formData.venue_type === "Conference Hall" && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Wifi
@@ -747,40 +767,18 @@ function VDB_addlistings(prop) {
                 )}
               </div>
 
-              {formData.service_type === "Venue" && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Outdoor Catering Allowed
-                  </label>
-                  <select
-                    name="outdoor_catering"
-                    value={formData.outdoor_catering}
-                    // value={formData.catering}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                    onChange={handleChange}
-                  >
-                    {booleanOptions.map((e, index) => {
-                      return (
-                        <option key={index} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              )}
-              {formData.service_type === "Venue" && (
-                <div className=" gap-4 mb-4">
+              {formData.service_type === "Venue" &&
+                formData.venue_type !== "Conference Hall" &&
+                formData.venue_type !== "Sports Arena" && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Inbound Catering Service
+                      Outdoor Catering Allowed
                     </label>
                     <select
-                      name="Inbond_catering"
-                      value={formData.Inbond_catering}
+                      name="outdoor_catering"
+                      value={formData.outdoor_catering}
                       // value={formData.catering}
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                      required
                       onChange={handleChange}
                     >
                       {booleanOptions.map((e, index) => {
@@ -792,21 +790,47 @@ function VDB_addlistings(prop) {
                       })}
                     </select>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Seating Capacity
-                    </label>
-                    <input
-                      type="text"
-                      name="seating_capacity"
-                      value={formData.seating_capacity}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                      onChange={handleChange}
-                      placeholder="No. of persons"
-                    />
+                )}
+              {formData.service_type === "Venue" &&
+                formData.venue_type !== "Conference Hall" &&
+                formData.venue_type !== "Sports Arena" && (
+                  <div className=" gap-4 mb-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Inbound Catering Service
+                      </label>
+                      <select
+                        name="Inbond_catering"
+                        value={formData.Inbond_catering}
+                        // value={formData.catering}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                        required
+                        onChange={handleChange}
+                      >
+                        {booleanOptions.map((e, index) => {
+                          return (
+                            <option key={index} value={e}>
+                              {e}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Seating Capacity
+                      </label>
+                      <input
+                        type="text"
+                        name="seating_capacity"
+                        value={formData.seating_capacity}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                        onChange={handleChange}
+                        placeholder="No. of persons"
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
               <div className="">
                 <h2>Create Your Menu</h2>
                 {menuItems.map((object, index) => (
@@ -888,7 +912,7 @@ function VDB_addlistings(prop) {
                     </button>
                   </div>
                 ))}
-               
+
                 <div className="flex justify-end">
                   <button
                     type="button"
@@ -1019,10 +1043,8 @@ function VDB_addlistings(prop) {
 
 export default VDB_addlistings;
 
-
-
-
-                    {/* {optionArray.map((option, optionIndex) => (
+{
+  /* {optionArray.map((option, optionIndex) => (
                       <>
                         {optionIndex == 0 ? (
                           <input
@@ -1141,4 +1163,5 @@ export default VDB_addlistings;
                       </>
                     )
                     )
-                    } */}
+                    } */
+}

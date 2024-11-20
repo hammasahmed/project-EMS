@@ -112,7 +112,7 @@ const Navbar = ({
           alt="logo"
           className="h-8 animate-bounce animate-infinite"
         />
-        <p className="text-2xl font-itim">Evento {role}</p>
+        <p className="text-2xl font-itim">Evento</p>
       </div>
       <div
         className={`features absolute top-14 left-0 w-full ${
